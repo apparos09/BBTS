@@ -1,5 +1,5 @@
-using LoLSDK;
-using SimpleJSON;
+
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,9 +11,6 @@ namespace RM_BBTS
     {
         // the instance of the LOL manager.
         private static LOLManager instance;
-
-        // Language definition for translation.
-        private JSONNode defs;
         
         // The save system for the game.
         public SaveSystem saveSystem;
@@ -95,45 +92,22 @@ namespace RM_BBTS
             }
         }
 
-        // Gets the text from the language file.
-        public string GetLanguageText(string key)
-        {
-            // Gets the language definitions.
-            if(defs == null)
-                defs = SharedState.LanguageDefs;
-
-            // Returns the text.
-            if (defs != null)
-                return defs[key];
-            else
-                return "";
-        }
-
-        // Submits progress for the game.
-        // The value overrides the last progress value submitted, and must not go over the max.
-        // NOTE: the value will be REPLACED, not added to.
-        public void SubmitProgress(int score, int currentProgress)
-        {
-            // SDK not initialized.
-            if(!LOLSDK.Instance.IsInitialized)
-            {
-                Debug.LogWarning("The SDK is not initialized. No data was submitted.");
-                return;
-            }
-
-            // Clamps the current progress.
-            currentProgress = Mathf.Clamp(currentProgress, 0, MAX_PROGRESS);
-
-            // Submit the progress.
-            LOLSDK.Instance.SubmitProgress(score, currentProgress, MAX_PROGRESS);
-        }
-
-        // Submits progress to show that the game is complete.
-        public void SubmitProgressComplete(int score)
-        {
-            // Submits the final score.
-           SubmitProgress(score, MAX_PROGRESS);
-        }
+        // // Gets the text from the language file.
+        // public string GetLanguageText(string key)
+        // {
+        //     // TODO: implement.
+        // 
+        //     // // Gets the language definitions.
+        //     // if(defs == null)
+        //     //     defs = SharedState.LanguageDefs;
+        //     // 
+        //     // // Returns the text.
+        //     // if (defs != null)
+        //     //     return defs[key];
+        //     // else
+        //     //     return "";
+        // 
+        // }
     }
 }
 

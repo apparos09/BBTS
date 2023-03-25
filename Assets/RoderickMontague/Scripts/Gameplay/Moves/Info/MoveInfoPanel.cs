@@ -1,4 +1,4 @@
-using LoLSDK;
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +7,7 @@ using UnityEngine.UI;
 // A panel for the moves.
 namespace RM_BBTS
 {
+    // Info panel for moves.
     public class MoveInfoPanel : MonoBehaviour
     {
         // The id of the move being represented.
@@ -30,30 +31,27 @@ namespace RM_BBTS
         // Start is called just before any of the Update methods is called the first time.
         private void Start()
         {
-            // If the LOLSDK has not been initialized.
-            if(!LOLSDK.Instance.IsInitialized)
-            {
-                // Changes the text colour to show that the language file isn't loaded.
-                LanguageMarker marker = LanguageMarker.Instance;
+            // The SDK has been removed, so the text marking doesn't serve a point anymore.
+            // Changes the text colour to show that the language file isn't loaded.
+            LanguageMarker marker = LanguageMarker.Instance;
 
-                // Name
-                marker.MarkText(nameText);
+            // Name
+            marker.MarkText(nameText);
 
-                // Rank
-                marker.MarkText(rankText);
+            // Rank
+            marker.MarkText(rankText);
 
-                // Power
-                marker.MarkText(powerText);
+            // Power
+            marker.MarkText(powerText);
 
-                // Accuracy
-                marker.MarkText(accuracyText);
+            // Accuracy
+            marker.MarkText(accuracyText);
 
-                // Energy
-                marker.MarkText(energyText);
+            // Energy
+            marker.MarkText(energyText);
 
-                // Description
-                marker.MarkText(description);
-            }
+            // Description
+            marker.MarkText(description);
         }
 
         // Gets the move id.

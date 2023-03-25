@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using LoLSDK;
-using SimpleJSON;
+
+
 using JetBrains.Annotations;
 
 namespace RM_BBTS
@@ -208,32 +208,19 @@ namespace RM_BBTS
         // Provided are the name key and the description key.
         public void LoadTranslation(string nameKey)
         {
-            // Grabs the language definitions.
-            JSONNode defs = SharedState.LanguageDefs;
+            //displayName = defs[nameKey];
+            // displayNameSpeakKey = nameKey;
 
-            // If the SDK has been initialized.
-            if (defs != null)
-            {
-                // Loads in the name and the speak key.
-                displayName = defs[nameKey];
-                displayNameSpeakKey = nameKey;
-            }
-
+            // ...
         }
 
         // Loads translation information, changing the provided battle data.
         public static void LoadTranslationForData(ref BattleEntityGameData data, string nameKey)
         {
-            // Grabs the language definitions.
-            JSONNode defs = SharedState.LanguageDefs;
 
-            // If the SDK has been initialized.
-            if (defs != null)
-            {
-                // Loads in the name and description.
-                data.displayName = defs[nameKey];
-                data.displayNameSpeakKey = nameKey;
-            }
+            // // Loads in the name and description.
+            // data.displayName = defs[nameKey];
+            // data.displayNameSpeakKey = nameKey;
         }
 
         // Generates the battle entity data for this entity.

@@ -1,4 +1,4 @@
-using SimpleJSON;
+
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -79,29 +79,16 @@ namespace RM_BBTS
         {
             selectedMoveInfo.ClearMoveInfo();
 
-            // The definitions for the language.
-            JSONNode defs = SharedState.LanguageDefs;
+            LanguageMarker marker = LanguageMarker.Instance;
 
-            // The defs are not set.
-            if (defs != null)
-            {
-                descriptionText.text = defs[DESCRIPTION_TEXT_LANG_KEY];
-                nextButtonText.text = defs["kwd_next"];
-                skipButtonText.text = defs["kwd_skip"];
-            }
-            else
-            {
-                LanguageMarker marker = LanguageMarker.Instance;
+            marker.MarkText(descriptionText);
 
-                marker.MarkText(descriptionText);
+            marker.MarkText(move0ButtonText);
+            marker.MarkText(move1ButtonText);
+            marker.MarkText(move2ButtonText);
 
-                marker.MarkText(move0ButtonText);
-                marker.MarkText(move1ButtonText);
-                marker.MarkText(move2ButtonText);
-
-                marker.MarkText(nextButtonText);
-                marker.MarkText(skipButtonText);
-            }
+            marker.MarkText(nextButtonText);
+            marker.MarkText(skipButtonText);
         }
 
         // This function is called when the object becomes enabled and visible.

@@ -1,4 +1,4 @@
-using SimpleJSON;
+
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -118,57 +118,28 @@ namespace RM_BBTS
                 runMove = MoveList.Instance.RunMove;
 
             // Translation
-            JSONNode defs = SharedState.LanguageDefs;
+            LanguageMarker marker = LanguageMarker.Instance;
 
-            // Language definitions set.
-            if (defs != null)
-            {
-                legendTitleText.text = defs["kwd_legend"];
+            marker.MarkText(legendTitleText);
 
-                // Standard Symbols
-                rankLabel.text = gameManager.RankString;
-                powerLabel.text = gameManager.PowerString;
-                accuracyLabel.text = gameManager.AccuracyString;
-                energyLabel.text = gameManager.EnergyString;
+            // Standard Symbols
+            marker.MarkText(rankLabel);
+            marker.MarkText(powerLabel);
+            marker.MarkText(accuracyLabel);
+            marker.MarkText(energyLabel);
 
-                // Stat Changes
-                attackChangeLabel.text = defs["kwd_attackChange"];
-                defenseChangeLabel.text = defs["kwd_defenseChange"];
-                speedChangeLabel.text = defs["kwd_speedChange"];
-                accuracyChangeLabel.text = defs["kwd_accuracyChange"];
+            // Stat Changes
+            marker.MarkText(attackChangeLabel);
+            marker.MarkText(defenseChangeLabel);
+            marker.MarkText(speedChangeLabel);
+            marker.MarkText(accuracyChangeLabel);
 
-                // Effects
-                effectSelfLabel.text = defs["kwd_effectSelf"];
-                effectTargetLabel.text = defs["kwd_effectTarget"];
-                criticalLabel.text = defs["kwd_criticalChance"];
-                burnLabel.text = defs["kwd_burnChance"];
-                paralysisLabel.text = defs["kwd_paralysisChance"];
-            }
-            else // Mark text to show that it's not loaded from the langauge file.
-            {
-                LanguageMarker marker = LanguageMarker.Instance;
-
-                marker.MarkText(legendTitleText);
-
-                // Standard Symbols
-                marker.MarkText(rankLabel);
-                marker.MarkText(powerLabel);
-                marker.MarkText(accuracyLabel);
-                marker.MarkText(energyLabel);
-
-                // Stat Changes
-                marker.MarkText(attackChangeLabel);
-                marker.MarkText(defenseChangeLabel);
-                marker.MarkText(speedChangeLabel);
-                marker.MarkText(accuracyChangeLabel);
-
-                // Effects
-                marker.MarkText(effectSelfLabel);
-                marker.MarkText(effectTargetLabel);
-                marker.MarkText(criticalLabel);
-                marker.MarkText(burnLabel);
-                marker.MarkText(paralysisLabel);
-            }
+            // Effects
+            marker.MarkText(effectSelfLabel);
+            marker.MarkText(effectTargetLabel);
+            marker.MarkText(criticalLabel);
+            marker.MarkText(burnLabel);
+            marker.MarkText(paralysisLabel);
 
 
             UpdatePlayerInfo();

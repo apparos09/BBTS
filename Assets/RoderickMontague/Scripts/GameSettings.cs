@@ -1,4 +1,3 @@
-using LoLSDK;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -106,15 +105,6 @@ namespace RM_BBTS
 
                 // returns the instance.
                 return instance;
-            }
-        }
-
-        // the LOL SDK has been initialized.
-        public bool InitializedLOLSDK
-        {
-            get
-            {
-                return LOLSDK.Instance.IsInitialized;
             }
         }
         

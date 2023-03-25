@@ -1,4 +1,3 @@
-using LoLSDK;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -48,7 +47,7 @@ namespace RM_BBTS
         public void SpeakPage()
         {
             // Checks for text-to-speech automatically.
-            if (GameSettings.Instance.UseTextToSpeech && LOLSDK.Instance.IsInitialized)
+            if (GameSettings.Instance.UseTextToSpeech)
             {
                 // Checks if the speak key has been set.
                 if (speakKey != "")
@@ -60,7 +59,7 @@ namespace RM_BBTS
         public void StopSpeakingPage()
         {
             // Checks for text-to-speech automatically.
-            if (GameSettings.Instance.UseTextToSpeech && LOLSDK.Instance.IsInitialized)
+            if (GameSettings.Instance.UseTextToSpeech)
             {
                 // Checks if the speak key has been set, and if it's the one being spoken.
                 if (speakKey != "" && TextToSpeech.Instance.CurrentSpeakKey == speakKey)

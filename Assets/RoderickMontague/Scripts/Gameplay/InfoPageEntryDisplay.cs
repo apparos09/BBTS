@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using LoLSDK;
+
 
 namespace RM_BBTS
 {
@@ -35,12 +35,9 @@ namespace RM_BBTS
         {
             symbol.color = symbolColor;
 
-            // If the SDK has not been initialized, mark the text.
-            if(!LOLSDK.Instance.IsInitialized)
-            {
-                LanguageMarker.Instance.MarkText(nameText);
-                LanguageMarker.Instance.MarkText(descriptionText);
-            }
+            // SDK no longer available.
+            LanguageMarker.Instance.MarkText(nameText);
+            LanguageMarker.Instance.MarkText(descriptionText);
         }
 
         // Called when the script is enabled.
@@ -79,7 +76,7 @@ namespace RM_BBTS
         public void RefreshSpeakButton()
         {
             // Checks if the speak button should be read based on the game settings.
-            if (!LOLSDK.Instance.IsInitialized || !GameSettings.Instance.UseTextToSpeech)
+            if (!GameSettings.Instance.UseTextToSpeech)
             {
                 // The TTS isn't available, so disable the speak button.
                 speakKeyButton.interactable = false;

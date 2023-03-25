@@ -1,5 +1,5 @@
-using LoLSDK;
-using SimpleJSON;
+
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -110,50 +110,22 @@ namespace RM_BBTS
             // });
 
 
-            // If the SDK isn't initialized, some functions may be unavailable.
-            // These functions are disabled here.
-            if (!LOLSDK.Instance.IsInitialized)
-            {
-                ttsVolumeSlider.interactable = false;
-                textToSpeechToggle.interactable = false;
-            }
-            else
-            {
-                // Hides the tutorial toggle since it shoudn't be usable.
-                tutorialToggle.gameObject.SetActive(false);
-            }
-                
+            // No SDK, so disable these functions.
+            ttsVolumeSlider.interactable = false;
+            textToSpeechToggle.interactable = false;
 
-            // Translation.
-            JSONNode defs = SharedState.LanguageDefs;
+            // Translate the dialogue - NO LONGER DOES ANYTHING.
+            LanguageMarker marker = LanguageMarker.Instance;
 
-            // Translate the dialogue.
-            if(defs != null)
-            {
-                titleText.text = defs["kwd_settings"];
-                bgmLabelText.text = defs["kwd_bgmVolume"];
-                sfxLabelText.text = defs["kwd_sfxVolume"];
-                ttsLabelText.text = defs["kwd_ttsVolume"];
+            marker.MarkText(titleText);
+            marker.MarkText(bgmLabelText);
+            marker.MarkText(sfxLabelText);
+            marker.MarkText(ttsLabelText);
 
-                muteLabel.text = defs["kwd_mute"];
-                textToSpeechLabel.text = defs["kwd_textToSpeech"];
-                tutorialLabel.text = defs["kwd_tutorial"];
-                backButtonText.text = defs["kwd_back"];
-            }  
-            else
-            {
-                LanguageMarker marker = LanguageMarker.Instance;
-
-                marker.MarkText(titleText);
-                marker.MarkText(bgmLabelText);
-                marker.MarkText(sfxLabelText);
-                marker.MarkText(ttsLabelText);
-
-                marker.MarkText(muteLabel);
-                marker.MarkText(textToSpeechLabel);
-                marker.MarkText(tutorialLabel);
-                marker.MarkText(backButtonText);
-            }
+            marker.MarkText(muteLabel);
+            marker.MarkText(textToSpeechLabel);
+            marker.MarkText(tutorialLabel);
+            marker.MarkText(backButtonText);
 
         }
 
@@ -179,9 +151,7 @@ namespace RM_BBTS
         {
             gameSettings.UseTextToSpeech = toggle.isOn;
 
-            // Stops the text-to-speech if it was just turned off.
-            if (LOLSDK.Instance.IsInitialized && !gameSettings.UseTextToSpeech)
-                LOLManager.Instance.textToSpeech.StopSpeakText();
+            // NO TTS
         }
 
         // On the tutorial changes.

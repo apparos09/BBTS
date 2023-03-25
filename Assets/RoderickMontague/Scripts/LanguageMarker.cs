@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using LoLSDK;
+
 
 namespace RM_BBTS
 {
@@ -72,20 +72,13 @@ namespace RM_BBTS
         // If the language file isn't loaded, then the text is marked using the noLoad colour.
         public bool TranslateText(TMP_Text text, string key, bool markIfFailed)
         {
-            // Checks if the SDK has been initialized. 
-            if(LOLSDK.Instance.IsInitialized)
-            {
-                text.text = LOLManager.Instance.GetLanguageText(key);
-                return true;
-            }
-            else
-            {
-                // If the text should be marked if failed.
-                if (markIfFailed)
-                    MarkText(text);
+            // TODO: consult another file to slot in text.
 
-                return false;
-            }
+            // Since the game is only in English, this will always return false.
+            if (markIfFailed)
+                MarkText(text);
+
+            return false;
 
         }
     }

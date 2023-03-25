@@ -1,4 +1,3 @@
-using LoLSDK;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,9 +20,8 @@ namespace RM_BBTS
         // Call this function to speak the text for the object.
         public void SpeakText()
         {
-            // If the instance is initialized, use the text-to-speech.
-            if(LOLSDK.Instance.IsInitialized && speakKey != "")
-                LOLManager.Instance.textToSpeech.SpeakText(speakKey);
+            // The SDK for TTS has been removed, so the game no longer has any TTS functions.
+            // ...
         }
 
         // This doesn't work if it's part of the UI. Use a button to call SpeakText() instead.

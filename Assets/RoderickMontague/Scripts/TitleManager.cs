@@ -1,5 +1,5 @@
-using LoLSDK;
-using SimpleJSON;
+
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -82,111 +82,57 @@ namespace RM_BBTS
             LOLManager lolManager = LOLManager.Instance;
 
             // Language
-            JSONNode defs = SharedState.LanguageDefs;
+            // Mark all of the text.
+            LanguageMarker marker = LanguageMarker.Instance;
 
-            // Translate text.
-            if (defs != null)
+            marker.MarkText(saveFeedbackText);
+
+            marker.MarkText(newGameButtonText);
+            marker.MarkText(continueButtonText);
+
+            marker.MarkText(controlsButtonText);
+            marker.MarkText(settingsButtonText);
+            marker.MarkText(creditsButtonText);
+
+            marker.MarkText(controlsTitleText);
+            marker.MarkText(controlsInstructText);
+            marker.MarkText(controlsDescText);
+            marker.MarkText(controlsBackButtonText);
+
+
+            // You can save and go back to the menu, so the continue button is usable under that circumstance.
+            if (LOLManager.Instance.saveSystem.HasLoadedData()) // Game has loaded data.
             {
-                // Main Menu
-                // startButtonText.text = defs["kwd_start"];
-                newGameButtonText.text = defs["kwd_newGame"];
-                continueButtonText.text = defs["kwd_continue"];
+                // Tutorial should be overwritten.
+                overrideTutorial = true;
 
-                controlsButtonText.text = defs["kwd_controls"];
-                settingsButtonText.text = defs["kwd_settings"];
-                creditsButtonText.text = defs["kwd_licenses"];
-
-                // Controls Menu
-                controlsTitleText.text = defs["kwd_controls"];
-                controlsInstructText.text = defs["mnu_controls_instruct"];
-                controlsDescText.text = defs[controlsDescTextKey];
-                controlsBackButtonText.text = defs["kwd_back"];
-            }
-            else
-            {
-                // Mark all of the text.
-                LanguageMarker marker = LanguageMarker.Instance;
-
-                marker.MarkText(saveFeedbackText);
-
-                marker.MarkText(newGameButtonText);
-                marker.MarkText(continueButtonText);
-
-                marker.MarkText(controlsButtonText);
-                marker.MarkText(settingsButtonText);
-                marker.MarkText(creditsButtonText);
-
-                marker.MarkText(controlsTitleText);
-                marker.MarkText(controlsInstructText);
-                marker.MarkText(controlsDescText);
-                marker.MarkText(controlsBackButtonText);
-            }
-
-            // Checks for initialization
-            if (LOLSDK.Instance.IsInitialized)
-            {
-                // NOTE: the buttons disappear for a frame if there is no save state.
-                // It doesn't effect anything, but it's jarring visually.
-                // As such, the Update loop keeps them both on.
-
-
-                // Set up the game initializations.
-                if (newGameButton != null && continueButton != null)
-                    lolManager.saveSystem.Initialize(newGameButton, continueButton);
-
-
-                // Don't disable the continue button, otherwise the save data can't be loaded.
-                // Enables/disables the continue button based on if there is loaded data or not.
-                // continueButton.interactable = lolManager.saveSystem.HasLoadedData();
-                // Continue button is left alone.
-
-                // Since the player can't change the tutorial settings anyway when loaded from InitScene...
-                // These are turned off just as a safety precaution. 
-                // This isn't needed since the tutorial is activated by default if going from InitScene...
-                // And can't be turned off.
-                // overrideTutorial = true;
-                // continueTutorial = true;
-
-                // LOLSDK.Instance.SubmitProgress();
-            }
-            else
-            {
-                Debug.LogError("LOL SDK NOT INITIALIZED.");
-
-                // You can save and go back to the menu, so the continue button is usable under that circumstance.
-                if(LOLManager.Instance.saveSystem.HasLoadedData()) // Game has loaded data.
+                // Checks if the intro was cleared.
+                if (LOLManager.Instance.saveSystem.loadedData.clearedIntro)
                 {
-                    // Tutorial should be overwritten.
-                    overrideTutorial = true;
-
-                    // Checks if the intro was cleared.
-                    if (LOLManager.Instance.saveSystem.loadedData.clearedIntro)
-                    {
-                        // If the intro was cleared, then that means the tutorial was on last time.
-                        continueTutorial = true;
-                    }
-                    else
-                    {
-                        // If the intro wasn't cleared, then the tutorial was disabled last time.
-                        continueTutorial = false;
-                    }
-
-                    // Activate continue button.
-                    continueButton.interactable = true;
+                    // If the intro was cleared, then that means the tutorial was on last time.
+                    continueTutorial = true;
                 }
-                else // No loaded data.
+                else
                 {
-                    // Disable continue button.
-                    continueButton.interactable = false;
+                    // If the intro wasn't cleared, then the tutorial was disabled last time.
+                    continueTutorial = false;
                 }
 
-
-                // Have the button be turned on no matter what for testing purposes.
+                // Activate continue button.
                 continueButton.interactable = true;
-
-                // Adjust the audio settings since the InitScene was not used.
-                settings.AdjustAllAudioLevels();
             }
+            else // No loaded data.
+            {
+                // Disable continue button.
+                continueButton.interactable = false;
+            }
+
+
+            // Have the button be turned on no matter what for testing purposes.
+            continueButton.interactable = true;
+
+            // Adjust the audio settings since the InitScene was not used.
+            settings.AdjustAllAudioLevels();
         }
 
         // Start is called before the first frame update
@@ -195,7 +141,7 @@ namespace RM_BBTS
             //  SceneManager.LoadScene("ResultsScene");
 
             // Sets the save text.
-            if (saveFeedbackText != null && LOLSDK.Instance.IsInitialized)
+            if (saveFeedbackText != null)
             {
                 saveFeedbackText.text = string.Empty;
                 LOLManager.Instance.saveSystem.feedbackText = saveFeedbackText;
@@ -274,7 +220,7 @@ namespace RM_BBTS
             if(active)
             {
                 // Play the controls description.
-                if(LOLSDK.Instance.IsInitialized && GameSettings.Instance.UseTextToSpeech && controlsDescTextKey != "")
+                if(GameSettings.Instance.UseTextToSpeech && controlsDescTextKey != "")
                 {
                     // Voice the text.
                     LOLManager.Instance.textToSpeech.SpeakText(controlsDescTextKey);

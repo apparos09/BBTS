@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using SimpleJSON;
-using LoLSDK;
+
+
 
 namespace RM_BBTS
 {
@@ -126,45 +126,33 @@ namespace RM_BBTS
             // UpdateWindow();
 
             // Translation
-            JSONNode defs = SharedState.LanguageDefs;
+            LanguageMarker marker = LanguageMarker.Instance;
 
-            // Language definitions set.
-            if(defs != null)
-            {
-                titleText.text = defs["kwd_stats"];
-                switchButtonText.text = defs["kwd_switch"];
-                backButtonText.text = defs["kwd_back"];
-            }
-            else
-            {
-                LanguageMarker marker = LanguageMarker.Instance;
+            marker.MarkText(titleText);
 
-                marker.MarkText(titleText);
+            marker.MarkText(levelText);
+            marker.MarkText(healthText);
+            marker.MarkText(attackText);
+            marker.MarkText(defenseText);
+            marker.MarkText(speedText);
+            marker.MarkText(energyText);
 
-                marker.MarkText(levelText);
-                marker.MarkText(healthText);
-                marker.MarkText(attackText);
-                marker.MarkText(defenseText);
-                marker.MarkText(speedText);
-                marker.MarkText(energyText);
+            marker.MarkText(move0ButtonText);
+            marker.MarkText(move1ButtonText);
+            marker.MarkText(move2ButtonText);
+            marker.MarkText(move3ButtonText);
+            marker.MarkText(chargeButtonText);
+            marker.MarkText(runButtonText);
 
-                marker.MarkText(move0ButtonText);
-                marker.MarkText(move1ButtonText);
-                marker.MarkText(move2ButtonText);
-                marker.MarkText(move3ButtonText);
-                marker.MarkText(chargeButtonText);
-                marker.MarkText(runButtonText);
+            marker.MarkText(switchButtonText);
+            marker.MarkText(backButtonText);
 
-                marker.MarkText(switchButtonText);
-                marker.MarkText(backButtonText);
-
-                marker.MarkText(moveNameText);
-                marker.MarkText(moveRankText);
-                marker.MarkText(movePowerText);
-                marker.MarkText(moveAccuracyText);
-                marker.MarkText(moveEnergyText);
-                marker.MarkText(moveDescriptionText);
-            }
+            marker.MarkText(moveNameText);
+            marker.MarkText(moveRankText);
+            marker.MarkText(movePowerText);
+            marker.MarkText(moveAccuracyText);
+            marker.MarkText(moveEnergyText);
+            marker.MarkText(moveDescriptionText);
 
 
             ResetMoveButtonColors();
@@ -331,7 +319,7 @@ namespace RM_BBTS
             moveDescriptionText.text = gameManager.DescriptionString + ": " + move.description.ToString();
 
             // If the text-to-speech is enabled, and the SDK has been initialized.. 
-            if (GameSettings.Instance.UseTextToSpeech && LOLSDK.Instance.IsInitialized)
+            if (GameSettings.Instance.UseTextToSpeech)
             {
                 // Checks which mode the menu is in.
                 // If move info is visible, then the move description is read.

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using SimpleJSON;
-using LoLSDK;
+
+
 
 // Namespace.
 namespace RM_BBTS
@@ -212,33 +212,19 @@ namespace RM_BBTS
         void Start()
         {
             // Translation.
-            JSONNode defs = SharedState.LanguageDefs;
+            LanguageMarker marker = LanguageMarker.Instance;
 
-            // Translate text.
-            if(defs != null)
-            {
-                titleText.text = defs["kwd_questionTime"];
-                correctString = defs[correctKey];
-                incorrectString = defs[incorrectKey];
-                confirmButtonText.text = defs["kwd_confirm"];
-                finishButtonText.text = defs["kwd_finish"];
-            }
-            else
-            {
-                LanguageMarker marker = LanguageMarker.Instance;
+            marker.MarkText(titleText);
 
-                marker.MarkText(titleText);
+            marker.MarkText(questionText);
+            marker.MarkText(response0Text);
+            marker.MarkText(response1Text);
+            marker.MarkText(response2Text);
+            marker.MarkText(response3Text);
 
-                marker.MarkText(questionText);
-                marker.MarkText(response0Text);
-                marker.MarkText(response1Text);
-                marker.MarkText(response2Text);
-                marker.MarkText(response3Text);
-
-                marker.MarkText(evaluationText);
-                marker.MarkText(confirmButtonText);
-                marker.MarkText(finishButtonText);
-            }
+            marker.MarkText(evaluationText);
+            marker.MarkText(confirmButtonText);
+            marker.MarkText(finishButtonText);
         }
 
         // Returns the current question.
@@ -597,7 +583,7 @@ namespace RM_BBTS
         {
             // Checks if extra time should be added.
             // Extra time won't be added if TTS is not being used.
-            if(addTtsExtraTime && LOLSDK.Instance.IsInitialized && GameSettings.Instance.UseTextToSpeech)
+            if(addTtsExtraTime && GameSettings.Instance.UseTextToSpeech)
             {
                 timer = startTime + ttsExtraTime;
             }
@@ -663,14 +649,9 @@ namespace RM_BBTS
             // Call to signify that a question has been asked.
             gameManager.OnQuestionStart();
 
-            // Reads out the question.
-            // If the LOLSDK is initialized.
-            if(LOLSDK.Instance.IsInitialized)
-            {
-                // Use the text-to-speech, and the speak key is set.
-                if (GameSettings.Instance.UseTextToSpeech && currentQuestion.questionSpeakKey != string.Empty)
-                    LOLManager.Instance.textToSpeech.SpeakText(currentQuestion.questionSpeakKey);
-            }
+            // NO SPEAK TEXT
+
+            
         }
 
         // Ask the new question, loading said question into the game.
@@ -828,26 +809,8 @@ namespace RM_BBTS
 
             // Reads out evaluation response.
             // If the LOLSDK is initialized.
-            if (LOLSDK.Instance.IsInitialized)
-            {
-                // Use the text-to-speech, and the speak keys are set.
-                // Checks both keys at the same time. There'd be no point in speaking one without the other being available.
-                if (GameSettings.Instance.UseTextToSpeech && correctKey != string.Empty && incorrectKey != string.Empty)
-                {
-                    // Now reads out the message instead of saying correct/incorrect.
-                    if(currentQuestion.correctAnswerSpeakKey != "" && currentQuestion.incorrectAnswerSpeakKey != "")
-                    {
-                        // NEW - Now reads out the correct/incorrect message.
-                        LOLManager.Instance.textToSpeech.SpeakText((correct) ?
-                            currentQuestion.correctAnswerSpeakKey : currentQuestion.incorrectAnswerSpeakKey);
-                    }
-                    else
-                    {
-                        // OLD - Just says correct/incorrect
-                        LOLManager.Instance.textToSpeech.SpeakText((correct) ? correctKey : incorrectKey);
-                    }
-                }
-            }
+
+            // NO SPEAK TEXT
 
 
             // If the answer should always be shown, highlight the correct and incorrect answers.

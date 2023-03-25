@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using LoLSDK;
+
 
 namespace RM_BBTS
 {
@@ -25,12 +25,9 @@ namespace RM_BBTS
             if (text == null)
                 text = GetComponent<TextMeshPro>();
 
-            // If the SDK is initialized.
-            if(LOLSDK.Instance.IsInitialized && text != null)
-            {
-                text.text = LOLManager.Instance.GetLanguageText(key);
-            }
-            else
+            // Since text is built into the project and not coming from an external file...
+            // The LanguageMarker is no longer needed.
+            if(text != null)
             {
                 // Mark the text.
                 LanguageMarker.Instance.MarkText(text);
@@ -40,13 +37,15 @@ namespace RM_BBTS
         // Speaks out the provided text.
         public void SpeakText()
         {
-
+            // TTS is no longer available, so this function has nothing.
             // Checks if the TTS is set up, if the TTS is active, and if the key string exists.
-            if(LOLSDK.Instance.IsInitialized && GameSettings.Instance.UseTextToSpeech && key != string.Empty)
+            if(GameSettings.Instance.UseTextToSpeech && key != string.Empty)
             {
                 // Read out the text.
                 LOLManager.Instance.textToSpeech.SpeakText(key);
             }
+
+
         }
     }
 }

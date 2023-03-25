@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using SimpleJSON;
+
 using UnityEngine.UI;
 using System.Linq;
 
@@ -96,53 +96,28 @@ namespace RM_BBTS
             // The switch button cannot be used until a move is selected.
             switchButton.interactable = false;
 
-            // Translation
-            JSONNode defs = SharedState.LanguageDefs;
+            // SDK REMOVED
 
-            // Language definitions set.
-            if (defs != null)
-            {
-                // Title text.
-                titleText.text = defs["kwd_learnMoveTitle"];
+            // The language marker.
+            LanguageMarker marker = LanguageMarker.Instance;
 
-                // The instructional text.
-                instructText.text = defs[INSTRUCT_TEXT_LANG_KEY];
+            // The title text.
+            marker.MarkText(titleText);
 
-                // The player moves header text.
-                moveOfferHeaderText.text = defs["kwd_moveOffer"];
+            // The instructional text.
+            marker.MarkText(instructText);
 
-                // The player moves header text.
-                currentMovesHeaderText.text = defs["kwd_currentMoves"];
+            // The move offer header text.
+            marker.MarkText(moveOfferHeaderText);
 
-                // The switch move message text.
-                switchButtonText.text = defs["kwd_switchMoves"];
+            // The player moves header text.
+            marker.MarkText(currentMovesHeaderText);
 
-                // The switch move message text.
-                finishButtonText.text = defs["kwd_finish"];
-            }
-            else
-            {
-                // The language marker.
-                LanguageMarker marker = LanguageMarker.Instance;
+            // The switch moves text.
+            marker.MarkText(switchButtonText);
 
-                // The title text.
-                marker.MarkText(titleText);
-
-                // The instructional text.
-                marker.MarkText(instructText);
-
-                // The move offer header text.
-                marker.MarkText(moveOfferHeaderText);
-
-                // The player moves header text.
-                marker.MarkText(currentMovesHeaderText);
-
-                // The switch moves text.
-                marker.MarkText(switchButtonText);
-
-                // The finish text.
-                marker.MarkText(finishButtonText);
-            }
+            // The finish text.
+            marker.MarkText(finishButtonText);
         }
 
         // This function is called when the object becomes enabled and visible.

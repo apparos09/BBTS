@@ -1,5 +1,5 @@
-using LoLSDK;
-using SimpleJSON;
+
+
 using System.Collections;
 using System.IO;
 using UnityEngine;
@@ -64,35 +64,15 @@ namespace RM_BBTS
             // LOL Initialization
             // Create the WebGL (or mock) object
 #if UNITY_EDITOR
-            ILOLSDK sdk = new LoLSDK.MockWebGL();
+            // ...
 #elif UNITY_WEBGL
-            ILOLSDK sdk = new LoLSDK.WebGL();
+            // ...
 #elif UNITY_IOS || UNITY_ANDROID
-            ILOLSDK sdk = null; 
+            // ...
 #endif
 
-            // Initialize the object, passing in the WebGL
-            LOLSDK.Init(sdk, "com.legends-of-learning.battle-bot-training-simulation");
-
-            // Register event handlers
-            LOLSDK.Instance.StartGameReceived += new StartGameReceivedHandler(HandleStartGame);
-            LOLSDK.Instance.LanguageDefsReceived += new LanguageDefsReceivedHandler(HandleLanguageDefs);
-            LOLSDK.Instance.QuestionsReceived += new QuestionListReceivedHandler(HandleQuestions);
-            LOLSDK.Instance.GameStateChanged += new GameStateChangedHandler(HandleGameStateChange);
-
-            // Used for player feedback. Not required by SDK.
-            // LOLSDK.Instance.SaveResultReceived += OnSaveResult;
-
-
-            // Mock the platform-to-game messages when in the Unity editor.
-#if UNITY_EDITOR
-            // UnityEditor.EditorGUIUtility.PingObject(this);
-            LoadMockData();
-#endif
-
-            // Call GameIsReady before calling LoadState or using the helper method.
-            // Then, tell the platform the game is ready.
-            LOLSDK.Instance.GameIsReady();
+            
+           // 
             StartCoroutine(_WaitForData());
 
             // Helper method to hide and show the state buttons as needed.
@@ -128,12 +108,6 @@ namespace RM_BBTS
             // LOLSDK.Instance.SaveResultReceived -= OnSaveResult;
         }
 
-        // Saves the game. This isn't used in the InitGame file.
-        void Save()
-        {
-            LOLSDK.Instance.SaveState(gameData);
-        }
-
         // // On save result.
         // void OnSaveResult(bool success)
         // {
@@ -154,42 +128,6 @@ namespace RM_BBTS
         {
             yield return new WaitUntil(() => (_receivedData & _expectedData) != 0);
             SceneManager.LoadScene("TitleScene", LoadSceneMode.Single);
-        }
-
-        // Start the game here
-        void HandleStartGame(string json)
-        {
-            SharedState.StartGameData = JSON.Parse(json);
-            _receivedData |= LoLDataType.START;
-        }
-
-
-        // Use language to populate UI
-        void HandleLanguageDefs(string json)
-        {
-            JSONNode langDefs = JSON.Parse(json);
-
-            // Example of accessing language strings
-            // Debug.Log(langDefs);
-            // Debug.Log(langDefs["welcome"]);
-
-            SharedState.LanguageDefs = langDefs;
-            _receivedData |= LoLDataType.LANGUAGE;
-        }
-
-        // Store the questions and show them in order based on your game flow.
-        void HandleQuestions(MultipleChoiceQuestionList questionList)
-        {
-            Debug.Log("HandleQuestions");
-            SharedState.QuestionList = questionList;
-            _receivedData |= LoLDataType.QUESTIONS;
-        }
-
-        // Handle pause / resume
-        void HandleGameStateChange(LoLSDK.GameState gameState)
-        {
-            // Either GameState.Paused or GameState.Resumed
-            Debug.Log("HandleGameStateChange");
         }
 
         /// <summary>
@@ -214,71 +152,6 @@ namespace RM_BBTS
             // Becomes set to 'true' when the game data has been loaded.
             initGame = true;
         }
-
-        // Gets translated text.
-        public string GetTranslatedText(string key)
-        {
-            // Gets the definitions.
-            JSONNode defs = SharedState.LanguageDefs;
-
-            // Get content.
-            if (defs != null)
-                return defs[key];
-            else
-                return "";
-        }
-
-        // // Not quite sure what this does.
-        // IEnumerator Feedback(string text)
-        // {
-        //     feedbackText.text = text;
-        //     yield return feedbackTimer;
-        //     feedbackText.text = string.Empty;
-        //     feedbackMethod = null;
-        // }
-
-        private void LoadMockData()
-        {
-#if UNITY_EDITOR
-            // Load Dev Language File from StreamingAssets
-
-            string startDataFilePath = Path.Combine(Application.streamingAssetsPath, startGameJSONFilePath);
-            string langCode = "en";
-
-            Debug.Log(File.Exists(startDataFilePath));
-
-            if (File.Exists(startDataFilePath))
-            {
-                string startDataAsJSON = File.ReadAllText(startDataFilePath);
-                JSONNode startGamePayload = JSON.Parse(startDataAsJSON);
-                // Capture the language code from the start payload. Use this to switch fonts
-                langCode = startGamePayload["languageCode"];
-                HandleStartGame(startDataAsJSON);
-            }
-
-            // Load Dev Language File from StreamingAssets
-            string langFilePath = Path.Combine(Application.streamingAssetsPath, languageJSONFilePath);
-            if (File.Exists(langFilePath))
-            {
-                string langDataAsJson = File.ReadAllText(langFilePath);
-                // The dev payload in language.json includes all languages.
-                // Parse this file as JSON, encode, and stringify to mock
-                // the platform payload, which includes only a single language.
-                JSONNode langDefs = JSON.Parse(langDataAsJson);
-                // use the languageCode from startGame.json captured above
-                HandleLanguageDefs(langDefs[langCode].ToString());
-            }
-
-            // Load Dev Questions from StreamingAssets
-            string questionsFilePath = Path.Combine(Application.streamingAssetsPath, questionsJSONFilePath);
-            if (File.Exists(questionsFilePath))
-            {
-                string questionsDataAsJson = File.ReadAllText(questionsFilePath);
-                MultipleChoiceQuestionList qs =
-                    MultipleChoiceQuestionList.CreateFromJSON(questionsDataAsJson);
-                HandleQuestions(qs);
-            }
-#endif
-        }
+        
     }
 }

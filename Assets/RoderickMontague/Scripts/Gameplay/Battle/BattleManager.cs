@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using SimpleJSON;
+
 using UnityEngine.SceneManagement;
 using System.Data.Common;
-using LoLSDK;
+
 using UnityEngine.Timeline;
 
 namespace RM_BBTS
@@ -301,9 +301,6 @@ namespace RM_BBTS
             turnsPassed = 0;
             playerDamageTaken = 0;
 
-            // The language definitions.
-            JSONNode defs = SharedState.LanguageDefs;
-
             // Turns off the bases.
             enemyBase.gameObject.SetActive(false);
             treasureBase.gameObject.SetActive(false);
@@ -337,33 +334,35 @@ namespace RM_BBTS
             // opponentAnimTimer = new TimerManager.Timer();
             // opponentAnimTimer.tag = "opponent";
 
-            // The defs are not set.
-            if(defs != null)
-            {
-                // Translate the treasure prompt.
-                // treasurePromptTextKey = "btl_msg_treasure"; // Set by default so that the text-to-speech can use it.
-                treasurePromptText.text = defs[TREASURE_PROMPT_TEXT_KEY];
-                treasureYesButtonText.text = defs["kwd_yes"];
-                treasureNoButtonText.text = defs["kwd_no"];
-            }
-            else
-            {
-                LanguageMarker marker = LanguageMarker.Instance;
-
-                marker.MarkText(chargeButtonText);
-                marker.MarkText(runButtonText);
+            //// The defs are not set.
+            //if(defs != null)
+            //{
+            //    // Translate the treasure prompt.
+            //    // treasurePromptTextKey = "btl_msg_treasure"; // Set by default so that the text-to-speech can use it.
+            //    treasurePromptText.text = defs[TREASURE_PROMPT_TEXT_KEY];
+            //    treasureYesButtonText.text = defs["kwd_yes"];
+            //    treasureNoButtonText.text = defs["kwd_no"];
+            //}
+            //else
+            //{
                 
-                marker.MarkText(move0NameText);
-                marker.MarkText(move1NameText);
-                marker.MarkText(move2NameText);
-                marker.MarkText(move3NameText);
+            //}
 
-                marker.MarkText(treasurePromptText);
-                marker.MarkText(treasureYesButtonText);
-                marker.MarkText(treasureNoButtonText);
+            LanguageMarker marker = LanguageMarker.Instance;
 
-                marker.MarkText(opponentNameText);
-            }
+            marker.MarkText(chargeButtonText);
+            marker.MarkText(runButtonText);
+
+            marker.MarkText(move0NameText);
+            marker.MarkText(move1NameText);
+            marker.MarkText(move2NameText);
+            marker.MarkText(move3NameText);
+
+            marker.MarkText(treasurePromptText);
+            marker.MarkText(treasureYesButtonText);
+            marker.MarkText(treasureNoButtonText);
+
+            marker.MarkText(opponentNameText);
         }
 
         // This function is called when the object becomes enabled and active
@@ -505,7 +504,7 @@ namespace RM_BBTS
                     treasureNoButton.interactable = true;
 
                     // Reads out the treasure prompt if the treasure tutorial isn't being shown.
-                    if(LOLSDK.Instance.IsInitialized && GameSettings.Instance.UseTextToSpeech && TREASURE_PROMPT_TEXT_KEY != "")
+                    if(GameSettings.Instance.UseTextToSpeech && TREASURE_PROMPT_TEXT_KEY != "")
                     {
                         // Speaks the text for the treasure prompt.
                         LOLManager.Instance.textToSpeech.SpeakText(TREASURE_PROMPT_TEXT_KEY);
@@ -1376,9 +1375,6 @@ namespace RM_BBTS
 
             // Calculates the score for completing the round, and adds it to the game score.
             gameManager.score += CalculateBattleScore();
-
-            // Submit the player's current progress now that the roomsCompleted and score have been updated.
-            gameManager.SubmitProgress();
 
             // The door is now locked since the room is cleared.
             door.Locked = true;

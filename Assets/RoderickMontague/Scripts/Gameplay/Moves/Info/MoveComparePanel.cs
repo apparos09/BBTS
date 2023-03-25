@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Timeline;
-using LoLSDK;
+
 
 namespace RM_BBTS
 {
@@ -67,9 +67,7 @@ namespace RM_BBTS
         // Start is just before any of the update methods are called for the first time.
         private void Start()
         {
-            // Colour the text to show that it's not coming form the language file.
-            if(!LOLSDK.Instance.IsInitialized)
-                LanguageMarker.Instance.MarkText(nameText);
+            LanguageMarker.Instance.MarkText(nameText);
         }
 
         // Checks to see if a move is loaded in.

@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using SimpleJSON;
-using LoLSDK;
+
+
 using TMPro;
 
 namespace RM_BBTS
@@ -77,9 +77,6 @@ namespace RM_BBTS
         // Start is called before the first frame update
         void Start()
         {
-            // The language defs.
-            JSONNode defs = SharedState.LanguageDefs;
-
             // Labels for translation.
             string titleLabel = "Results";
             string scoreLabel = "Final Score";
@@ -98,48 +95,26 @@ namespace RM_BBTS
             // The speak key for the title.
             string titleSpeakKey = "";
 
-            // Translate title text.
-            if (defs != null)
-            {
-                titleSpeakKey = "kwd_results";
-                titleLabel = defs[titleSpeakKey];
+            LanguageMarker marker = LanguageMarker.Instance;
 
-                scoreLabel = defs["kwd_finalScore"];
-                roomsClearedLabel = defs["kwd_roomsCleared"];
-                totalTimeLabel = defs["kwd_totalTime"];
-                totalTurnsLabel = defs["kwd_totalTurns"];
-                questionsCorrectLabel = defs["kwd_questionsCorrect"];
-                questionsAskedLabel = defs["kwd_questionsAsked"];
-                noRepeatsLabel = defs["kwd_noRepeats"];
-                finalLevelLabel = defs["kwd_finalLevel"];
-                finalMovesLabel = defs["kwd_finalMoves"];
+            marker.MarkText(titleText);
+            marker.MarkText(saveFeedbackText);
 
-                finishLabel = defs["kwd_finish"];
-            }
-            else // If the language file isn't loaded, then mark the text objects.
-            {
-                LanguageMarker marker = LanguageMarker.Instance;
+            marker.MarkText(scoreText);
+            marker.MarkText(roomsClearedText);
+            marker.MarkText(totalTimeText);
+            marker.MarkText(totalTurnsText);
+            marker.MarkText(questionsCorrectText);
+            marker.MarkText(questionsAsked);
+            marker.MarkText(finalLevelText);
+            marker.MarkText(moveSubtitleText);
 
-                marker.MarkText(titleText);
-                marker.MarkText(saveFeedbackText);
+            marker.MarkText(move0Text);
+            marker.MarkText(move1Text);
+            marker.MarkText(move2Text);
+            marker.MarkText(move3Text);
 
-                marker.MarkText(scoreText);
-                marker.MarkText(roomsClearedText);
-                marker.MarkText(totalTimeText);
-                marker.MarkText(totalTurnsText);
-                marker.MarkText(questionsCorrectText);
-                marker.MarkText(questionsAsked);
-                marker.MarkText(finalLevelText);
-                marker.MarkText(moveSubtitleText);
-
-                marker.MarkText(move0Text);
-                marker.MarkText(move1Text);
-                marker.MarkText(move2Text);
-                marker.MarkText(move3Text);
-
-                marker.MarkText(finishButtonText);
-
-            }
+            marker.MarkText(finishButtonText);
 
             // Change out titles and buttons with translated label.
             titleText.text = titleLabel;
@@ -205,14 +180,14 @@ namespace RM_BBTS
             }
 
             // Say the name of the title text.
-            if(LOLSDK.Instance.IsInitialized && GameSettings.Instance.UseTextToSpeech && titleSpeakKey != "")
+            if(GameSettings.Instance.UseTextToSpeech && titleSpeakKey != "")
             {
                 // Voice the title text.
                 LOLManager.Instance.textToSpeech.SpeakText(titleSpeakKey);
             }
 
             // Provides the save feedback text.
-            if (saveFeedbackText != null && LOLSDK.Instance.IsInitialized)
+            if (saveFeedbackText != null)
             {
                 saveFeedbackText.text = string.Empty;
                 LOLManager.Instance.saveSystem.feedbackText = saveFeedbackText;
@@ -233,24 +208,9 @@ namespace RM_BBTS
         // Call this function to complete the game. This is called by the "finish" button.
         public void CompleteGame()
         {
-            // The SDK has been initialized.
-            if(LOLSDK.Instance.IsInitialized)
-            {
-                // Complete the game.
-                LOLSDK.Instance.CompleteGame();
-            }
-            else
-            {
-                // Logs the error.
-                Debug.LogError("SDK NOT INITIALIZED. RETURNING TO MAIN MENU.");
-
-                // Return to the main menu scene.
-                ToMainMenu();
-            }
-
             // Do not return to the main menu scene if running through the LOL platform.
             // This is because you can't have the game get repeated in the same session.
-            // ToMainMenu();
+            ToMainMenu();
         }
     }
 }

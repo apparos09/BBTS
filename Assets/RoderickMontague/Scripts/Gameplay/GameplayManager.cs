@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using SimpleJSON;
+
 using TMPro;
-using LoLSDK;
+
 using UnityEngine.UI;
 
 namespace RM_BBTS
@@ -265,80 +265,31 @@ namespace RM_BBTS
                 useTutorial = GameSettings.Instance.UseTutorial;
 
             // Translation
-            JSONNode defs = SharedState.LanguageDefs;
+            // For marking text to show it's not loaded from the language file.
+            LanguageMarker marker = LanguageMarker.Instance;
 
-            // Translate all of the string objects.
-            if (defs != null)
-            {
-                // Windows/Prompts
-                // STATS WINDOW
-                statsButtonText.text = defs["kwd_stats"];
+            // Windows/Prompts
+            // STATS WINDOW
+            marker.MarkText(statsButtonText);
 
-                // SAVE PROMPT //
-                saveButtonText.text = defs["kwd_save"];
-                savePromptText.text = defs[SAVE_PROMPT_TEXT_KEY];
-                saveAndContinueText.text = defs["kwd_saveContinue"];
-                saveAndQuitText.text = defs["kwd_saveQuit"];
-                savePromptBackText.text = defs["kwd_back"];
+            // SAVE PROMPT //
+            marker.MarkText(saveButtonText);
+            marker.MarkText(savePromptText);
+            marker.MarkText(saveAndContinueText);
+            marker.MarkText(saveAndQuitText);
+            marker.MarkText(savePromptBackText);
 
-                // SETTINGS WINDOW //
-                settingsButtonText.text = defs["kwd_settings"];
+            // SETTINGS WINDOW //
+            marker.MarkText(settingsButtonText);
 
-                // MAIN MENU (TITLE SCREEN) PROMPT
-                mainMenuButtonText.text = defs["kwd_mainMenu"];
-                mainMenuPromptText.text = defs[MAIN_MENU_PROMPT_TEXT_KEY];
-                mainMenuYesText.text = defs["kwd_returnToMainMenu"];
-                mainMenuNoText.text = defs["kwd_returnToGame"];
+            // MAIN MENU (TITLE SCREEN) PROMPT
+            marker.MarkText(mainMenuButtonText);
+            marker.MarkText(mainMenuPromptText);
+            marker.MarkText(mainMenuYesText);
+            marker.MarkText(mainMenuNoText);
 
-                // INFO WINDOW
-                infoButtonText.text = defs["kwd_info"];
-
-                // String Labels
-                // Moves
-                levelString = defs["kwd_level"];
-                healthString = defs["kwd_health"];
-                attackString = defs["kwd_attack"];
-                defenseString = defs["kwd_defense"];
-                speedString = defs["kwd_speed"];
-                energyString = defs["kwd_energy"];
-
-                // Move characteristics.
-                rankString = defs["kwd_rank"];
-                powerString = defs["kwd_power"];
-                accuracyString = defs["kwd_accuracy"];
-                descriptionString = defs["kwd_description"];
-
-                // The score string.
-                scoreString = defs["kwd_score"];
-            }
-            else
-            {
-                // For marking text to show it's not loaded from the language file.
-                LanguageMarker marker = LanguageMarker.Instance;
-
-                // Windows/Prompts
-                // STATS WINDOW
-                marker.MarkText(statsButtonText);
-
-                // SAVE PROMPT //
-                marker.MarkText(saveButtonText);
-                marker.MarkText(savePromptText);
-                marker.MarkText(saveAndContinueText);
-                marker.MarkText(saveAndQuitText);
-                marker.MarkText(savePromptBackText);
-
-                // SETTINGS WINDOW //
-                marker.MarkText(settingsButtonText);
-
-                // MAIN MENU (TITLE SCREEN) PROMPT
-                marker.MarkText(mainMenuButtonText);
-                marker.MarkText(mainMenuPromptText);
-                marker.MarkText(mainMenuYesText);
-                marker.MarkText(mainMenuNoText);
-
-                // INFO WINDOW
-                marker.MarkText(infoButtonText);
-            }
+            // INFO WINDOW
+            marker.MarkText(infoButtonText);
 
 
             // Turns off the entrance animation if scene transitions shouldn't be used.
@@ -353,7 +304,7 @@ namespace RM_BBTS
             //     mouseTouchInput = FindObjectOfType<MouseTouchInput>();
 
             // Provides the save feedback text.
-            if (saveFeedbackText != null && LOLSDK.Instance.IsInitialized)
+            if (saveFeedbackText != null)
             {
                 saveFeedbackText.text = string.Empty;
                 LOLManager.Instance.saveSystem.feedbackText = saveFeedbackText;
@@ -422,7 +373,7 @@ namespace RM_BBTS
                     }
 
                     // If a tutorial wasn't loaded, stop the speak text from the closed textbox.
-                    if(!loadedTutorial && LOLSDK.Instance.IsInitialized && GameSettings.Instance.UseTextToSpeech)
+                    if(!loadedTutorial && GameSettings.Instance.UseTextToSpeech)
                     {
                         // Stop the speak text does not work here, so you need to have it say something else.
                         // LOLManager.Instance.textToSpeech.StopSpeakText();
@@ -568,8 +519,7 @@ namespace RM_BBTS
             // Submits a base score of 0 with 0 battles completed.
             // This is to kick off the start of the game.
             score = 0;
-            roomsCompleted = 0;
-            SubmitProgress();                
+            roomsCompleted = 0;             
         }
 
         // public void Test()
@@ -859,7 +809,7 @@ namespace RM_BBTS
             if (active)
             {
                 // If the SDK is initialized, text-to-speech is being used, and the speak key has been set.
-                if (LOLSDK.Instance.IsInitialized && GameSettings.Instance.UseTextToSpeech && SAVE_PROMPT_TEXT_KEY != "")
+                if (GameSettings.Instance.UseTextToSpeech && SAVE_PROMPT_TEXT_KEY != "")
                 {
                     // Read out the mssage.
                     LOLManager.Instance.textToSpeech.SpeakText(SAVE_PROMPT_TEXT_KEY);
@@ -903,7 +853,7 @@ namespace RM_BBTS
             if (active)
             {
                 // If the SDK is initialized, text-to-speech is being used, and the speak key has been set.
-                if (LOLSDK.Instance.IsInitialized && GameSettings.Instance.UseTextToSpeech && MAIN_MENU_PROMPT_TEXT_KEY != "")
+                if (GameSettings.Instance.UseTextToSpeech && MAIN_MENU_PROMPT_TEXT_KEY != "")
                 {
                     // Read out the mssage.
                     LOLManager.Instance.textToSpeech.SpeakText(MAIN_MENU_PROMPT_TEXT_KEY);
@@ -1388,18 +1338,6 @@ namespace RM_BBTS
         }
 
 
-        // Submits the current game progress.
-        public void SubmitProgress()
-        {
-            LOLManager.Instance.SubmitProgress(score, roomsCompleted);
-        }
-
-        // Submits the game progress complete.
-        public void SubmitProgressComplete()
-        {
-            LOLManager.Instance.SubmitProgressComplete(score);
-        }
-
         // Goes to the results scene.
         public void ToResultsScene()
         {
@@ -1436,10 +1374,7 @@ namespace RM_BBTS
             results.move0 = (player.Move0 != null) ? player.Move0.Name : "-";
             results.move1 = (player.Move1 != null) ? player.Move1.Name : "-";
             results.move2 = (player.Move2 != null) ? player.Move2.Name : "-";
-            results.move3 = (player.Move3 != null) ? player.Move3.Name : "-";
-            
-            // Submit progress to show that the game is complete.
-            SubmitProgressComplete();
+            results.move3 = (player.Move3 != null) ? player.Move3.Name : "-";         
 
             // Saves the game before loading the results screen.
             SaveAndContinueGame();

@@ -1,4 +1,4 @@
-using LoLSDK;
+
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -109,9 +109,9 @@ namespace RM_BBTS
             // Set this to the max by default.
             SetAutoNextTimerToMax();
 
+            // The SDK is no longer available, so this isn't needed anymore.
             // Recolour the text to show that the text loaded is not coming from the language file.
-            if (!LOLSDK.Instance.IsInitialized)
-                LanguageMarker.Instance.MarkText(boxText);
+            LanguageMarker.Instance.MarkText(boxText);
         }
 
         // TODO: add touch and mouse for going onto the next page.
@@ -626,7 +626,7 @@ namespace RM_BBTS
             autoNextTimer = autoNextTimerMax;
 
             // Adds the extra time for TTS reading.
-            if (addTtsExtraTime && LOLSDK.Instance.IsInitialized && GameSettings.Instance.UseTextToSpeech)
+            if (addTtsExtraTime && GameSettings.Instance.UseTextToSpeech)
                 autoNextTimer += ttsExtraTime;
         }
 

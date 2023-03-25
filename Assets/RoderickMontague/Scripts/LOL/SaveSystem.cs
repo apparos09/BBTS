@@ -1,5 +1,5 @@
-using LoLSDK;
-using SimpleJSON;
+
+
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -101,22 +101,13 @@ namespace RM_BBTS
         // Start is called before the first frame update
         void Start()
         {
-            // Sets the save result to the instance.
-            LOLSDK.Instance.SaveResultReceived += OnSaveResult;
-
-            // Gets the language definition.
-            JSONNode defs = SharedState.LanguageDefs;
-
-            // Sets the save complete text.
-            if (defs != null)
-                feedbackString = defs[FEEDBACK_STRING_KEY];
+            // feedbackString = defs[FEEDBACK_STRING_KEY];
         }
 
         // Set save and load operations.
         public void Initialize(Button newGameButton, Button continueButton)
         {
-            // Makes the continue button disappear if there is no data to load. 
-            Helper.StateButtonInitialize<BBTS_GameData>(newGameButton, continueButton, OnLoadData);
+            // ...
         }
 
         // Checks if the game manager has been set.
@@ -167,30 +158,7 @@ namespace RM_BBTS
             // Stores the most recent save.
             lastSave = savedData;
 
-            // If the instance has been initialized.
-            if (LOLSDK.Instance.IsInitialized)
-            {
-                // Makes sure that the feedback string is set.
-                if(FEEDBACK_STRING_KEY != string.Empty)
-                {
-                    // Gets the language definition.
-                    JSONNode defs = SharedState.LanguageDefs;
-
-                    // Sets the feedback string if it wasn't already set.
-                    if (feedbackString != defs[FEEDBACK_STRING_KEY])
-                        feedbackString = defs[FEEDBACK_STRING_KEY];
-                }
-               
-
-                // Send the save state.
-                LOLSDK.Instance.SaveState(savedData);
-                success = true;
-            }
-            else // Not initialized.
-            {
-                Debug.LogError("The SDK has not been initialized. Improper save made.");
-                success = false;
-            }
+            // TODO: implement save state.
 
             return success;
         }

@@ -1,4 +1,4 @@
-using SimpleJSON;
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,7 +18,7 @@ namespace RM_BBTS
         public TextBox textBox;
 
         // The definitions from the json file.
-        private JSONNode defs;
+        // private JSONNode defs;
 
         // Automatically shows the textbox when text is loaded.
         public bool showTextboxOnLoad;
@@ -92,9 +92,6 @@ namespace RM_BBTS
             // Adds the callbacks.
             textBox.OnTextBoxOpenedAddCallback(OnTutorialStart);
             textBox.OnTextBoxClosedAddCallback(OnTutorialEnd);
-
-            // Loads the language definitions.
-            defs = SharedState.LanguageDefs;
         }
 
         // Start is called before the first frame update
@@ -247,30 +244,30 @@ namespace RM_BBTS
             Page hudPage;
 
             // Pages
-            if (defs != null) // Translation
+            if (false) // Translation
             {
-                pages.Add(new Page(defs["trl_intro_00"], "trl_intro_00"));
-                pages.Add(new Page(defs["trl_intro_01"], "trl_intro_01"));
+                //pages.Add(new Page(defs["trl_intro_00"], "trl_intro_00"));
+                //pages.Add(new Page(defs["trl_intro_01"], "trl_intro_01"));
 
-                // Show/Hide the Probability Percent Diagram
-                probPercentPage = new Page(defs["trl_intro_02"], "trl_intro_02");
-                pages.Add(probPercentPage);
+                //// Show/Hide the Probability Percent Diagram
+                //probPercentPage = new Page(defs["trl_intro_02"], "trl_intro_02");
+                //pages.Add(probPercentPage);
 
-                // Show Probability Fraction Diagram
-                probFractionPageStart = new Page(defs["trl_intro_03"], "trl_intro_03");
-                pages.Add(probFractionPageStart);
+                //// Show Probability Fraction Diagram
+                //probFractionPageStart = new Page(defs["trl_intro_03"], "trl_intro_03");
+                //pages.Add(probFractionPageStart);
 
-                // Hide Probability Fraction Diagram
-                probFractionPageEnd = new Page(defs["trl_intro_04"], "trl_intro_04");
-                pages.Add(probFractionPageEnd);
+                //// Hide Probability Fraction Diagram
+                //probFractionPageEnd = new Page(defs["trl_intro_04"], "trl_intro_04");
+                //pages.Add(probFractionPageEnd);
 
-                pages.Add(new Page(defs["trl_intro_05"], "trl_intro_05"));
+                //pages.Add(new Page(defs["trl_intro_05"], "trl_intro_05"));
 
-                // Hud page requires moving the textbox, so save it.
-                hudPage = new Page(defs["trl_intro_06"], "trl_intro_06");
-                pages.Add(hudPage);
+                //// Hud page requires moving the textbox, so save it.
+                //hudPage = new Page(defs["trl_intro_06"], "trl_intro_06");
+                //pages.Add(hudPage);
 
-                pages.Add(new Page(defs["trl_intro_07"], "trl_intro_07"));
+                //pages.Add(new Page(defs["trl_intro_07"], "trl_intro_07"));
             }
             else // Default
             {
@@ -334,13 +331,13 @@ namespace RM_BBTS
             List<Page> pages = new List<Page>();
 
             // Pages
-            if(defs != null) // Translation
+            if(false) // Translation
             {
-                pages.Add(new Page(defs["trl_battle_00"], "trl_battle_00"));
-                pages.Add(new Page(defs["trl_battle_01"], "trl_battle_01"));
-                pages.Add(new Page(defs["trl_battle_02"], "trl_battle_02"));
-                pages.Add(new Page(defs["trl_battle_03"], "trl_battle_03"));
-                pages.Add(new Page(defs["trl_battle_04"], "trl_battle_04"));
+                //pages.Add(new Page(defs["trl_battle_00"], "trl_battle_00"));
+                //pages.Add(new Page(defs["trl_battle_01"], "trl_battle_01"));
+                //pages.Add(new Page(defs["trl_battle_02"], "trl_battle_02"));
+                //pages.Add(new Page(defs["trl_battle_03"], "trl_battle_03"));
+                //pages.Add(new Page(defs["trl_battle_04"], "trl_battle_04"));
             }    
             else // Default
             {
@@ -364,12 +361,12 @@ namespace RM_BBTS
             List<Page> pages = new List<Page>();
 
             // Pages
-            if (defs != null) // Translation
+            if (false) // Translation
             {
-                pages.Add(new Page(defs["trl_firstMove_00"], "trl_firstMove_00"));
-                pages.Add(new Page(defs["trl_firstMove_01"], "trl_firstMove_01"));
-                pages.Add(new Page(defs["trl_firstMove_02"], "trl_firstMove_02"));
-                pages.Add(new Page(defs["trl_firstMove_03"], "trl_firstMove_03"));
+                //pages.Add(new Page(defs["trl_firstMove_00"], "trl_firstMove_00"));
+                //pages.Add(new Page(defs["trl_firstMove_01"], "trl_firstMove_01"));
+                //pages.Add(new Page(defs["trl_firstMove_02"], "trl_firstMove_02"));
+                //pages.Add(new Page(defs["trl_firstMove_03"], "trl_firstMove_03"));
             }
             else // Default
             {
@@ -392,9 +389,9 @@ namespace RM_BBTS
             List<Page> pages = new List<Page>();
 
             // Pages
-            if (defs != null) // Translation
+            if (false) // Translation
             {
-                pages.Add(new Page(defs["trl_critical_00"], "trl_critical_00"));
+                //pages.Add(new Page(defs["trl_critical_00"], "trl_critical_00"));
             }
             else // Default
             {
@@ -414,9 +411,9 @@ namespace RM_BBTS
             List<Page> pages = new List<Page>();
 
             // Pages
-            if (defs != null) // Translation
+            if (false) // Translation
             {
-                pages.Add(new Page(defs["trl_recoil_00"], "trl_recoil_00"));
+                //pages.Add(new Page(defs["trl_recoil_00"], "trl_recoil_00"));
             }
             else // Default
             {
@@ -436,9 +433,9 @@ namespace RM_BBTS
             List<Page> pages = new List<Page>();
 
             // Pages
-            if (defs != null) // Translation
+            if (false) // Translation
             {
-                pages.Add(new Page(defs["trl_statChange_00"], "trl_statChange_00"));
+                //pages.Add(new Page(defs["trl_statChange_00"], "trl_statChange_00"));
             }
             else // Default
             {
@@ -458,9 +455,9 @@ namespace RM_BBTS
             List<Page> pages = new List<Page>();
 
             // Pages
-            if (defs != null) // Translation
+            if (false) // Translation
             {
-                pages.Add(new Page(defs["trl_burn_00"], "trl_burn_00"));
+                //pages.Add(new Page(defs["trl_burn_00"], "trl_burn_00"));
             }
             else // Default
             {
@@ -480,9 +477,9 @@ namespace RM_BBTS
             List<Page> pages = new List<Page>();
 
             // Pages
-            if (defs != null) // Translation
+            if (false) // Translation
             {
-                pages.Add(new Page(defs["trl_paralysis_00"], "trl_paralysis_00"));
+                //pages.Add(new Page(defs["trl_paralysis_00"], "trl_paralysis_00"));
             }
             else // Default
             {
@@ -502,9 +499,9 @@ namespace RM_BBTS
             List<Page> pages = new List<Page>();
 
             // Pages
-            if (defs != null) // Translation
+            if (false) // Translation
             {
-                pages.Add(new Page(defs["trl_firstBattleDeath_00"], "trl_firstBattleDeath_00"));
+                //pages.Add(new Page(defs["trl_firstBattleDeath_00"], "trl_firstBattleDeath_00"));
             }
             else // Default
             {
@@ -524,9 +521,9 @@ namespace RM_BBTS
             List<Page> pages = new List<Page>();
 
             // Pages
-            if (defs != null) // Translation
+            if (false) // Translation
             {
-                pages.Add(new Page(defs["trl_overworld_00"], "trl_overworld_00"));
+                //pages.Add(new Page(defs["trl_overworld_00"], "trl_overworld_00"));
             }
             else // Default
             {
@@ -549,9 +546,9 @@ namespace RM_BBTS
             List<Page> pages = new List<Page>();
 
             // Pages
-            if(defs != null) // Translation
+            if(false) // Translation
             {
-                pages.Add(new Page(defs["trl_treasure_00"], "trl_treasure_00"));
+                //pages.Add(new Page(defs["trl_treasure_00"], "trl_treasure_00"));
             }
             else // Default
             {
@@ -571,10 +568,10 @@ namespace RM_BBTS
             List<Page> pages = new List<Page>();
 
             // Pages
-            if (defs != null) // Translation
+            if (false) // Translation
             {
-                pages.Add(new Page(defs["trl_question_00"], "trl_question_00"));
-                pages.Add(new Page(defs["trl_question_01"], "trl_question_01"));
+                //pages.Add(new Page(defs["trl_question_00"], "trl_question_00"));
+                //pages.Add(new Page(defs["trl_question_01"], "trl_question_01"));
             }
             else // Default
             {
@@ -596,9 +593,9 @@ namespace RM_BBTS
             List<Page> pages = new List<Page>();
 
             // Pages
-            if (defs != null) // Translation
+            if (false) // Translation
             {
-                pages.Add(new Page(defs["trl_phase_00"], "trl_phase_00"));
+                //pages.Add(new Page(defs["trl_phase_00"], "trl_phase_00"));
             }
             else // Default
             {
@@ -619,9 +616,9 @@ namespace RM_BBTS
             List<Page> pages = new List<Page>();
 
             // Pages
-            if(defs != null) // Translation
+            if(false) // Translation
             {
-                pages.Add(new Page(defs["trl_boss_00"], "trl_boss_00"));
+                //pages.Add(new Page(defs["trl_boss_00"], "trl_boss_00"));
             }
             else // Default
             {
@@ -641,9 +638,9 @@ namespace RM_BBTS
             List<Page> pages = new List<Page>();
 
             // Pages
-            if (defs != null) // Translation
+            if (false) // Translation
             {
-                pages.Add(new Page(defs["trl_gameOver_00"], "trl_gameOver_00"));
+                //pages.Add(new Page(defs["trl_gameOver_00"], "trl_gameOver_00"));
             }
             else // Default
             {

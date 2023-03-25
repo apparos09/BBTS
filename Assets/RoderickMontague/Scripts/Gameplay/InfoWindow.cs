@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using SimpleJSON;
-using LoLSDK;
+
+
 
 namespace RM_BBTS
 {
@@ -95,21 +95,10 @@ namespace RM_BBTS
         // Start is called before the first frame update
         void Start()
         {
-            // Translation.
-            JSONNode defs = SharedState.LanguageDefs;
-
-            // Translate the content.
-            if (defs != null)
-            {
-                titleText.text = defs["kwd_info"];
-                backButtonText.text = defs["kwd_returnToGame"];
-            }
-            else
-            {
-                LanguageMarker.Instance.MarkText(titleText);
-                LanguageMarker.Instance.MarkText(pageTitle);
-                LanguageMarker.Instance.MarkText(backButtonText);
-            }
+            // Marking Text
+            LanguageMarker.Instance.MarkText(titleText);
+            LanguageMarker.Instance.MarkText(pageTitle);
+            LanguageMarker.Instance.MarkText(backButtonText);
 
             // Initialize the list.
             pages = new List<InfoPage>();
@@ -486,23 +475,7 @@ namespace RM_BBTS
         // Loads the entry's language text.
         public static InfoPage LoadPageLanguageText(InfoPage infoPage, bool loadEntryText)
         {
-            // If the SDK has been initialized.
-            if (LOLSDK.Instance.IsInitialized)
-            {
-                // Translates the page title.
-                infoPage.title = LOLManager.Instance.GetLanguageText(infoPage.titleKey);
-            
-                // If the entry text should also be loaded.
-                if(loadEntryText)
-                {
-                    // Loads the text for each entry.
-                    for (int i = 0; i < infoPage.entries.Count; i++)
-                    {
-                        infoPage.entries[i] = LoadEntryLanguageText(infoPage.entries[i]);
-                    }
-                }
-            
-            }
+            // SDK REMOVED, SO NOTHING HAPPENS HERE
 
             return infoPage;
         }
@@ -510,12 +483,7 @@ namespace RM_BBTS
         // Loads the entry's language text.
         public static InfoPageEntry LoadEntryLanguageText(InfoPageEntry infoEntry)
         {
-            // If the SDK has been initialized.
-            if(LOLSDK.Instance.IsInitialized)
-            {
-                infoEntry.name = LOLManager.Instance.GetLanguageText(infoEntry.nameKey);
-                infoEntry.description = LOLManager.Instance.GetLanguageText(infoEntry.descriptionKey);
-            }
+            // NO BEHAVIOUR
 
             return infoEntry;
         }
@@ -610,34 +578,7 @@ namespace RM_BBTS
         // Speaks the provided entry, which ranges from 0 to 2.
         private void SpeakEntry(int entryNumber)
         {
-            // Checks if text-to-speech is enabled.
-            if (LOLSDK.Instance.IsInitialized && GameSettings.Instance.UseTextToSpeech)
-            {
-                // Entry display object.
-                InfoPageEntryDisplay iped = null;
-
-                // Checks the entry number.
-                switch (entryNumber)
-                {
-                    case 0:
-                        iped = pageEntry0;
-                        break;
-                    case 1:
-                        iped = pageEntry1;
-                        break;
-                    case 2:
-                        iped = pageEntry2;
-                        break;
-                }
-
-                // The object was set.
-                if(iped != null)
-                {
-                    // The speak key exists.
-                    if(iped.descriptionSpeakKey != string.Empty)
-                        LOLManager.Instance.textToSpeech.SpeakText(iped.descriptionSpeakKey);
-                }
-            }
+            // NO TTS
         }
 
 

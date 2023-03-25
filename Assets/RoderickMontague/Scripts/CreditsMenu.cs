@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using SimpleJSON;
+
 
 namespace RM_BBTS
 {
@@ -52,20 +52,10 @@ namespace RM_BBTS
         void Start()
         {
             // Translation.
-            JSONNode defs = SharedState.LanguageDefs;
 
-            // Defs set.
-            if(defs != null)
-            {
-                titleText.text = defs["kwd_licenses"];
-                backButtonText.text = defs["kwd_back"];
-            }
-            else
-            {
-                // Mark the auto load text.
-                LanguageMarker.Instance.MarkText(titleText);
-                LanguageMarker.Instance.MarkText(backButtonText);
-            }
+            // Mark the auto load text.
+            LanguageMarker.Instance.MarkText(titleText);
+            LanguageMarker.Instance.MarkText(backButtonText);
 
             // Loads credit and sets page number.
             UpdateCredit();

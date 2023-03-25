@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using LoLSDK;
-using SimpleJSON;
+
+
 
 namespace RM_BBTS
 {
@@ -114,21 +114,7 @@ namespace RM_BBTS
         // Provided are the name key and the description key.
         public void LoadTranslation(string nameKey, string descKey)
         {
-            // Grabs the language definitions.
-            JSONNode defs = SharedState.LanguageDefs;
-
-            // If the SDK has been initialized.
-            if (defs != null)
-            {
-                // Loads in the name and description.
-                name = defs[nameKey];
-                description = defs[descKey];
-
-                // Saves the name speak key and description speak key.
-                nameSpeakKey = nameKey;
-                descSpeakKey = descKey;
-            }
-
+            // NONE
         }
 
         // Returns the ID of the move.
