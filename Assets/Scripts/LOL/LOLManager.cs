@@ -92,22 +92,13 @@ namespace BBTS
             }
         }
 
-        // // Gets the text from the language file.
-        // public string GetLanguageText(string key)
-        // {
-        //     // TODO: implement.
-        // 
-        //     // // Gets the language definitions.
-        //     // if(defs == null)
-        //     //     defs = SharedState.LanguageDefs;
-        //     // 
-        //     // // Returns the text.
-        //     // if (defs != null)
-        //     //     return defs[key];
-        //     // else
-        //     //     return "";
-        // 
-        // }
+        // Gets the text from the language file.
+        public string GetLanguageText(string key)
+        {
+            string result = LanguageManager.Instance.GetLanguageText(key);
+
+            return result;
+        }
     }
 }
 

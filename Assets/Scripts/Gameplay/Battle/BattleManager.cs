@@ -334,20 +334,6 @@ namespace BBTS
             // opponentAnimTimer = new TimerManager.Timer();
             // opponentAnimTimer.tag = "opponent";
 
-            //// The defs are not set.
-            //if(defs != null)
-            //{
-            //    // Translate the treasure prompt.
-            //    // treasurePromptTextKey = "btl_msg_treasure"; // Set by default so that the text-to-speech can use it.
-            //    treasurePromptText.text = defs[TREASURE_PROMPT_TEXT_KEY];
-            //    treasureYesButtonText.text = defs["kwd_yes"];
-            //    treasureNoButtonText.text = defs["kwd_no"];
-            //}
-            //else
-            //{
-                
-            //}
-
             // Loads the language instance. 
             LanguageManager lm = LanguageManager.Instance;
 

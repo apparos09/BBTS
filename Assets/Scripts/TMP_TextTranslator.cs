@@ -25,13 +25,32 @@ namespace BBTS
             if (text == null)
                 text = GetComponent<TextMeshPro>();
 
-            // Since text is built into the project and not coming from an external file...
-            // The LanguageMarker is no longer needed.
+
+            // Translate the text.
             if(text != null)
             {
-                // Mark the text.
-                LanguageManager.Instance.MarkText(text);
+                Translate();
             }
+        }
+
+        // Translate the text.
+        public bool Translate()
+        {
+            // The result variable.
+            bool result = false;
+
+            // Checks if the text and the key both exists.
+            if (text != null && key != string.Empty)
+            {
+                // Mark the text.
+                result = LanguageManager.Instance.TranslateText(text, key, true);
+            }
+            else
+            {
+                result = false;
+            }
+
+            return result;
         }
 
         // Speaks out the provided text.

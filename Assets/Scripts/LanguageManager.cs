@@ -26,7 +26,7 @@ namespace BBTS
         private language setLanguage = language.english;
 
         // If set to 'true', the text is translated.
-        public const bool TRANSLATE_TEXT = true;
+        public const bool TRANSLATE_TEXT = false;
 
         // The color used for marking text that wasn't repalced with language file content. 
         [HideInInspector]
@@ -86,11 +86,11 @@ namespace BBTS
             get { return setLanguage; }
         }
 
-        // // Returns the language text.
-        // public Dictionary<string, string> LangText
-        // {
-        //     get { return langText; }
-        // }
+        // Checks if a language is set.
+        public bool IsLanguageSet()
+        {
+            return setLanguage != language.none;
+        }
 
         // Loads the language.
         private bool LoadLanguage(language langSet)
@@ -160,6 +160,10 @@ namespace BBTS
         // Translates the text by 
         public string GetLanguageText(string key)
         {
+            // Key not provided.
+            if (key == "")
+                return "";
+
             // The resulting string.
             string result = string.Empty;
 
@@ -181,7 +185,7 @@ namespace BBTS
             bool result = false;
 
             // Checks if the key is in the list.
-            if (langText.ContainsKey(key))
+            if (langText.ContainsKey(key) && key != string.Empty)
             {
                 // Set the text.
                 text.text = langText[key];

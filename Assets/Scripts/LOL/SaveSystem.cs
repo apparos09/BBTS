@@ -101,7 +101,12 @@ namespace BBTS
         // Start is called before the first frame update
         void Start()
         {
-            // feedbackString = defs[FEEDBACK_STRING_KEY];
+            // If the language should be translated.
+            if(LanguageManager.TRANSLATE_TEXT && LanguageManager.Instance.IsLanguageSet())
+            {
+                feedbackString = LanguageManager.Instance.GetLanguageText(FEEDBACK_STRING_KEY);
+            }
+
         }
 
         // Set save and load operations.

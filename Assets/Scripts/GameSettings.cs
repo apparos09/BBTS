@@ -230,7 +230,7 @@ namespace BBTS
             {
                 audio.audioSource.volume = audio.MaxVolume * ttsVolume;
             }
-            else // no recognizable tag.
+            else // No recognizable tag.
             {
                 Debug.LogAssertion("No recognizable audio tag has been set, so the audio can't be adjusted.");
             }

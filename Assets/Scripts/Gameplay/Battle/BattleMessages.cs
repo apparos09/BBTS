@@ -15,7 +15,7 @@ namespace BBTS
         private static BattleMessages instance;
 
         // The language definitions.
-        // LanguageMarker language = null;
+        LanguageManager lm = null;
 
         // Constructor
         private BattleMessages()
@@ -29,6 +29,13 @@ namespace BBTS
             if (instance == null)
             {
                 instance = this;
+
+                // Set the instance.
+                lm = LanguageManager.Instance;
+            }
+            else
+            {
+                return;
             }
 
         }
@@ -66,30 +73,7 @@ namespace BBTS
             }
         }
 
-        // // Gets the move used message.
-        // public string GetBase(string user, string move)
-        // {
-        //     // The message string.
-        //     string msg = "";
-        // 
-        //     // Checks if defs existed.
-        //     if (defs != null)
-        //     {
-        //         // Grabs the translated message.
-        //         msg = defs["btl_msg_mve_moveUsed"];
-        //     }
-        //     else
-        //     {
-        //         // Grabs the default mesage.
-        //         msg = "{0} used {1}!";
-        //     }
-        // 
-        //     // Replaces the information.
-        //     msg = msg.Replace("{0}", user);
-        //     msg = msg.Replace("{1}", move);
-        // 
-        //     return msg;
-        // }
+        
 
         // MOVE USED //
         // Gets the move used message.
@@ -98,19 +82,18 @@ namespace BBTS
             // The message string.
             string msg = "";
 
-            // // Checks if defs existed.
-            // if(language != null)
-            // {
-            //     // Grabs the translated message.
-            //     msg = language["btl_msg_mve_moveUsed"];
-            // }
-            // else
-            // {
-            //     
-            // }
-
-            // Grabs the default mesage.
+            // Default message.
             msg = "{0} used {1}!";
+
+            // Checks to translate the message.
+            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            {
+                // Grabs the translated message.
+                string newMsg = lm.GetLanguageText("btl_msg_mve_moveUsed");
+
+                if (newMsg != string.Empty)
+                    msg = newMsg;
+            }
 
             // Replaces the information.
             msg = msg.Replace("{0}", user);
@@ -140,19 +123,19 @@ namespace BBTS
             // The message string.
             string msg = "";
 
-            // // Checks if defs existed.
-            // if (language != null)
-            // {
-            //     // Grabs the translated message.
-            //     msg = language["btl_msg_mve_moveHit"];
-            // }
-            // else
-            // {
-            //     
-            // }
-
-            // Grabs the default message.
+            // Default message.
             msg = "The move hit!";
+
+            // Checks if translation exists.
+            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            {
+                // Grabs the translated message.
+                string newMsg = lm.GetLanguageText("btl_msg_mve_moveHit");
+
+                // Set the new message.
+                if (newMsg != string.Empty)
+                    msg = newMsg;
+            }
 
             return msg;
         }
@@ -169,19 +152,19 @@ namespace BBTS
             // The message string.
             string msg = "";
 
-            // // Checks if defs existed.
-            // if (language != null)
-            // {
-            //     // Grabs the translated message.
-            //     msg = language["btl_msg_mve_moveSuccess"];
-            // }
-            // else
-            // {
-            //     
-            // }
-
-            // Grabs the default mesage.
+            // Grabs the default message.
             msg = "The move was successful!";
+
+            // Checks if translation exists.
+            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            {
+                // Grabs the translated message.
+                string newMsg = lm.GetLanguageText("btl_msg_mve_moveSuccess");
+
+                // Set the new message.
+                if (newMsg != string.Empty)
+                    msg = newMsg;
+            }
 
             return msg;
         }
@@ -201,19 +184,19 @@ namespace BBTS
             // The message string.
             string msg = "";
 
-            // // Checks if defs existed.
-            // if (language != null)
-            // {
-            //     // Grabs the translated message.
-            //     msg = language["btl_msg_mve_moveCritical"];
-            // }
-            // else
-            // {
-            //     
-            // }
-
             // Grabs the default mesage.
             msg = "The move hit, and it did critical damage!";
+
+            // Checks if translation exists.
+            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            {
+                // Grabs the translated message.
+                string newMsg = lm.GetLanguageText("btl_msg_mve_moveCritical");
+
+                // Set the new message.
+                if (newMsg != string.Empty)
+                    msg = newMsg;
+            }
 
             return msg;
         }
@@ -231,19 +214,19 @@ namespace BBTS
             // The message string.
             string msg = "";
 
-            // // Checks if defs exists.
-            // if (language != null)
-            // {
-            //     // Pull translated messages.
-            //     msg = language["btl_msg_mve_moveRecoil"];
-            // }
-            // else
-            // {
-            //     
-            // }
-
-            // Grabs the default message.
+            // Default message.
             msg = "{0} took recoil damage!";
+
+            // Checks if translation exists.
+            if(LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            {
+                // Pull translated messages.
+                string newMsg = lm.GetLanguageText("btl_msg_mve_moveRecoil");
+
+                // Set translation.
+                if (newMsg != string.Empty)
+                    msg = newMsg;
+            }
 
             // Slot in the message text.
             msg = msg.Replace("{0}", user);
@@ -272,19 +255,20 @@ namespace BBTS
             // The message string.
             string msg = "";
 
-            // // Checks if defs exists.
-            // if (language != null)
-            // {
-            //     // Grabs the translated message.
-            //     msg = language["btl_msg_mve_moveNoEnergy"];
-            // }
-            // else
-            // {
-            //     
-            // }
-
             // Grabs the default mesage.
             msg = "{0} does not have enough energy to use their move!";
+
+            // Checks if translation exists.
+            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            {
+                // Grabs the translated message.
+                string newMsg = lm.GetLanguageText("btl_msg_mve_moveNoEnergy");
+
+                // Set the new message.
+                if (newMsg != string.Empty)
+                    msg = newMsg;
+            }
+
 
             // Replaces the information.
             msg = msg.Replace("{0}", user);
@@ -313,19 +297,19 @@ namespace BBTS
             // The message string.
             string msg = "";
 
-            // // Checks if defs exists.
-            // if (language != null)
-            // {
-            //     // Grabs the translated message.
-            //     msg = language["btl_msg_mve_moveMissed"];
-            // }
-            // else
-            // {
-            //     
-            // }
-
             // Grabs the default mesage.
             msg = "The move missed!";
+
+            // Checks if translation exists.
+            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            {
+                // Grabs the translated message.
+                string newMsg = lm.GetLanguageText("btl_msg_mve_moveMissed");
+
+                // Set the message.
+                if (newMsg != string.Empty)
+                    msg = newMsg;
+            }
 
             return msg;
         }
@@ -345,19 +329,18 @@ namespace BBTS
             // The message string.
             string msg = "";
 
-            // // Checks if defs exists.
-            // if (language != null)
-            // {
-            //     // Grabs the translated message.
-            //     msg = language["btl_msg_mve_moveFailed"];
-            // }
-            // else
-            // {
-            //     
-            // }
-
             // Grabs the default mesage.
             msg = "The move failed!";
+
+            // Checks if translation exists.
+            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            {
+                // Grabs the translated message.
+                string newMsg = lm.GetLanguageText("btl_msg_mve_moveFailed");
+
+                if (newMsg != string.Empty)
+                    msg = newMsg;
+            }
 
             return msg;
         }
@@ -377,26 +360,27 @@ namespace BBTS
             // The message string.
             string msg = "";
 
-            // // Checks if defs exists.
-            // if (language != null)
-            // {
-            //     // Grabs the translated message.
-            //     // A difference message is used based on the amount (singular vs. plural).
-            //     if(amount == 1)
-            //         msg = language["btl_msg_mve_moveStatIncSgl"];
-            //     else
-            //         msg = language["btl_msg_mve_moveStatIncMlt"];
-            // }
-            // else
-            // {
-            //     
-            // }
-
             // Grabs the default mesage (singular vs. pural).
             if (amount == 1)
                 msg = "The move increased {0}'s {1} by 1 stage!";
             else
                 msg = "The move increased {0}'s {1} by {2} stages!";
+
+            // Checks if translation exists.
+            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            {
+                // Grabs the translated message.
+                string newMsg = "";
+
+                // A difference message is used based on the amount (singular vs. plural).
+                if(amount == 1)
+                    newMsg = lm.GetLanguageText("btl_msg_mve_moveStatIncSgl");
+                else
+                    newMsg = lm.GetLanguageText("btl_msg_mve_moveStatIncMlt");
+
+                // Set the new message.
+                msg = newMsg;
+            }
 
             // Slot in values.
             msg = msg.Replace("{0}", target);
@@ -429,26 +413,27 @@ namespace BBTS
             // The message string.
             string msg = "";
 
-            // // Checks if defs exists.
-            // if (language != null)
-            // {
-            //     // Grabs the translated message.
-            //     // A difference message is used based on the amount (singular vs. plural).
-            //     if (amount == 1)
-            //         msg = language["btl_msg_mve_moveStatDecSgl"];
-            //     else
-            //         msg = language["btl_msg_mve_moveStatDecMlt"];
-            // }
-            // else
-            // {
-            //     
-            // }
-
             // Grabs the default mesage (singular vs. pural).
             if (amount == 1)
                 msg = "The move decreased {0}'s {1} by 1 stage!";
             else
                 msg = "The move decreased {0}'s {1} by {2} stages!";
+
+            // Checks if translation exists.
+            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            {
+                // Grabs the translated message.
+                string newMsg = "";
+
+                // A difference message is used based on the amount (singular vs. plural).
+                if (amount == 1)
+                    newMsg = lm.GetLanguageText("btl_msg_mve_moveStatDecSgl");
+                else
+                    newMsg = lm.GetLanguageText("btl_msg_mve_moveStatDecMlt");
+
+                if (newMsg != string.Empty)
+                    msg = newMsg;
+            }
 
             // Slot in values.
             msg = msg.Replace("{0}", target);
@@ -481,26 +466,29 @@ namespace BBTS
             // The message string.
             string msg = "";
 
-            // // Checks if defs exists.
-            // if (language != null)
-            // {
-            //     // Grabs the translated message.
-            //     // A different message is used based on if the move can't go any higher, or any lower.
-            //     if (upperLimit)
-            //         msg = language["btl_msg_mve_moveStatHigh"];
-            //     else
-            //         msg = language["btl_msg_mve_moveStatLow"];
-            // }
-            // else
-            // {
-            //     
-            // }
-
             // Checks if the stat can't go any higher, or lower.
             if (upperLimit)
                 msg = "{0}'s {1} stat can't go any higher!";
             else
                 msg = "{0}'s {1} stat can't go any lower!";
+
+
+            // Checks if translation exists.
+            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            {
+                // Grabs the translated message.
+                string newMsg = "";
+
+                // A different message is used based on if the move can't go any higher, or any lower.
+                if (upperLimit)
+                    newMsg = lm.GetLanguageText("btl_msg_mve_moveStatHigh");
+                else
+                    newMsg = lm.GetLanguageText("btl_msg_mve_moveStatLow");
+
+                // Set message.
+                if (newMsg != string.Empty)
+                    msg = newMsg;
+            }
 
             // Slot in values.
             msg = msg.Replace("{0}", target);
@@ -537,19 +525,19 @@ namespace BBTS
             // The message string.
             string msg = "";
 
-            // // Checks if defs exists.
-            // if (language != null)
-            // {
-            //     // Grabs the translated message.
-            //     msg = language["btl_msg_mve_moveBurned"];
-            // }
-            // else
-            // {
-            //     
-            // }
-
             // Grabs the default mesage.
             msg = "{0} has been inflicted with burn status!";
+
+            // Checks if translation exists.
+            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            {
+                // Grabs the translated message.
+                string newMsg = lm.GetLanguageText("btl_msg_mve_moveBurned");
+
+                // Set message.
+                if (newMsg != string.Empty)
+                    msg = newMsg;
+            }
 
             // Slot in target name.
             msg = msg.Replace("{0}", target);
@@ -578,19 +566,19 @@ namespace BBTS
             // The message string.
             string msg = "";
 
-            // // Checks if defs exists.
-            // if (language != null)
-            // {
-            //     // Grabs the translated message.
-            //     msg = language["btl_msg_mve_moveParalyzed"];
-            // }
-            // else
-            // {
-            //     
-            // }
-
             // Grabs the default mesage.
             msg = "{0} has been inflicted with paralysis status!";
+
+            // Checks if translation exists.
+            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            {
+                // Grabs the translated message.
+                string newMsg = lm.GetLanguageText("btl_msg_mve_moveParalyzed");
+
+                // Set new message.
+                if (newMsg != string.Empty)
+                    msg = newMsg;
+            }
 
             // Slot in target name.
             msg = msg.Replace("{0}", target);
@@ -619,19 +607,19 @@ namespace BBTS
             // The message string.
             string msg = "";
 
-            // // Checks if defs exists.
-            // if (language != null)
-            // {
-            //     // Grabs the translated message.
-            //     msg = language["btl_msg_mve_chargeUsed"];
-            // }
-            // else
-            // {
-            //     
-            // }
-
             // Grabs the default mesage.
             msg = "{0} charged their energy!";
+
+            // Checks if translation exists.
+            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            {
+                // Grabs the translated message.
+                string newMsg = lm.GetLanguageText("btl_msg_mve_chargeUsed");
+
+                // Set the new message.
+                if (newMsg != string.Empty)
+                    msg = newMsg;
+            }
 
             // Slotting in content.
             msg = msg.Replace("{0}", user);
@@ -660,19 +648,19 @@ namespace BBTS
             // The message string.
             string msg = "";
 
-            // // Checks if defs exists.
-            // if (language != null)
-            // {
-            //     // Grabs the translated message.
-            //     msg = language["btl_msg_mve_runFailed"];
-            // }
-            // else
-            // {
-            //     
-            // }
-
             // Grabs the default mesage.
             msg = "{0} failed to run away!";
+
+            // Checks if translation exists.
+            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            {
+                // Grabs the translated message.
+                string newMsg = lm.GetLanguageText("btl_msg_mve_runFailed");
+
+                // Set the new message.
+                if (newMsg != string.Empty)
+                    msg = newMsg;
+            }
 
             // Slotting in content.
             msg = msg.Replace("{0}", user);
@@ -701,19 +689,18 @@ namespace BBTS
             // The message string.
             string msg = "";
 
-            // // Checks if defs exists.
-            // if (language != null)
-            // {
-            //     // Grabs the translated message.
-            //     msg = language["btl_msg_mve_nothing"];
-            // }
-            // else
-            // {
-            //     
-            // }
-
             // Grabs the default mesage.
             msg = "Nothing happened.";
+
+            // Checks if translation exists.
+            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            {
+                // Grabs the translated message.
+                string newMsg = lm.GetLanguageText("btl_msg_mve_nothing");
+
+                if (newMsg != string.Empty)
+                    msg = newMsg;
+            }            
 
             return msg;
         }
@@ -733,19 +720,19 @@ namespace BBTS
             // The message string.
             string msg = "";
 
-            // // Checks if defs exists.
-            // if (language != null)
-            // {
-            //     // Grabs the translated message.
-            //     msg = language["btl_msg_burned"];
-            // }
-            // else
-            // {
-            //     
-            // }
-
             // Grabs the default mesage.
             msg = "{0} took burn damage!";
+
+            // Checks if translation exists.
+            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            {
+                // Grabs the translated message.
+                string newMsg = lm.GetLanguageText("btl_msg_burned");
+
+                // Set the message.
+                if (newMsg != string.Empty)
+                    msg = newMsg;
+            }
 
             // Slotting in content.
             msg = msg.Replace("{0}", infected);
@@ -774,19 +761,19 @@ namespace BBTS
             // The message string.
             string msg = "";
 
-            // // Checks if defs exists.
-            // if (language != null)
-            // {
-            //     // Grabs the translated message.
-            //     msg = language["btl_msg_paralyzed"];
-            // }
-            // else
-            // {
-            //     
-            // }
-            // 
             // Grabs the default mesage.
             msg = "{0} is immobilized, and can't move!";
+
+            // Checks if translation exists.
+            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            {
+                // Grabs the translated message.
+                string newMsg = lm.GetLanguageText("btl_msg_paralyzed");
+
+                // Sets the new message.
+                if (newMsg != string.Empty)
+                    msg = newMsg;
+            }
 
             // Slotting in content.
             msg = msg.Replace("{0}", infected);
@@ -814,20 +801,19 @@ namespace BBTS
         {
             // The message string.
             string msg = "";
-            
-            // // Checks if defs exists.
-            // if (language != null)
-            // {
-            //     // Grabs the translated message.
-            //     msg = language["btl_msg_battleWon"];
-            // }
-            // else
-            // {
-            //     
-            // }
 
             // Grabs the default mesage.
             msg = "The opponent ran away! Battle Bot has won the battle!";
+
+            // Checks if translation exists.
+            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            {
+                // Grabs the translated message.
+                string newMsg = lm.GetLanguageText("btl_msg_battleWon");
+
+                if (newMsg != string.Empty)
+                    msg = newMsg;
+            }
 
             return msg;
         }
@@ -847,19 +833,19 @@ namespace BBTS
             // The message string.
             string msg = "";
 
-            // // Checks if defs exists.
-            // if (language != null)
-            // {
-            //     // Grabs the translated message.
-            //     msg = language["btl_msg_battleWonBoss"];
-            // }
-            // else
-            // {
-            //     
-            // }
-
             // Grabs the default mesage.
             msg = "The boss ran away! Battle Bot has completed the simulation!";
+
+            // Checks if translation exists.
+            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            {
+                // Grabs the translated message.
+                string newMsg = lm.GetLanguageText("btl_msg_battleWonBoss");
+
+                // Set message.
+                if (newMsg != string.Empty)
+                    msg = newMsg;
+            }
 
             return msg;
         }
@@ -879,19 +865,19 @@ namespace BBTS
             // The message string.
             string msg = "";
 
-            // // Checks if defs exists.
-            // if (language != null)
-            // {
-            //     // Grabs the translated message.
-            //     msg = language["btl_msg_battleLost"];
-            // }
-            // else
-            // {
-            //     
-            // }
-
             // Grabs the default mesage.
             msg = "Battle Bot lost the battle, and had to run away!";
+
+            // Checks if translation exists.
+            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            {
+                // Grabs the translated message.
+                string newMsg = lm.GetLanguageText("btl_msg_battleLost");
+
+                // Set the new message.
+                if (newMsg != string.Empty)
+                    msg = newMsg;
+            }
 
             return msg;
         }
@@ -911,19 +897,19 @@ namespace BBTS
             // The message string.
             string msg = "";
 
-            // // Checks if defs exists.
-            // if (language != null)
-            // {
-            //     // Grabs the translated message.
-            //     msg = language["btl_msg_takeTreasure"];
-            // }
-            // else
-            // {
-            //     
-            // }
-
             // Grabs the default mesage.
             msg = "Battle Bot has taken the treasure!";
+
+            // Checks if translation exists.
+            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            {
+                // Grabs the translated message.
+                string newMsg = lm.GetLanguageText("btl_msg_takeTreasure");
+
+                // Set message.
+                if (newMsg != string.Empty)
+                    msg = newMsg;
+            }
 
             return msg;
         }
@@ -943,19 +929,19 @@ namespace BBTS
             // The message string.
             string msg = "";
 
-            // // Checks if defs exists.
-            // if (language != null)
-            // {
-            //     // Grabs the translated message.
-            //     msg = language["btl_msg_levelUp"];
-            // }
-            // else
-            // {
-            //     
-            // }
-
             // Grabs the default mesage.
             msg = "Battle Bot got a level up!";
+
+            // Checks if translation exists.
+            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            {
+                // Grabs the translated message.
+                string newMsg = lm.GetLanguageText("btl_msg_levelUp");
+
+                // Set.
+                if (newMsg != string.Empty)
+                    msg = newMsg;
+            }
 
             return msg;
         }
@@ -975,19 +961,19 @@ namespace BBTS
             // The message string.
             string msg = "";
 
-            // // Checks if defs exists.
-            // if (language != null)
-            // {
-            //     // Grabs the translated message.
-            //     msg = language["btl_msg_learnMove"];
-            // }
-            // else
-            // {
-            //     
-            // }
-
             // Grabs the default mesage.
             msg = "Battle Bot is trying to learn a new move!";
+
+            // Checks if translation exists.
+            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            {
+                // Grabs the translated message.
+                string newMsg = lm.GetLanguageText("btl_msg_learnMove");
+
+                // Sets the new message.
+                if (newMsg != string.Empty)
+                    msg = newMsg;
+            }
 
             return msg;
         }
@@ -1005,19 +991,19 @@ namespace BBTS
             // The message string.
             string msg = "";
 
-            // // Checks if defs exists.
-            // if (language != null)
-            // {
-            //     // Grabs the translated message.
-            //     msg = language["btl_msg_learnMoveYes"];
-            // }
-            // else
-            // {
-            //     
-            // }
-
             // Grabs the default mesage.
             msg = "Battle Bot learned {0}!";
+
+            // Checks if translation exists.
+            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            {
+                // Grabs the translated message.
+                string newMsg = lm.GetLanguageText("btl_msg_learnMoveYes");
+
+                // Set.
+                if (newMsg != string.Empty)
+                    msg = newMsg;
+            }
 
             // Slotting in content.
             msg = msg.Replace("{0}", newMove);
@@ -1038,19 +1024,20 @@ namespace BBTS
             // The message string.
             string msg = "";
 
-            // // Checks if defs exists.
-            // if (language != null)
-            // {
-            //     // Grabs the translated message.
-            //     msg = language["btl_msg_learnMoveNo"];
-            // }
-            // else
-            // {
-            //     
-            // }
-
             // Grabs the default mesage.
             msg = "Battle Bot did not learn {0}.";
+
+
+            // Checks if translation exists.
+            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            {
+                // Grabs the translated message.
+                string newMsg = lm.GetLanguageText("btl_msg_learnMoveNo");
+
+                // Set.
+                if (newMsg != string.Empty)
+                    msg = newMsg;
+            }
 
             // Slotting in content.
             msg = msg.Replace("{0}", newMove);
@@ -1073,19 +1060,19 @@ namespace BBTS
             // The message string.
             string msg = "";
 
-            // // Checks if defs exists.
-            // if (language != null)
-            // {
-            //     // Grabs the translated message.
-            //     msg = language["btl_msg_multMoveOffer"];
-            // }
-            // else
-            // {
-            //     
-            // }
-
             // Grabs the default mesage.
             msg = "The treasure had 3 moves inside! Choose one of the 3 moves to learn!";
+
+            // Checks if translation exists.
+            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            {
+                // Grabs the translated message.
+                string newMsg = lm.GetLanguageText("btl_msg_multMoveOffer");
+
+                // Set.
+                if (newMsg != string.Empty)
+                    msg = newMsg;
+            }
 
             return msg;
         }
@@ -1103,19 +1090,19 @@ namespace BBTS
             // The message string.
             string msg = "";
 
-            // // Checks if defs exists.
-            // if (language != null)
-            // {
-            //     // Grabs the translated message.
-            //     // msg = language["btl_msg_multMoveOfferSkip"];
-            // }
-            // else
-            // {
-            //     // Grabs the default mesage.
-            //     msg = "Battle Bot did not learn any of the new moves!";
-            // }
-
+            // Default message.
             msg = "Battle Bot did not learn any of the new moves!";
+
+            // Checks if translation exists.
+            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            {
+                // Grabs the translated message.
+                string newMsg = lm.GetLanguageText("btl_msg_multMoveOfferSkip");
+
+                // Set
+                if (newMsg != string.Empty)
+                    msg = newMsg;
+            }
 
             return msg;
         }

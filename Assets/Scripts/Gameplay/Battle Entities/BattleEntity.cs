@@ -208,19 +208,30 @@ namespace BBTS
         // Provided are the name key and the description key.
         public void LoadTranslation(string nameKey)
         {
-            //displayName = defs[nameKey];
-            // displayNameSpeakKey = nameKey;
+            LanguageManager lm = LanguageManager.Instance;
 
-            // ...
+            // Translate the name.
+            if(LanguageManager.TRANSLATE_TEXT && lm.Language != language.none)
+            {
+                displayName = lm.GetLanguageText(nameKey);
+            }
+
+            displayNameSpeakKey = nameKey;
         }
 
         // Loads translation information, changing the provided battle data.
         public static void LoadTranslationForData(ref BattleEntityGameData data, string nameKey)
         {
-
             // // Loads in the name and description.
-            // data.displayName = defs[nameKey];
-            // data.displayNameSpeakKey = nameKey;
+            LanguageManager lm = LanguageManager.Instance;
+
+            // Translate the name.
+            if (LanguageManager.TRANSLATE_TEXT && lm.Language != language.none)
+            {
+                data.displayName = lm.GetLanguageText(nameKey);
+            }
+
+            data.displayNameSpeakKey = nameKey;
         }
 
         // Generates the battle entity data for this entity.

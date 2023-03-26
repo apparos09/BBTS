@@ -87,16 +87,12 @@ namespace BBTS
         // Start is called just before any of the Update methods is called the first time.
         public void Start()
         {
-            // Taken out since this probably doesn't need to be translated.
-            // // Grabs the language defs.
-            // JSONNode defs = SharedState.LanguageDefs;
-            // 
-            // // Translate the text in case it's shown on screen from the game taking a while to initialize.
-            // if (initText != null && defs != null)
-            // {
-            //     // Do this just in case 
-            //     // initText.text = defs["kwd_loading"]; // Loading
-            // }
+            // If text should be translated.
+            if(LanguageManager.TRANSLATE_TEXT)
+            {
+                LanguageManager lm = LanguageManager.Instance;
+                lm.LoadEnglish();
+            }
         }
 
         private void OnDestroy()
