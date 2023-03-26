@@ -12,6 +12,9 @@ namespace BBTS
     // General manager for the gameplay.
     public class GameplayManager : GameState
     {
+        // The instance of the Gameplay Manager.
+        private static GameplayManager instance;
+
         // the state of the game.
         private gameState state = gameState.none;
 
@@ -249,51 +252,63 @@ namespace BBTS
         // The room transition object.
         public RoomTransition roomTransition;
 
+        // Private constructor so that only one gameplay manager object exists.
+        private GameplayManager()
+        {
+            // ...
+        }
+
         // Awake is called when the script instance is being loaded
         private void Awake()
         {
-            // Turns on the overworld object and its ui.
-            overworld.gameObject.SetActive(false);
-            overworld.ui.SetActive(false);
+            // This is the instance.
+            if (instance == null)
+            {
+                instance = this;
 
-            // Turns off the battle object and its ui.
-            battle.gameObject.SetActive(false);
-            battle.ui.SetActive(false);
+                // Turns on the overworld object and its ui.
+                overworld.gameObject.SetActive(false);
+                overworld.ui.SetActive(false);
 
-            // Tutorial settings.
-            if(FindObjectOfType<GameSettings>() != null)
-                useTutorial = GameSettings.Instance.UseTutorial;
+                // Turns off the battle object and its ui.
+                battle.gameObject.SetActive(false);
+                battle.ui.SetActive(false);
 
-            // Translation
-            // For marking text to show it's not loaded from the language file.
-            LanguageManager marker = LanguageManager.Instance;
+                // Tutorial settings.
+                if (FindObjectOfType<GameSettings>() != null)
+                    useTutorial = GameSettings.Instance.UseTutorial;
 
-            // Windows/Prompts
-            // STATS WINDOW
-            marker.MarkText(statsButtonText);
+                // Translation
+                // For marking text to show it's not loaded from the language file.
+                LanguageManager marker = LanguageManager.Instance;
 
-            // SAVE PROMPT //
-            marker.MarkText(saveButtonText);
-            marker.MarkText(savePromptText);
-            marker.MarkText(saveAndContinueText);
-            marker.MarkText(saveAndQuitText);
-            marker.MarkText(savePromptBackText);
+                // Windows/Prompts
+                // STATS WINDOW
+                marker.MarkText(statsButtonText);
 
-            // SETTINGS WINDOW //
-            marker.MarkText(settingsButtonText);
+                // SAVE PROMPT //
+                marker.MarkText(saveButtonText);
+                marker.MarkText(savePromptText);
+                marker.MarkText(saveAndContinueText);
+                marker.MarkText(saveAndQuitText);
+                marker.MarkText(savePromptBackText);
 
-            // MAIN MENU (TITLE SCREEN) PROMPT
-            marker.MarkText(mainMenuButtonText);
-            marker.MarkText(mainMenuPromptText);
-            marker.MarkText(mainMenuYesText);
-            marker.MarkText(mainMenuNoText);
+                // SETTINGS WINDOW //
+                marker.MarkText(settingsButtonText);
 
-            // INFO WINDOW
-            marker.MarkText(infoButtonText);
+                // MAIN MENU (TITLE SCREEN) PROMPT
+                marker.MarkText(mainMenuButtonText);
+                marker.MarkText(mainMenuPromptText);
+                marker.MarkText(mainMenuYesText);
+                marker.MarkText(mainMenuNoText);
+
+                // INFO WINDOW
+                marker.MarkText(infoButtonText);
 
 
-            // Turns off the entrance animation if scene transitions shouldn't be used.
-            sceneTransition.useSceneEnterAnim = useTransitions;
+                // Turns off the entrance animation if scene transitions shouldn't be used.
+                sceneTransition.useSceneEnterAnim = useTransitions;
+            }
         }
 
         // Start is called before the first frame update
@@ -399,6 +414,26 @@ namespace BBTS
 
             // The post start function was called.
             calledPostStart = true;
+        }
+
+        // Returns the instance of the gameplay manager.
+        public static GameplayManager Instance
+        {
+            get
+            {
+                // Checks to see if the instance exists. If it doesn't, generate an object.
+                if (instance == null)
+                {
+                    // Makes a new settings object.
+                    GameObject go = new GameObject("Game (singleton)");
+
+                    // Adds the instance component to the new object.
+                    instance = go.AddComponent<GameplayManager>();
+                }
+
+                // returns the instance.
+                return instance;
+            }
         }
 
         // Initializes the gameplay manager.

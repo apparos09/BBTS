@@ -26,7 +26,7 @@ namespace BBTS
         private language setLanguage = language.english;
 
         // If set to 'true', the text is translated.
-        public const bool TRANSLATE_TEXT = false;
+        public const bool TRANSLATE_TEXT = true;
 
         // The color used for marking text that wasn't repalced with language file content. 
         [HideInInspector]
@@ -99,7 +99,7 @@ namespace BBTS
             langText.Clear();
 
             string file = "";
-            string filePath = "Resources/Data/Languages/";
+            string filePath = "Assets\\Resources\\Data\\Languages\\";
 
             // Set the language.
             setLanguage = langSet;

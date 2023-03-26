@@ -34,14 +34,15 @@ namespace BBTS
         }
 
         // sets the file and the file path.
-        public void SetFile(string newFile, string newFilePath)
+        public void SetFile(string newFile, string newFilePath, bool useBackSlash = true)
         {
             SetFile(newFile);
-            SetFilePath(newFilePath);
+            SetFilePath(newFilePath, useBackSlash);
         }
 
-        // sets the file path.
-        public void SetFilePath(string newFilePath)
+        // sets the file path 9make sure to use back slashes ('\'), not forward slashes.
+        // If useBackSlash is set to false, forward slashes are used.
+        public void SetFilePath(string newFilePath, bool useBackSlash = true)
         {
             // set new file path.
             filePath = newFilePath;
@@ -50,9 +51,13 @@ namespace BBTS
             if (filePath.Length != 0)
             {
                 // if the last character is not a slash, add one.
-                if (filePath[filePath.Length - 1] != '\\')
+                if (filePath[filePath.Length - 1] != '\\' && useBackSlash)
                 {
                     filePath += "\\";
+                }
+                else if (filePath[filePath.Length - 1] != '/' && !useBackSlash)
+                {
+                    filePath += "/";
                 }
             }
         }
@@ -71,7 +76,9 @@ namespace BBTS
             SetFile(file, filePath);
 
             // returns true if the file exists.
-            return File.Exists(filePath + file);
+            bool result = File.Exists(filePath + file);
+
+            return result;
         }
 
         // Read from the file.

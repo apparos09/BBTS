@@ -76,6 +76,12 @@ namespace BBTS
     // Used to save the game.
     public class SaveSystem : MonoBehaviour
     {
+        // The instance of the Battle Manager.
+        private static SaveSystem instance;
+
+        // If set to 'true', the game allows the player to save.
+        public bool allowSaves = false;
+
         // The game data.
         // The last game save. This is only for testing purposes.
         public BBTS_GameData lastSave;
@@ -98,6 +104,23 @@ namespace BBTS
         // The string key for the feedback.
         private const string FEEDBACK_STRING_KEY = "sve_msg_savingGame";
 
+        // Private constructor so that only one save system object exists.
+        private SaveSystem()
+        {
+            // ...
+        }
+
+        // Awake is called when the script instance is being loaded
+        private void Awake()
+        {
+            // This is the instance.
+            if (instance == null)
+            {
+                instance = this;
+            }
+        }
+
+
         // Start is called before the first frame update
         void Start()
         {
@@ -109,9 +132,30 @@ namespace BBTS
 
         }
 
-        // Set save and load operations.
-        public void Initialize(Button newGameButton, Button continueButton)
+        // Returns the instance of the save system.
+        public static SaveSystem Instance
         {
+            get
+            {
+                // Checks to see if the instance exists. If it doesn't, generate an object.
+                if (instance == null)
+                {
+                    // Makes a new settings object.
+                    GameObject go = new GameObject("Save System (singleton)");
+
+                    // Adds the instance component to the new object.
+                    instance = go.AddComponent<SaveSystem>();
+                }
+
+                // returns the instance.
+                return instance;
+            }
+        }
+
+        // Set save and load operations.
+        public void Initialize()
+        {
+
             // ...
         }
 

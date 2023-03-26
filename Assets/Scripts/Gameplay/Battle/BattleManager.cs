@@ -14,6 +14,9 @@ namespace BBTS
     // Manages the battle operations for the game. This becomes active when the game enters a battle state.
     public class BattleManager : GameState
     {
+        // The instance of the Battle Manager.
+        private static BattleManager instance;
+
         // Becomes 'true' when the overworld is initialized.
         private bool initialized = false;
 
@@ -270,6 +273,22 @@ namespace BBTS
         // If the battle background should be used.
         public const bool USE_BATTLE_BACKGROUND = true;
 
+        // Private constructor so that only one battle manager object exists.
+        private BattleManager()
+        {
+            // ...
+        }
+
+        // Awake is called when the script instance is being loaded
+        private void Awake()
+        {
+            // This is the instance.
+            if (instance == null)
+            {
+                instance = this;
+            }
+        }
+
         // Start is called before the first frame update
         void Start()
         {
@@ -360,6 +379,26 @@ namespace BBTS
                 lm.MarkText(treasureNoButtonText);
 
                 lm.MarkText(opponentNameText);
+            }
+        }
+
+        // Returns the instance of the battle manager.
+        public static BattleManager Instance
+        {
+            get
+            {
+                // Checks to see if the instance exists. If it doesn't, generate an object.
+                if (instance == null)
+                {
+                    // Makes a new batttle object.
+                    GameObject go = new GameObject("Battle (singleton)");
+
+                    // Adds the instance component to the new object.
+                    instance = go.AddComponent<BattleManager>();
+                }
+
+                // returns the instance.
+                return instance;
             }
         }
 

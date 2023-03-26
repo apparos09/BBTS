@@ -9,7 +9,7 @@ namespace BBTS
     // a class for the system management (formally the LOLManager).
     public class SystemManager : MonoBehaviour
     {
-        // the instance of the LOL manager.
+        // the instance of the system manager.
         private static SystemManager instance;
         
         // The save system for the game.
@@ -72,7 +72,7 @@ namespace BBTS
         // 
         // }
 
-        // Returns the instance of the accessibility.
+        // Returns the instance of the save system.
         public static SystemManager Instance
         {
             get

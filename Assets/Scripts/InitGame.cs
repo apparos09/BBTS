@@ -64,16 +64,13 @@ namespace BBTS
             // LOL Initialization
             // Create the WebGL (or mock) object
 #if UNITY_EDITOR
-            // ...
+            SystemManager.Instance.saveSystem.allowSaves = true;
 #elif UNITY_WEBGL
-            // ...
+            SystemManager.Instance.saveSystem.allowSaves = false;
 #elif UNITY_IOS || UNITY_ANDROID
-            // ...
+            SystemManager.Instance.saveSystem.allowSaves = false;
 #endif
 
-            
-           // 
-            StartCoroutine(_WaitForData());
 
             // Helper method to hide and show the state buttons as needed.
             // Will call LoadState<T> for you.
@@ -81,7 +78,7 @@ namespace BBTS
 
             // TODO: take this out?
             // Shows that the game has been initialized?
-            initGame = true;
+            
         }
 
         // Start is called just before any of the Update methods is called the first time.
@@ -93,61 +90,26 @@ namespace BBTS
                 LanguageManager lm = LanguageManager.Instance;
                 lm.LoadEnglish();
             }
-        }
 
-        private void OnDestroy()
-        {
-#if UNITY_EDITOR
-            if (!UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode)
-                return;
-#endif
-            // LOLSDK.Instance.SaveResultReceived -= OnSaveResult;
-        }
+            // Loads the current save.
+            if(SystemManager.Instance.saveSystem.allowSaves)
+                LoadCurrentSave();
 
-        // // On save result.
-        // void OnSaveResult(bool success)
-        // {
-        //     if (!success)
-        //     {
-        //         Debug.LogWarning("Saving not successful");
-        //         return;
-        //     }
-        // 
-        //     if (feedbackMethod != null)
-        //         StopCoroutine(feedbackMethod);
-        //     // ...Auto Saving Complete
-        //     feedbackMethod = StartCoroutine(Feedback("autoSave"));
-        // }
-
-        // Waits for the data and then loads the scene.
-        IEnumerator _WaitForData()
-        {
-            yield return new WaitUntil(() => (_receivedData & _expectedData) != 0);
-            SceneManager.LoadScene("TitleScene", LoadSceneMode.Single);
-        }
-
-        /// <summary>
-        /// This is the setting of your initial state when the scene loads.
-        /// The state can be set from your default editor settings or from the
-        /// users saved data after a valid save is called.
-        /// </summary>
-        /// <param name="loadedGameData"></param>
-        void OnLoad(BBTS_GameData loadedGameData)
-        {
-            // Overrides serialized state data or continues with editor serialized values.
-            if (loadedGameData != null)
-            {
-                gameData = loadedGameData;
-                SystemManager.Instance.saveSystem.loadedData = loadedGameData;
-            }
-            else
-            {
-                return;
-            }
-               
-            // Becomes set to 'true' when the game data has been loaded.
+            // Game has been initialized.
             initGame = true;
         }
-        
+
+        // Load the current save.
+        public void LoadCurrentSave()
+        {
+            // TODO: load current save.
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            // Load the title scene on the first frame.
+            SceneManager.LoadScene("TitleScene", LoadSceneMode.Single);
+        }
     }
 }

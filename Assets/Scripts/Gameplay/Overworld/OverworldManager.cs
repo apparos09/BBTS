@@ -7,6 +7,10 @@ namespace BBTS
     // The manager for the overworld.
     public class OverworldManager : GameState
     {
+        // The instance of the Overworld Manager.
+        private static OverworldManager instance;
+
+
         // Becomes 'true' when the overworld is initialized.
         private bool initialized = false;
 
@@ -162,6 +166,24 @@ namespace BBTS
         // The question incorrect SFX.
         public AudioClip questionIncorrectSfx;
 
+
+        // Private constructor so that only one overworld manager object exists.
+        private OverworldManager()
+        {
+            // ...
+        }
+
+        // Awake is called when the script instance is being loaded
+        private void Awake()
+        {
+            // This is the instance.
+            if (instance == null)
+            {
+                instance = this;
+            }
+        }
+
+
         // Start is called before the first frame update
         void Start()
         {
@@ -171,6 +193,27 @@ namespace BBTS
                 Debug.LogWarning("The door count does not match the room count! Will cause save issues.");
             }
         }
+
+        // Returns the instance of the overworld manager.
+        public static OverworldManager Instance
+        {
+            get
+            {
+                // Checks to see if the instance exists. If it doesn't, generate an object.
+                if (instance == null)
+                {
+                    // Makes a new overworld object.
+                    GameObject go = new GameObject("Overworld (singleton)");
+
+                    // Adds the instance component to the new object.
+                    instance = go.AddComponent<OverworldManager>();
+                }
+
+                // returns the instance.
+                return instance;
+            }
+        }
+
 
         // This function is called when the object becomes enabled and active
         private void OnEnable()
