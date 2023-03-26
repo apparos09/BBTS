@@ -115,18 +115,33 @@ namespace BBTS
             textToSpeechToggle.interactable = false;
 
             // Translate the dialogue - NO LONGER DOES ANYTHING.
-            LanguageManager marker = LanguageManager.Instance;
+            LanguageManager lm = LanguageManager.Instance;
 
-            marker.MarkText(titleText);
-            marker.MarkText(bgmLabelText);
-            marker.MarkText(sfxLabelText);
-            marker.MarkText(ttsLabelText);
+            // Translate the dialogue.
+            if (lm.TranslateAndLanguageSet())
+            {
+                titleText.text = lm.GetLanguageText("kwd_settings");
+                bgmLabelText.text = lm.GetLanguageText("kwd_bgmVolume");
+                sfxLabelText.text = lm.GetLanguageText("kwd_sfxVolume");
+                ttsLabelText.text = lm.GetLanguageText("kwd_ttsVolume");
 
-            marker.MarkText(muteLabel);
-            marker.MarkText(textToSpeechLabel);
-            marker.MarkText(tutorialLabel);
-            marker.MarkText(backButtonText);
+                muteLabel.text = lm.GetLanguageText("kwd_mute");
+                textToSpeechLabel.text = lm.GetLanguageText("kwd_textToSpeech");
+                tutorialLabel.text = lm.GetLanguageText("kwd_tutorial");
+                backButtonText.text = lm.GetLanguageText("kwd_back");
+            }
+            else
+            {
+                lm.MarkText(titleText);
+                lm.MarkText(bgmLabelText);
+                lm.MarkText(sfxLabelText);
+                lm.MarkText(ttsLabelText);
 
+                lm.MarkText(muteLabel);
+                lm.MarkText(textToSpeechLabel);
+                lm.MarkText(tutorialLabel);
+                lm.MarkText(backButtonText);
+            }
         }
 
         // This function is called when the object becomes enabled and active

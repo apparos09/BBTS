@@ -5,6 +5,7 @@ using TMPro;
 
 using UnityEngine.UI;
 using System.Linq;
+using System.Security.Cryptography;
 
 namespace BBTS
 {
@@ -99,25 +100,50 @@ namespace BBTS
             // SDK REMOVED
 
             // The language marker.
-            LanguageManager marker = LanguageManager.Instance;
+            LanguageManager lm = LanguageManager.Instance;
 
-            // The title text.
-            marker.MarkText(titleText);
+            // Language definitions set.
+            if (lm.TranslateAndLanguageSet())
+            {
+                // Title text.
+                titleText.text = lm.GetLanguageText("kwd_learnMoveTitle");
 
-            // The instructional text.
-            marker.MarkText(instructText);
+                // The instructional text.
+                instructText.text = lm.GetLanguageText(INSTRUCT_TEXT_LANG_KEY);
 
-            // The move offer header text.
-            marker.MarkText(moveOfferHeaderText);
+                // The player moves header text.
+                moveOfferHeaderText.text = lm.GetLanguageText("kwd_moveOffer");
 
-            // The player moves header text.
-            marker.MarkText(currentMovesHeaderText);
+                // The player moves header text.
+                currentMovesHeaderText.text = lm.GetLanguageText("kwd_currentMoves");
 
-            // The switch moves text.
-            marker.MarkText(switchButtonText);
+                // The switch move message text.
+                switchButtonText.text = lm.GetLanguageText("kwd_switchMoves");
 
-            // The finish text.
-            marker.MarkText(finishButtonText);
+                // The switch move message text.
+                finishButtonText.text = lm.GetLanguageText("kwd_finish");
+            }
+            else
+            {
+                // The title text.
+                lm.MarkText(titleText);
+
+                // The instructional text.
+                lm.MarkText(instructText);
+
+                // The move offer header text.
+                lm.MarkText(moveOfferHeaderText);
+
+                // The player moves header text.
+                lm.MarkText(currentMovesHeaderText);
+
+                // The switch moves text.
+                lm.MarkText(switchButtonText);
+
+                // The finish text.
+                lm.MarkText(finishButtonText);
+            }
+      
         }
 
         // This function is called when the object becomes enabled and visible.

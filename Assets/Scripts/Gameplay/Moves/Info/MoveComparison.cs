@@ -118,28 +118,55 @@ namespace BBTS
                 runMove = MoveList.Instance.RunMove;
 
             // Translation
-            LanguageManager marker = LanguageManager.Instance;
+            LanguageManager lm = LanguageManager.Instance;
 
-            marker.MarkText(legendTitleText);
+            // Language definitions set.
+            if (lm.TranslateAndLanguageSet())
+            {
+                legendTitleText.text = lm.GetLanguageText("kwd_legend");
 
-            // Standard Symbols
-            marker.MarkText(rankLabel);
-            marker.MarkText(powerLabel);
-            marker.MarkText(accuracyLabel);
-            marker.MarkText(energyLabel);
+                // Standard Symbols
+                rankLabel.text = gameManager.RankString;
+                powerLabel.text = gameManager.PowerString;
+                accuracyLabel.text = gameManager.AccuracyString;
+                energyLabel.text = gameManager.EnergyString;
 
-            // Stat Changes
-            marker.MarkText(attackChangeLabel);
-            marker.MarkText(defenseChangeLabel);
-            marker.MarkText(speedChangeLabel);
-            marker.MarkText(accuracyChangeLabel);
+                // Stat Changes
+                attackChangeLabel.text = lm.GetLanguageText("kwd_attackChange");
+                defenseChangeLabel.text = lm.GetLanguageText("kwd_defenseChange");
+                speedChangeLabel.text = lm.GetLanguageText("kwd_speedChange");
+                accuracyChangeLabel.text = lm.GetLanguageText("kwd_accuracyChange");
 
-            // Effects
-            marker.MarkText(effectSelfLabel);
-            marker.MarkText(effectTargetLabel);
-            marker.MarkText(criticalLabel);
-            marker.MarkText(burnLabel);
-            marker.MarkText(paralysisLabel);
+                // Effects
+                effectSelfLabel.text = lm.GetLanguageText("kwd_effectSelf");
+                effectTargetLabel.text = lm.GetLanguageText("kwd_effectTarget");
+                criticalLabel.text = lm.GetLanguageText("kwd_criticalChance");
+                burnLabel.text = lm.GetLanguageText("kwd_burnChance");
+                paralysisLabel.text = lm.GetLanguageText("kwd_paralysisChance");
+            }
+            else
+            {
+                lm.MarkText(legendTitleText);
+
+                // Standard Symbols
+                lm.MarkText(rankLabel);
+                lm.MarkText(powerLabel);
+                lm.MarkText(accuracyLabel);
+                lm.MarkText(energyLabel);
+
+                // Stat Changes
+                lm.MarkText(attackChangeLabel);
+                lm.MarkText(defenseChangeLabel);
+                lm.MarkText(speedChangeLabel);
+                lm.MarkText(accuracyChangeLabel);
+
+                // Effects
+                lm.MarkText(effectSelfLabel);
+                lm.MarkText(effectTargetLabel);
+                lm.MarkText(criticalLabel);
+                lm.MarkText(burnLabel);
+                lm.MarkText(paralysisLabel);
+            }
 
 
             UpdatePlayerInfo();

@@ -92,6 +92,12 @@ namespace BBTS
             return setLanguage != language.none;
         }
 
+        // Returns 'true' if text should be translated, and if the language is set.
+        public bool TranslateAndLanguageSet()
+        {
+            return TRANSLATE_TEXT && IsLanguageSet();
+        }
+
         // Loads the language.
         private bool LoadLanguage(language langSet)
         {

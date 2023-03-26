@@ -280,31 +280,77 @@ namespace BBTS
 
                 // Translation
                 // For marking text to show it's not loaded from the language file.
-                LanguageManager marker = LanguageManager.Instance;
+                LanguageManager lm = LanguageManager.Instance;
 
-                // Windows/Prompts
-                // STATS WINDOW
-                marker.MarkText(statsButtonText);
+                // Translate all of the string objects.
+                if (lm.TranslateAndLanguageSet())
+                {
+                    // Windows/Prompts
+                    // STATS WINDOW
+                    statsButtonText.text = lm.GetLanguageText("kwd_stats");
 
-                // SAVE PROMPT //
-                marker.MarkText(saveButtonText);
-                marker.MarkText(savePromptText);
-                marker.MarkText(saveAndContinueText);
-                marker.MarkText(saveAndQuitText);
-                marker.MarkText(savePromptBackText);
+                    // SAVE PROMPT //
+                    saveButtonText.text = lm.GetLanguageText("kwd_save");
+                    savePromptText.text = lm.GetLanguageText(SAVE_PROMPT_TEXT_KEY);
+                    saveAndContinueText.text = lm.GetLanguageText("kwd_saveContinue");
+                    saveAndQuitText.text = lm.GetLanguageText("kwd_saveQuit");
+                    savePromptBackText.text = lm.GetLanguageText("kwd_back");
 
-                // SETTINGS WINDOW //
-                marker.MarkText(settingsButtonText);
+                    // SETTINGS WINDOW //
+                    settingsButtonText.text = lm.GetLanguageText("kwd_settings");
 
-                // MAIN MENU (TITLE SCREEN) PROMPT
-                marker.MarkText(mainMenuButtonText);
-                marker.MarkText(mainMenuPromptText);
-                marker.MarkText(mainMenuYesText);
-                marker.MarkText(mainMenuNoText);
+                    // MAIN MENU (TITLE SCREEN) PROMPT
+                    mainMenuButtonText.text = lm.GetLanguageText("kwd_mainMenu");
+                    mainMenuPromptText.text = lm.GetLanguageText(MAIN_MENU_PROMPT_TEXT_KEY);
+                    mainMenuYesText.text = lm.GetLanguageText("kwd_returnToMainMenu");
+                    mainMenuNoText.text = lm.GetLanguageText("kwd_returnToGame");
 
-                // INFO WINDOW
-                marker.MarkText(infoButtonText);
+                    // INFO WINDOW
+                    infoButtonText.text = lm.GetLanguageText("kwd_info");
 
+                    // String Labels
+                    // Moves
+                    levelString = lm.GetLanguageText("kwd_level");
+                    healthString = lm.GetLanguageText("kwd_health");
+                    attackString = lm.GetLanguageText("kwd_attack");
+                    defenseString = lm.GetLanguageText("kwd_defense");
+                    speedString = lm.GetLanguageText("kwd_speed");
+                    energyString = lm.GetLanguageText("kwd_energy");
+
+                    // Move characteristics.
+                    rankString = lm.GetLanguageText("kwd_rank");
+                    powerString = lm.GetLanguageText("kwd_power");
+                    accuracyString = lm.GetLanguageText("kwd_accuracy");
+                    descriptionString = lm.GetLanguageText("kwd_description");
+
+                    // The score string.
+                    scoreString = lm.GetLanguageText("kwd_score");
+                }
+                else
+                {
+                    // Windows/Prompts
+                    // STATS WINDOW
+                    lm.MarkText(statsButtonText);
+
+                    // SAVE PROMPT //
+                    lm.MarkText(saveButtonText);
+                    lm.MarkText(savePromptText);
+                    lm.MarkText(saveAndContinueText);
+                    lm.MarkText(saveAndQuitText);
+                    lm.MarkText(savePromptBackText);
+
+                    // SETTINGS WINDOW //
+                    lm.MarkText(settingsButtonText);
+
+                    // MAIN MENU (TITLE SCREEN) PROMPT
+                    lm.MarkText(mainMenuButtonText);
+                    lm.MarkText(mainMenuPromptText);
+                    lm.MarkText(mainMenuYesText);
+                    lm.MarkText(mainMenuNoText);
+
+                    // INFO WINDOW
+                    lm.MarkText(infoButtonText);
+                }
 
                 // Turns off the entrance animation if scene transitions shouldn't be used.
                 sceneTransition.useSceneEnterAnim = useTransitions;

@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 
 using TMPro;
+using System.Security.Cryptography;
 
 namespace BBTS
 {
@@ -95,26 +96,48 @@ namespace BBTS
             // The speak key for the title.
             string titleSpeakKey = "";
 
-            LanguageManager marker = LanguageManager.Instance;
+            // The language manager text.
+            LanguageManager lm = LanguageManager.Instance;
 
-            marker.MarkText(titleText);
-            marker.MarkText(saveFeedbackText);
+            // Translate the text.
+            if (lm.TranslateAndLanguageSet())
+            {
+                titleSpeakKey = "kwd_results";
+                titleLabel = lm.GetLanguageText(titleSpeakKey);
 
-            marker.MarkText(scoreText);
-            marker.MarkText(roomsClearedText);
-            marker.MarkText(totalTimeText);
-            marker.MarkText(totalTurnsText);
-            marker.MarkText(questionsCorrectText);
-            marker.MarkText(questionsAsked);
-            marker.MarkText(finalLevelText);
-            marker.MarkText(moveSubtitleText);
+                scoreLabel = lm.GetLanguageText("kwd_finalScore");
+                roomsClearedLabel = lm.GetLanguageText("kwd_roomsCleared");
+                totalTimeLabel = lm.GetLanguageText("kwd_totalTime");
+                totalTurnsLabel = lm.GetLanguageText("kwd_totalTurns");
+                questionsCorrectLabel = lm.GetLanguageText("kwd_questionsCorrect");
+                questionsAskedLabel = lm.GetLanguageText("kwd_questionsAsked");
+                noRepeatsLabel = lm.GetLanguageText("kwd_noRepeats");
+                finalLevelLabel = lm.GetLanguageText("kwd_finalLevel");
+                finalMovesLabel = lm.GetLanguageText("kwd_finalMoves");
 
-            marker.MarkText(move0Text);
-            marker.MarkText(move1Text);
-            marker.MarkText(move2Text);
-            marker.MarkText(move3Text);
+                finishLabel = lm.GetLanguageText("kwd_finish");
+            }
+            else
+            {
+                lm.MarkText(titleText);
+                lm.MarkText(saveFeedbackText);
 
-            marker.MarkText(finishButtonText);
+                lm.MarkText(scoreText);
+                lm.MarkText(roomsClearedText);
+                lm.MarkText(totalTimeText);
+                lm.MarkText(totalTurnsText);
+                lm.MarkText(questionsCorrectText);
+                lm.MarkText(questionsAsked);
+                lm.MarkText(finalLevelText);
+                lm.MarkText(moveSubtitleText);
+
+                lm.MarkText(move0Text);
+                lm.MarkText(move1Text);
+                lm.MarkText(move2Text);
+                lm.MarkText(move3Text);
+
+                lm.MarkText(finishButtonText);
+            }
 
             // Change out titles and buttons with translated label.
             titleText.text = titleLabel;

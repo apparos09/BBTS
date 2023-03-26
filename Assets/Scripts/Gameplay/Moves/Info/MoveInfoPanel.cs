@@ -33,25 +33,32 @@ namespace BBTS
         {
             // The SDK has been removed, so the text marking doesn't serve a point anymore.
             // Changes the text colour to show that the language file isn't loaded.
-            LanguageManager marker = LanguageManager.Instance;
+            LanguageManager lm = LanguageManager.Instance;
 
-            // Name
-            marker.MarkText(nameText);
 
-            // Rank
-            marker.MarkText(rankText);
+            // If the text shouldn't be translated.
+            if(!lm.TranslateAndLanguageSet())
+            {
+                // Name
+                lm.MarkText(nameText);
 
-            // Power
-            marker.MarkText(powerText);
+                // Rank
+                lm.MarkText(rankText);
 
-            // Accuracy
-            marker.MarkText(accuracyText);
+                // Power
+                lm.MarkText(powerText);
 
-            // Energy
-            marker.MarkText(energyText);
+                // Accuracy
+                lm.MarkText(accuracyText);
 
-            // Description
-            marker.MarkText(description);
+                // Energy
+                lm.MarkText(energyText);
+
+                // Description
+                lm.MarkText(description);
+            }
+
+            
         }
 
         // Gets the move id.

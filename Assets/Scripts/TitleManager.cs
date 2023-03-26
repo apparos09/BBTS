@@ -79,26 +79,47 @@ namespace BBTS
             GameSettings settings = GameSettings.Instance;
 
             // Gets an instance of the LOL manager.
-            SystemManager lolManager = SystemManager.Instance;
+            SystemManager systemManager = SystemManager.Instance;
 
             // Language
             // Mark all of the text.
-            LanguageManager marker = LanguageManager.Instance;
+            LanguageManager lm = LanguageManager.Instance;
 
-            marker.MarkText(saveFeedbackText);
+            // Checks if the language is set.
+            if(lm.TranslateAndLanguageSet())
+            {
+                // Main Menu
+                newGameButtonText.text = lm.GetLanguageText("kwd_newGame");
+                continueButtonText.text = lm.GetLanguageText("kwd_continue");
 
-            marker.MarkText(newGameButtonText);
-            marker.MarkText(continueButtonText);
+                controlsButtonText.text = lm.GetLanguageText("kwd_controls");
+                settingsButtonText.text = lm.GetLanguageText("kwd_settings");
+                creditsButtonText.text = lm.GetLanguageText("kwd_licenses");
 
-            marker.MarkText(controlsButtonText);
-            marker.MarkText(settingsButtonText);
-            marker.MarkText(creditsButtonText);
+                // Controls Menu
+                controlsTitleText.text = lm.GetLanguageText("kwd_controls");
+                controlsInstructText.text = lm.GetLanguageText("mnu_controls_instruct");
+                controlsDescText.text = lm.GetLanguageText(controlsDescTextKey);
+                controlsBackButtonText.text = lm.GetLanguageText("kwd_back");
+            }
+            else
+            {
+                lm.MarkText(saveFeedbackText);
 
-            marker.MarkText(controlsTitleText);
-            marker.MarkText(controlsInstructText);
-            marker.MarkText(controlsDescText);
-            marker.MarkText(controlsBackButtonText);
+                lm.MarkText(newGameButtonText);
+                lm.MarkText(continueButtonText);
 
+                lm.MarkText(controlsButtonText);
+                lm.MarkText(settingsButtonText);
+                lm.MarkText(creditsButtonText);
+
+                lm.MarkText(controlsTitleText);
+                lm.MarkText(controlsInstructText);
+                lm.MarkText(controlsDescText);
+                lm.MarkText(controlsBackButtonText);
+            }
+
+           
 
             // You can save and go back to the menu, so the continue button is usable under that circumstance.
             if (SystemManager.Instance.saveSystem.HasLoadedData()) // Game has loaded data.

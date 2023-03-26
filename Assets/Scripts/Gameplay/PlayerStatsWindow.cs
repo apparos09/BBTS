@@ -126,33 +126,43 @@ namespace BBTS
             // UpdateWindow();
 
             // Translation
-            LanguageManager marker = LanguageManager.Instance;
+            LanguageManager lm = LanguageManager.Instance;
 
-            marker.MarkText(titleText);
+            // Language definitions set.
+            if (lm.TranslateAndLanguageSet())
+            {
+                titleText.text = lm.GetLanguageText("kwd_stats");
+                switchButtonText.text = lm.GetLanguageText("kwd_switch");
+                backButtonText.text = lm.GetLanguageText("kwd_back");
+            }
+            else
+            {
+                lm.MarkText(titleText);
 
-            marker.MarkText(levelText);
-            marker.MarkText(healthText);
-            marker.MarkText(attackText);
-            marker.MarkText(defenseText);
-            marker.MarkText(speedText);
-            marker.MarkText(energyText);
+                lm.MarkText(levelText);
+                lm.MarkText(healthText);
+                lm.MarkText(attackText);
+                lm.MarkText(defenseText);
+                lm.MarkText(speedText);
+                lm.MarkText(energyText);
 
-            marker.MarkText(move0ButtonText);
-            marker.MarkText(move1ButtonText);
-            marker.MarkText(move2ButtonText);
-            marker.MarkText(move3ButtonText);
-            marker.MarkText(chargeButtonText);
-            marker.MarkText(runButtonText);
+                lm.MarkText(move0ButtonText);
+                lm.MarkText(move1ButtonText);
+                lm.MarkText(move2ButtonText);
+                lm.MarkText(move3ButtonText);
+                lm.MarkText(chargeButtonText);
+                lm.MarkText(runButtonText);
 
-            marker.MarkText(switchButtonText);
-            marker.MarkText(backButtonText);
+                lm.MarkText(switchButtonText);
+                lm.MarkText(backButtonText);
 
-            marker.MarkText(moveNameText);
-            marker.MarkText(moveRankText);
-            marker.MarkText(movePowerText);
-            marker.MarkText(moveAccuracyText);
-            marker.MarkText(moveEnergyText);
-            marker.MarkText(moveDescriptionText);
+                lm.MarkText(moveNameText);
+                lm.MarkText(moveRankText);
+                lm.MarkText(movePowerText);
+                lm.MarkText(moveAccuracyText);
+                lm.MarkText(moveEnergyText);
+                lm.MarkText(moveDescriptionText);
+            }
 
 
             ResetMoveButtonColors();

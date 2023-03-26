@@ -79,16 +79,28 @@ namespace BBTS
         {
             selectedMoveInfo.ClearMoveInfo();
 
-            LanguageManager marker = LanguageManager.Instance;
+            // Language set.
+            LanguageManager lm = LanguageManager.Instance;
 
-            marker.MarkText(descriptionText);
+            // The defs are not set.
+            if (lm.TranslateAndLanguageSet())
+            {
+                descriptionText.text = lm.GetLanguageText(DESCRIPTION_TEXT_LANG_KEY);
+                nextButtonText.text = lm.GetLanguageText("kwd_next");
+                skipButtonText.text = lm.GetLanguageText("kwd_skip");
+            }
+            else
+            {
+                lm.MarkText(descriptionText);
 
-            marker.MarkText(move0ButtonText);
-            marker.MarkText(move1ButtonText);
-            marker.MarkText(move2ButtonText);
+                lm.MarkText(move0ButtonText);
+                lm.MarkText(move1ButtonText);
+                lm.MarkText(move2ButtonText);
 
-            marker.MarkText(nextButtonText);
-            marker.MarkText(skipButtonText);
+                lm.MarkText(nextButtonText);
+                lm.MarkText(skipButtonText);
+            }
+            
         }
 
         // This function is called when the object becomes enabled and visible.

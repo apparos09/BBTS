@@ -559,6 +559,7 @@ GameObject:
   m_Component:
   - component: {fileID: 807932443}
   - component: {fileID: 807932442}
+  - component: {fileID: 807932446}
   - component: {fileID: 807932445}
   - component: {fileID: 807932444}
   m_Layer: 0
@@ -580,6 +581,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21aa0f45505619b408684b84f203c1ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  languageManager: {fileID: 807932446}
   saveSystem: {fileID: 807932445}
   textToSpeech: {fileID: 807932444}
 --- !u!4 &807932443
@@ -622,6 +624,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8da00f731b5d5384e8b08947034166e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allowSaves: 0
   lastSave:
     valid: 0
     complete: 0
@@ -1390,6 +1393,19 @@ MonoBehaviour:
     turnsPassed: 0
   gameManager: {fileID: 0}
   feedbackText: {fileID: 297845796}
+--- !u!114 &807932446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 807932441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 509b623c70635fc47bf7115e400c940f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noLoadColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &1052461055
 GameObject:
   m_ObjectHideFlags: 0

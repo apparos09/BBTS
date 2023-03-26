@@ -11,7 +11,10 @@ namespace BBTS
     {
         // the instance of the system manager.
         private static SystemManager instance;
-        
+
+        // The language manager.
+        public LanguageManager languageManager;
+
         // The save system for the game.
         public SaveSystem saveSystem;
         
@@ -95,7 +98,12 @@ namespace BBTS
         // Gets the text from the language file.
         public string GetLanguageText(string key)
         {
-            string result = LanguageManager.Instance.GetLanguageText(key);
+            // Checks if the manager is set.
+            if (languageManager == null)
+                languageManager = LanguageManager.Instance;
+
+            // Set the result.
+            string result = languageManager.GetLanguageText(key);
 
             return result;
         }
