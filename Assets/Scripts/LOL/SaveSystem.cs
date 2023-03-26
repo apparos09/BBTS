@@ -8,7 +8,7 @@ using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace RM_BBTS
+namespace BBTS
 {
     // The battle bot training sim data.
     [System.Serializable]

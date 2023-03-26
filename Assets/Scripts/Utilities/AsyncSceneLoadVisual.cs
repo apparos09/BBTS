@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace RM_BBTS
+namespace BBTS
 {
     // the asynchronous scene loader visual
     public class AsyncSceneLoadVisual : MonoBehaviour

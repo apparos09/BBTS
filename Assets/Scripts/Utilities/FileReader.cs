@@ -11,11 +11,11 @@ using UnityEngine;
 using System.IO;
 
 
-namespace RM_BBTS
+namespace BBTS
 {
     // file reader for excel text file exports.
     // NOTE: if the file is in the Assets folder (or a subfolder of the Assets folder), you can just do it from there.
-    public class FileReader : MonoBehaviour
+    public class FileReader
     {
         // file
         public string file = "";
@@ -26,12 +26,6 @@ namespace RM_BBTS
         // the lines from the file.
         public string[] lines;
 
-
-        // Start is called before the first frame update
-        void Start()
-        {
-
-        }
 
         // sets the file.
         public void SetFile(string newFile)
@@ -63,14 +57,14 @@ namespace RM_BBTS
             }
         }
 
-        // sets the file path and the file.
+        // Sets the file path and the file.
         public void SetFilePath(string newFilePath, string newFile)
         {
             SetFilePath(newFilePath);
             SetFile(newFile);
         }
 
-        // checks if the file exists.
+        // Checks if the file exists.
         public bool FileExists()
         {
             // sets the file and file path to make sure they're formatted properly.

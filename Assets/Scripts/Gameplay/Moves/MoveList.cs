@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RM_BBTS
+namespace BBTS
 {
     // NOTE: organize moves based on rank (all rank 1 moves > all rank 2 moves > all rank 3 moves)
     // The list of move ids.

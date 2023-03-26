@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine.Timeline;
 
 
-namespace RM_BBTS
+namespace BBTS
 {
     // A panel for a move being compared.
     public class MoveComparePanel : MonoBehaviour
@@ -67,7 +67,7 @@ namespace RM_BBTS
         // Start is just before any of the update methods are called for the first time.
         private void Start()
         {
-            LanguageMarker.Instance.MarkText(nameText);
+            LanguageManager.Instance.MarkText(nameText);
         }
 
         // Checks to see if a move is loaded in.

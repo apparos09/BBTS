@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 // A panel for the moves.
-namespace RM_BBTS
+namespace BBTS
 {
     // Info panel for moves.
     public class MoveInfoPanel : MonoBehaviour
@@ -33,7 +33,7 @@ namespace RM_BBTS
         {
             // The SDK has been removed, so the text marking doesn't serve a point anymore.
             // Changes the text colour to show that the language file isn't loaded.
-            LanguageMarker marker = LanguageMarker.Instance;
+            LanguageManager marker = LanguageManager.Instance;
 
             // Name
             marker.MarkText(nameText);

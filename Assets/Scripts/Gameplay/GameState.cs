@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RM_BBTS
+namespace BBTS
 {
     // the state of the game.
     public enum gameState { none, overworld, battle }

@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace RM_BBTS
+namespace BBTS
 {
     // A script for a progress bar.
     public class ProgressBar : MonoBehaviour

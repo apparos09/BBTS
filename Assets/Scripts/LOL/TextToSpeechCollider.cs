@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RM_BBTS
+namespace BBTS
 {
 // A collider used to do text-to-speech.
 // This is used for UI.

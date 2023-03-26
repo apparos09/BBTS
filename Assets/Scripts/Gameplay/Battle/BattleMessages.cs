@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace RM_BBTS
+namespace BBTS
 {
     // TODO: check to see if it'd be best to just save each message in its own string.
 

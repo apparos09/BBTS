@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RM_BBTS
+namespace BBTS
 {
     // Heals the user.
     public class CureMove : Move

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 
-namespace RM_BBTS
+namespace BBTS
 {
     // An audio reference struct.
     public struct AudioCredit

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-namespace RM_BBTS
+namespace BBTS
 {
     // The manager for the overworld.
     public class OverworldManager : GameState

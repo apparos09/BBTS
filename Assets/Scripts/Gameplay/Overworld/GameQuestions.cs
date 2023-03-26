@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 
-namespace RM_BBTS
+namespace BBTS
 {
     // A question to be posed in the overworld.
     public struct GameQuestion

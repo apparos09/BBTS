@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RM_BBTS
+namespace BBTS
 {
     // Provides controls for audio sources.
     // NOTE: for this to work the tag must be either "BGM" or 'SFX".

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RM_BBTS
+namespace BBTS
 {
     // A move that does more damage based on the turn order.
     public class TurnOrderMove : Move

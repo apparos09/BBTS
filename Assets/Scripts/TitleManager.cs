@@ -8,7 +8,7 @@ using TMPro;
 using UnityEngine.SceneManagement;
 
 // the manager for the title scene.
-namespace RM_BBTS
+namespace BBTS
 {
     // The manager for the title scene.
     public class TitleManager : MonoBehaviour
@@ -83,7 +83,7 @@ namespace RM_BBTS
 
             // Language
             // Mark all of the text.
-            LanguageMarker marker = LanguageMarker.Instance;
+            LanguageManager marker = LanguageManager.Instance;
 
             marker.MarkText(saveFeedbackText);
 
@@ -152,7 +152,7 @@ namespace RM_BBTS
                 saveFeedbackText.text = string.Empty;
 
                 // Mark this as debug text.
-                LanguageMarker.Instance.MarkText(saveFeedbackText);
+                LanguageManager.Instance.MarkText(saveFeedbackText);
             }
         }
 

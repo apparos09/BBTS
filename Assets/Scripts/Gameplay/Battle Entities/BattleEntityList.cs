@@ -1,9 +1,9 @@
-using RM_BBTS;
+using BBTS;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RM_BBTS
+namespace BBTS
 {
     // The list of IDs. CombatBot, Comet, and BlackHole are all bosses.
     public enum battleEntityId { 

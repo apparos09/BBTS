@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Timeline;
 using UnityEngine.UI;
 
-namespace RM_BBTS
+namespace BBTS
 {
     // The script for managing treasure moves.
     public class MultipleMoveOffer : MonoBehaviour
@@ -79,7 +79,7 @@ namespace RM_BBTS
         {
             selectedMoveInfo.ClearMoveInfo();
 
-            LanguageMarker marker = LanguageMarker.Instance;
+            LanguageManager marker = LanguageManager.Instance;
 
             marker.MarkText(descriptionText);
 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RM_BBTS
+namespace BBTS
 {
     // Holds the results data for the game, which is read in during the results screen.
     public class ResultsData : MonoBehaviour

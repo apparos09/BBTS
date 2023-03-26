@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 
 
-namespace RM_BBTS
+namespace BBTS
 {
     // Translates a TMP_Text object's text using the provided key.
     public class TMP_TextTranslator : MonoBehaviour
@@ -30,7 +30,7 @@ namespace RM_BBTS
             if(text != null)
             {
                 // Mark the text.
-                LanguageMarker.Instance.MarkText(text);
+                LanguageManager.Instance.MarkText(text);
             }
         }
 

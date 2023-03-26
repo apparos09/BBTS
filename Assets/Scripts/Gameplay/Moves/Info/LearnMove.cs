@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine.UI;
 using System.Linq;
 
-namespace RM_BBTS
+namespace BBTS
 {
     public class LearnMove : MonoBehaviour
     {
@@ -99,7 +99,7 @@ namespace RM_BBTS
             // SDK REMOVED
 
             // The language marker.
-            LanguageMarker marker = LanguageMarker.Instance;
+            LanguageManager marker = LanguageManager.Instance;
 
             // The title text.
             marker.MarkText(titleText);

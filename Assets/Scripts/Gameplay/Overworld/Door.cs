@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 
-namespace RM_BBTS
+namespace BBTS
 {
     // The save data for doors.
     [System.Serializable]

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // a class for the mouse touch objects.
-namespace RM_BBTS
+namespace BBTS
 {
     public class MouseTouchObject : MonoBehaviour
     {

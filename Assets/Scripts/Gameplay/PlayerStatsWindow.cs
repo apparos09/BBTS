@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 
 
-namespace RM_BBTS
+namespace BBTS
 {
     // The player stats window.
     public class PlayerStatsWindow : MonoBehaviour
@@ -126,7 +126,7 @@ namespace RM_BBTS
             // UpdateWindow();
 
             // Translation
-            LanguageMarker marker = LanguageMarker.Instance;
+            LanguageManager marker = LanguageManager.Instance;
 
             marker.MarkText(titleText);
 

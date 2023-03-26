@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RM_BBTS
+namespace BBTS
 {
     // Runs the text-to-speech for the provided speak key.
     public class SpeakOnClick : MonoBehaviour

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RM_BBTS
+namespace BBTS
 {
     // A move that boosts the move's power if a status effect is involved.
     public class StatusAttackMove : Move

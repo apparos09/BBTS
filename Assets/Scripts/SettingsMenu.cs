@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace RM_BBTS
+namespace BBTS
 {
     public class SettingsMenu : MonoBehaviour
     {
@@ -115,7 +115,7 @@ namespace RM_BBTS
             textToSpeechToggle.interactable = false;
 
             // Translate the dialogue - NO LONGER DOES ANYTHING.
-            LanguageMarker marker = LanguageMarker.Instance;
+            LanguageManager marker = LanguageManager.Instance;
 
             marker.MarkText(titleText);
             marker.MarkText(bgmLabelText);

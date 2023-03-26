@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Scripting.APIUpdating;
 using UnityEngine.UIElements;
 
-namespace RM_BBTS
+namespace BBTS
 {
     // The class for the player.
     public class Player : BattleEntity

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RM_BBTS
+namespace BBTS
 {
     // Tests out animations for the move.
     public class MoveAnimationTester : MonoBehaviour

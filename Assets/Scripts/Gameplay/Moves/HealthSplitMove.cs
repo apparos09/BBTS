@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RM_BBTS
+namespace BBTS
 {
     // Combines the current health (percentage wise) and splits between the two.
     public class HealthSplitMove : Move

@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using static RM_BBTS.TextBox;
+using static BBTS.TextBox;
 
-namespace RM_BBTS
+namespace BBTS
 {
     // Runs timers, calling the provided function wehn they're done.
     public class TimerManager : MonoBehaviour

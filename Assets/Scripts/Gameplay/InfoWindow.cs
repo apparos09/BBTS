@@ -5,7 +5,7 @@ using TMPro;
 
 
 
-namespace RM_BBTS
+namespace BBTS
 {
     // An info window entry.
     public struct InfoPageEntry
@@ -96,9 +96,9 @@ namespace RM_BBTS
         void Start()
         {
             // Marking Text
-            LanguageMarker.Instance.MarkText(titleText);
-            LanguageMarker.Instance.MarkText(pageTitle);
-            LanguageMarker.Instance.MarkText(backButtonText);
+            LanguageManager.Instance.MarkText(titleText);
+            LanguageManager.Instance.MarkText(pageTitle);
+            LanguageManager.Instance.MarkText(backButtonText);
 
             // Initialize the list.
             pages = new List<InfoPage>();

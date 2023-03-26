@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 
 
-namespace RM_BBTS
+namespace BBTS
 {
     // An entry for an info page.
     public class InfoPageEntryDisplay : MonoBehaviour
@@ -36,8 +36,8 @@ namespace RM_BBTS
             symbol.color = symbolColor;
 
             // SDK no longer available.
-            LanguageMarker.Instance.MarkText(nameText);
-            LanguageMarker.Instance.MarkText(descriptionText);
+            LanguageManager.Instance.MarkText(nameText);
+            LanguageManager.Instance.MarkText(descriptionText);
         }
 
         // Called when the script is enabled.

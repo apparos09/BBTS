@@ -6,7 +6,7 @@ using UnityEngine;
 
 // The namespace should be <YourCompany> <GameName>.
 // NOTE: due to the play method changing for LOL versus the Unity Editor you cannot create a universal means of checking when the speak text is done.
-namespace RM_BBTS
+namespace BBTS
 {
     public class TextToSpeech : MonoBehaviour
     {

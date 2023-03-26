@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 using TMPro;
 
-namespace RM_BBTS
+namespace BBTS
 {
     // The results manager.
     public class ResultsManager : MonoBehaviour
@@ -95,7 +95,7 @@ namespace RM_BBTS
             // The speak key for the title.
             string titleSpeakKey = "";
 
-            LanguageMarker marker = LanguageMarker.Instance;
+            LanguageManager marker = LanguageManager.Instance;
 
             marker.MarkText(titleText);
             marker.MarkText(saveFeedbackText);

@@ -5,7 +5,7 @@ using UnityEngine;
 
 using JetBrains.Annotations;
 
-namespace RM_BBTS
+namespace BBTS
 {
 
     // The game data for a battle entity.

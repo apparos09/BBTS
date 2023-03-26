@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
-namespace RM_BBTS
+namespace BBTS
 {
     // The run move, which is selected if the player attempts to run.
     // This move has no functionality. This just allows the turn to go through if the player's run fails.

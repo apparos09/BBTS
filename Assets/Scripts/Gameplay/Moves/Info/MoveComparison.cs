@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace RM_BBTS
+namespace BBTS
 {
     // The script for the move comparisons.
     public class MoveComparison : MonoBehaviour
@@ -118,7 +118,7 @@ namespace RM_BBTS
                 runMove = MoveList.Instance.RunMove;
 
             // Translation
-            LanguageMarker marker = LanguageMarker.Instance;
+            LanguageManager marker = LanguageManager.Instance;
 
             marker.MarkText(legendTitleText);
 

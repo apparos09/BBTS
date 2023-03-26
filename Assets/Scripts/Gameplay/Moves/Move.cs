@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 
-namespace RM_BBTS
+namespace BBTS
 {
     // A class for a move.
     // This inherits from monobehaviour so that related functions can be called.

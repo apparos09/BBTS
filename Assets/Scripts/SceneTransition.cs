@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace RM_BBTS
+namespace BBTS
 {
     // NOTE: I tried changing the method for playing the animation, but it didn't fix it. I'm not sure why.
 

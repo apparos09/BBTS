@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RM_BBTS
+namespace BBTS
 {
     // Causes an object to float in place by interpolating its position.
     public class ObjectFloat : MonoBehaviour

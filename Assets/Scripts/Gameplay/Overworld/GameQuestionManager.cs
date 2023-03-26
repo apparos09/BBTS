@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 
 // Namespace.
-namespace RM_BBTS
+namespace BBTS
 {
     // The system for posing questions in the overworld.
     public class GameQuestionManager : MonoBehaviour
@@ -212,7 +212,7 @@ namespace RM_BBTS
         void Start()
         {
             // Translation.
-            LanguageMarker marker = LanguageMarker.Instance;
+            LanguageManager marker = LanguageManager.Instance;
 
             marker.MarkText(titleText);
 

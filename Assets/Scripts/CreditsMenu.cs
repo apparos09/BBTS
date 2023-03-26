@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 
 
-namespace RM_BBTS
+namespace BBTS
 {
     // The credits menu for the game.
     public class CreditsMenu : MonoBehaviour
@@ -54,8 +54,8 @@ namespace RM_BBTS
             // Translation.
 
             // Mark the auto load text.
-            LanguageMarker.Instance.MarkText(titleText);
-            LanguageMarker.Instance.MarkText(backButtonText);
+            LanguageManager.Instance.MarkText(titleText);
+            LanguageManager.Instance.MarkText(backButtonText);
 
             // Loads credit and sets page number.
             UpdateCredit();

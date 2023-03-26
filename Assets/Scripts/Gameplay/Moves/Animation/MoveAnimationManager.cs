@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static RM_BBTS.Move;
+using static BBTS.Move;
 
-namespace RM_BBTS
+namespace BBTS
 {
     // The move animator ids.
     public enum moveAnim { 

@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 
 
-namespace RM_BBTS
+namespace BBTS
 {
     // A move that is stronger the earlier it is used in a fight.
     public class TurnsLowMove : Move

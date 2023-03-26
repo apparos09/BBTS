@@ -9,7 +9,7 @@ using System.Data.Common;
 
 using UnityEngine.Timeline;
 
-namespace RM_BBTS
+namespace BBTS
 {
     // Manages the battle operations for the game. This becomes active when the game enters a battle state.
     public class BattleManager : GameState
@@ -348,7 +348,7 @@ namespace RM_BBTS
                 
             //}
 
-            LanguageMarker marker = LanguageMarker.Instance;
+            LanguageManager marker = LanguageManager.Instance;
 
             marker.MarkText(chargeButtonText);
             marker.MarkText(runButtonText);

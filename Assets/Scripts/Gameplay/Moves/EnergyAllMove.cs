@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace RM_BBTS
+namespace BBTS
 {
     // A move that uses all the user's energy.
     public class EnergyAllMove : Move

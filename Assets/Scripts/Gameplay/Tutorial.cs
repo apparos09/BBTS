@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 // The namespace for the tutorial.
-namespace RM_BBTS
+namespace BBTS
 {
     // The tutorial script.
     public class Tutorial : MonoBehaviour

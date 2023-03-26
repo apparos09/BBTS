@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-namespace RM_BBTS
+namespace BBTS
 {
     // The clas sfor the text box for the game.
     public class TextBox : MonoBehaviour
@@ -111,7 +111,7 @@ namespace RM_BBTS
 
             // The SDK is no longer available, so this isn't needed anymore.
             // Recolour the text to show that the text loaded is not coming from the language file.
-            LanguageMarker.Instance.MarkText(boxText);
+            LanguageManager.Instance.MarkText(boxText);
         }
 
         // TODO: add touch and mouse for going onto the next page.

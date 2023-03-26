@@ -7,7 +7,7 @@ using TMPro;
 
 using UnityEngine.UI;
 
-namespace RM_BBTS
+namespace BBTS
 {
     // General manager for the gameplay.
     public class GameplayManager : GameState
@@ -266,7 +266,7 @@ namespace RM_BBTS
 
             // Translation
             // For marking text to show it's not loaded from the language file.
-            LanguageMarker marker = LanguageMarker.Instance;
+            LanguageManager marker = LanguageManager.Instance;
 
             // Windows/Prompts
             // STATS WINDOW

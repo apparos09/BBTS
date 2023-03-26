@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace RM_BBTS
+namespace BBTS
 {
     // used for tracking inputs with either the mouse or the touch.
     public class MouseTouchInput : MonoBehaviour
