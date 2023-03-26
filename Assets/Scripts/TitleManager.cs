@@ -79,7 +79,7 @@ namespace BBTS
             GameSettings settings = GameSettings.Instance;
 
             // Gets an instance of the LOL manager.
-            LOLManager lolManager = LOLManager.Instance;
+            SystemManager lolManager = SystemManager.Instance;
 
             // Language
             // Mark all of the text.
@@ -101,13 +101,13 @@ namespace BBTS
 
 
             // You can save and go back to the menu, so the continue button is usable under that circumstance.
-            if (LOLManager.Instance.saveSystem.HasLoadedData()) // Game has loaded data.
+            if (SystemManager.Instance.saveSystem.HasLoadedData()) // Game has loaded data.
             {
                 // Tutorial should be overwritten.
                 overrideTutorial = true;
 
                 // Checks if the intro was cleared.
-                if (LOLManager.Instance.saveSystem.loadedData.clearedIntro)
+                if (SystemManager.Instance.saveSystem.loadedData.clearedIntro)
                 {
                     // If the intro was cleared, then that means the tutorial was on last time.
                     continueTutorial = true;
@@ -144,7 +144,7 @@ namespace BBTS
             if (saveFeedbackText != null)
             {
                 saveFeedbackText.text = string.Empty;
-                LOLManager.Instance.saveSystem.feedbackText = saveFeedbackText;
+                SystemManager.Instance.saveSystem.feedbackText = saveFeedbackText;
             }
             else
             {
@@ -171,7 +171,7 @@ namespace BBTS
         public void StartNewGame()
         {
             // Clear out the loaded data and last save if the LOLSDK has been initialized.
-            LOLManager.Instance.saveSystem.ClearLoadedAndLastSaveData();
+            SystemManager.Instance.saveSystem.ClearLoadedAndLastSaveData();
 
             StartGame();
         }
@@ -223,7 +223,7 @@ namespace BBTS
                 if(GameSettings.Instance.UseTextToSpeech && controlsDescTextKey != "")
                 {
                     // Voice the text.
-                    LOLManager.Instance.textToSpeech.SpeakText(controlsDescTextKey);
+                    SystemManager.Instance.textToSpeech.SpeakText(controlsDescTextKey);
                 }
             }
         }
@@ -246,8 +246,8 @@ namespace BBTS
         // TODO: This is only for testing, and the button for this should not be shown in the final game.
         public void ClearSave()
         {
-            LOLManager.Instance.saveSystem.lastSave = null;
-            LOLManager.Instance.saveSystem.loadedData = null;
+            SystemManager.Instance.saveSystem.lastSave = null;
+            SystemManager.Instance.saveSystem.loadedData = null;
 
             continueButton.interactable = false;
         }

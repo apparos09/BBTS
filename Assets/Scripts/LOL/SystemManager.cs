@@ -6,11 +6,11 @@ using UnityEngine;
 
 namespace BBTS
 {
-    // a class for the LOL
-    public class LOLManager : MonoBehaviour
+    // a class for the system management (formally the LOLManager).
+    public class SystemManager : MonoBehaviour
     {
         // the instance of the LOL manager.
-        private static LOLManager instance;
+        private static SystemManager instance;
         
         // The save system for the game.
         public SaveSystem saveSystem;
@@ -23,7 +23,7 @@ namespace BBTS
         const int MAX_PROGRESS = OverworldManager.ROOM_COUNT; // same as room count.
 
         // private constructor so that only one accessibility object exists.
-        private LOLManager()
+        private SystemManager()
         {
             // ...
         }
@@ -73,7 +73,7 @@ namespace BBTS
         // }
 
         // Returns the instance of the accessibility.
-        public static LOLManager Instance
+        public static SystemManager Instance
         {
             get
             {
@@ -81,10 +81,10 @@ namespace BBTS
                 if (instance == null)
                 {
                     // Makes a new settings object.
-                    GameObject go = new GameObject("LOL Manager");
+                    GameObject go = new GameObject("System Manager (singleton)");
 
                     // Adds the instance component to the new object.
-                    instance = go.AddComponent<LOLManager>();
+                    instance = go.AddComponent<SystemManager>();
                 }
 
                 // returns the instance.

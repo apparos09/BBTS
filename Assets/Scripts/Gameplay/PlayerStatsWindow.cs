@@ -329,7 +329,7 @@ namespace BBTS
                     if (move.descSpeakKey != "")
                     {
                         // Voice the move description.
-                        LOLManager.Instance.textToSpeech.SpeakText(move.descSpeakKey);
+                        SystemManager.Instance.textToSpeech.SpeakText(move.descSpeakKey);
                     }
                 }
                 else // If the move info object isn't visible, just read the move name.
@@ -338,7 +338,7 @@ namespace BBTS
                     if (move.nameSpeakKey != "")
                     {
                         // Voice the move description.
-                        LOLManager.Instance.textToSpeech.SpeakText(move.nameSpeakKey);
+                        SystemManager.Instance.textToSpeech.SpeakText(move.nameSpeakKey);
                     }
                 }
             }

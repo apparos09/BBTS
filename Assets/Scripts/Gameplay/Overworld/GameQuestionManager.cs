@@ -1067,7 +1067,7 @@ namespace BBTS
             if(GameSettings.Instance.UseTextToSpeech && speakQuestion)
             {
                 // Reads out the current question again.
-                LOLManager.Instance.textToSpeech.SpeakText(currentQuestion.questionSpeakKey);
+                SystemManager.Instance.textToSpeech.SpeakText(currentQuestion.questionSpeakKey);
             }
         }
 

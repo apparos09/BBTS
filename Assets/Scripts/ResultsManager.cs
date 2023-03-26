@@ -183,14 +183,14 @@ namespace BBTS
             if(GameSettings.Instance.UseTextToSpeech && titleSpeakKey != "")
             {
                 // Voice the title text.
-                LOLManager.Instance.textToSpeech.SpeakText(titleSpeakKey);
+                SystemManager.Instance.textToSpeech.SpeakText(titleSpeakKey);
             }
 
             // Provides the save feedback text.
             if (saveFeedbackText != null)
             {
                 saveFeedbackText.text = string.Empty;
-                LOLManager.Instance.saveSystem.feedbackText = saveFeedbackText;
+                SystemManager.Instance.saveSystem.feedbackText = saveFeedbackText;
             }
             else
             {

@@ -61,7 +61,7 @@ namespace BBTS
             if(GameSettings.Instance.UseTextToSpeech && key != string.Empty)
             {
                 // Read out the text.
-                LOLManager.Instance.textToSpeech.SpeakText(key);
+                SystemManager.Instance.textToSpeech.SpeakText(key);
             }
 
 

@@ -505,7 +505,7 @@ namespace BBTS
                     if(GameSettings.Instance.UseTextToSpeech && TREASURE_PROMPT_TEXT_KEY != "")
                     {
                         // Speaks the text for the treasure prompt.
-                        LOLManager.Instance.textToSpeech.SpeakText(TREASURE_PROMPT_TEXT_KEY);
+                        SystemManager.Instance.textToSpeech.SpeakText(TREASURE_PROMPT_TEXT_KEY);
                     }
 
                 }

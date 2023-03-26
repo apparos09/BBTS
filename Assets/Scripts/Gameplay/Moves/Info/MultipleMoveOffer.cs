@@ -100,7 +100,7 @@ namespace BBTS
 
             // Read out the description text if text-to-speech is enabled.
             if (GameSettings.Instance.UseTextToSpeech)
-                LOLManager.Instance.textToSpeech.SpeakText(DESCRIPTION_TEXT_LANG_KEY);
+                SystemManager.Instance.textToSpeech.SpeakText(DESCRIPTION_TEXT_LANG_KEY);
         }
 
         // Move 0

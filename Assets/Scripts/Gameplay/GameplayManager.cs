@@ -307,7 +307,7 @@ namespace BBTS
             if (saveFeedbackText != null)
             {
                 saveFeedbackText.text = string.Empty;
-                LOLManager.Instance.saveSystem.feedbackText = saveFeedbackText;
+                SystemManager.Instance.saveSystem.feedbackText = saveFeedbackText;
             }
             else
             {
@@ -324,15 +324,15 @@ namespace BBTS
         void PostStart()
         {
             // If there is save data, load the saved game.
-            if (LOLManager.Instance.saveSystem.HasLoadedData())
+            if (SystemManager.Instance.saveSystem.HasLoadedData())
             {
                 // Load the data.
                 // This function also updates the UI once the data is loaded.
                 // This now does not allow completed game data to be reloaded.
-                bool success = LoadGame(LOLManager.Instance.saveSystem.loadedData, false);
+                bool success = LoadGame(SystemManager.Instance.saveSystem.loadedData, false);
 
                 // Clear data.
-                LOLManager.Instance.saveSystem.ClearLoadedData();
+                SystemManager.Instance.saveSystem.ClearLoadedData();
 
                 // Data successfully loaded.
                 if(success)
@@ -348,7 +348,7 @@ namespace BBTS
 
                         // Stops the text-to-speech if it's active.
                         if (GameSettings.Instance.UseTextToSpeech)
-                            LOLManager.Instance.textToSpeech.StopSpeakText();
+                            SystemManager.Instance.textToSpeech.StopSpeakText();
 
                         // Checks to see if any oveworld tutorials need to be run.
                         // However, the player shouldn't be able to save before the intro happened.
@@ -380,7 +380,7 @@ namespace BBTS
 
                         // Uses an alternate message to stop the closed textbox's text from being read.
                         // NOTE: this does not work when hosted though the LOL website itself.
-                        LOLManager.Instance.textToSpeech.SpeakText("owd_loadSuccess_msg");
+                        SystemManager.Instance.textToSpeech.SpeakText("owd_loadSuccess_msg");
                     }
                         
 
@@ -812,7 +812,7 @@ namespace BBTS
                 if (GameSettings.Instance.UseTextToSpeech && SAVE_PROMPT_TEXT_KEY != "")
                 {
                     // Read out the mssage.
-                    LOLManager.Instance.textToSpeech.SpeakText(SAVE_PROMPT_TEXT_KEY);
+                    SystemManager.Instance.textToSpeech.SpeakText(SAVE_PROMPT_TEXT_KEY);
                 }
             }
         }
@@ -856,7 +856,7 @@ namespace BBTS
                 if (GameSettings.Instance.UseTextToSpeech && MAIN_MENU_PROMPT_TEXT_KEY != "")
                 {
                     // Read out the mssage.
-                    LOLManager.Instance.textToSpeech.SpeakText(MAIN_MENU_PROMPT_TEXT_KEY);
+                    SystemManager.Instance.textToSpeech.SpeakText(MAIN_MENU_PROMPT_TEXT_KEY);
                 }
             }
         }
@@ -1381,7 +1381,7 @@ namespace BBTS
 
             // Sets the last save as the loaded data.
             // This gets overwritten anyway if the player is saving like normal.
-            LOLManager.Instance.saveSystem.SetLastSaveAsLoadedData();
+            SystemManager.Instance.saveSystem.SetLastSaveAsLoadedData();
 
             // Clears out the saves.
             // Taken out so that the game shows the results screen if attempt to continue.
@@ -1389,7 +1389,7 @@ namespace BBTS
             
             // NOTE: this only happens once. If the player attempts to continue again once the game is over, a new game will start.
             // As such, I have decided to leave this in, even though it undoes SetLastSaveAsLoadedData.
-            LOLManager.Instance.saveSystem.ClearLoadedAndLastSaveData();
+            SystemManager.Instance.saveSystem.ClearLoadedAndLastSaveData();
 
             // Go to the results scene.
             if (useTransitions) // Transition
@@ -1496,7 +1496,7 @@ namespace BBTS
         public bool SaveGame(bool continueGame)
         {
             // Saves the game.
-            bool success = LOLManager.Instance.saveSystem.SaveGame();
+            bool success = SystemManager.Instance.saveSystem.SaveGame();
 
             // NOTE: a message is printed to show that the save failed if the game hasn't been initialized.
             // As such, that message is not repeated.
@@ -1806,7 +1806,7 @@ namespace BBTS
         public void ToTitleScene()
         {
             // Sets the last save as the loaded data.
-            LOLManager.Instance.saveSystem.SetLastSaveAsLoadedData();
+            SystemManager.Instance.saveSystem.SetLastSaveAsLoadedData();
 
             // Goes to the title scene.
             SceneManager.LoadScene("TitleScene");

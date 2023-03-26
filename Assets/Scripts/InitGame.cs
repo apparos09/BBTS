@@ -138,7 +138,7 @@ namespace BBTS
             if (loadedGameData != null)
             {
                 gameData = loadedGameData;
-                LOLManager.Instance.saveSystem.loadedData = loadedGameData;
+                SystemManager.Instance.saveSystem.loadedData = loadedGameData;
             }
             else
             {

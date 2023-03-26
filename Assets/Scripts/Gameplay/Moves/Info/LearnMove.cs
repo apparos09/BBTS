@@ -129,7 +129,7 @@ namespace BBTS
 
             // Read out the instructional text if text-to-speech is enabled.
             if (GameSettings.Instance.UseTextToSpeech)
-                LOLManager.Instance.textToSpeech.SpeakText(INSTRUCT_TEXT_LANG_KEY);
+                SystemManager.Instance.textToSpeech.SpeakText(INSTRUCT_TEXT_LANG_KEY);
         }
         
         // Activates the panel.
