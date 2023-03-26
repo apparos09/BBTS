@@ -6,12 +6,12 @@ using TMPro;
 
 namespace BBTS
 {
+    // The language.
+    public enum language { none, english }
+
     // A marker used to mark text that is not loaded from the language file.
     public class LanguageManager : MonoBehaviour
-    {
-        // The language.
-        public enum language { none, english }
-
+    {   
         // The instance of the language marker.
         private static LanguageManager instance;
 
@@ -24,6 +24,9 @@ namespace BBTS
 
         // The language the game is set to.
         private language setLanguage = language.english;
+
+        // If set to 'true', the text is translated.
+        public const bool TRANSLATE_TEXT = true;
 
         // The color used for marking text that wasn't repalced with language file content. 
         [HideInInspector]
@@ -77,6 +80,18 @@ namespace BBTS
             }
         }
 
+        // Gets the set language.
+        public language Language
+        {
+            get { return setLanguage; }
+        }
+
+        // // Returns the language text.
+        // public Dictionary<string, string> LangText
+        // {
+        //     get { return langText; }
+        // }
+
         // Loads the language.
         private bool LoadLanguage(language langSet)
         {
@@ -104,6 +119,7 @@ namespace BBTS
             // File doesn't exist, so file can't be loaded.
             if(!fileReader.FileExists())
             {
+                setLanguage = language.none;
                 return false;
             }
 
@@ -139,6 +155,22 @@ namespace BBTS
             // If the text color should be changed.
             if(CHANGE_TEXT_COLOR)
                 text.color = noLoadColor;
+        }
+
+        // Translates the text by 
+        public string GetLanguageText(string key)
+        {
+            // The resulting string.
+            string result = string.Empty;
+
+            // Checks if the key is in the list.
+            if (langText.ContainsKey(key))
+            {
+                // Set the string
+                result = langText[key];
+            }
+
+            return result;
         }
 
         // Translates the text using the provided key.

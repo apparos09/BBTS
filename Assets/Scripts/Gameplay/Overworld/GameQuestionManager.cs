@@ -212,19 +212,32 @@ namespace BBTS
         void Start()
         {
             // Translation.
-            LanguageManager marker = LanguageManager.Instance;
+            LanguageManager lm = LanguageManager.Instance;
 
-            marker.MarkText(titleText);
+            // If text should be translated, and the language is set.
+            if (LanguageManager.TRANSLATE_TEXT && lm.Language != language.none)
+            {
+                titleText.text = lm.GetLanguageText("kwd_questionTime");
+                correctString = lm.GetLanguageText(correctKey);
+                incorrectString = lm.GetLanguageText(incorrectKey);
+                confirmButtonText.text = lm.GetLanguageText("kwd_confirm");
+                finishButtonText.text = lm.GetLanguageText("kwd_finish");
+            }
+            else
+            {
+                lm.MarkText(titleText);
 
-            marker.MarkText(questionText);
-            marker.MarkText(response0Text);
-            marker.MarkText(response1Text);
-            marker.MarkText(response2Text);
-            marker.MarkText(response3Text);
+                lm.MarkText(questionText);
+                lm.MarkText(response0Text);
+                lm.MarkText(response1Text);
+                lm.MarkText(response2Text);
+                lm.MarkText(response3Text);
 
-            marker.MarkText(evaluationText);
-            marker.MarkText(confirmButtonText);
-            marker.MarkText(finishButtonText);
+                lm.MarkText(evaluationText);
+                lm.MarkText(confirmButtonText);
+                lm.MarkText(finishButtonText);
+            }
+                
         }
 
         // Returns the current question.

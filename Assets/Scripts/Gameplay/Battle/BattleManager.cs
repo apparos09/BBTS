@@ -348,21 +348,33 @@ namespace BBTS
                 
             //}
 
-            LanguageManager marker = LanguageManager.Instance;
+            // Loads the language instance. 
+            LanguageManager lm = LanguageManager.Instance;
 
-            marker.MarkText(chargeButtonText);
-            marker.MarkText(runButtonText);
+            // Language has been set.
+            if(LanguageManager.TRANSLATE_TEXT && lm.Language != language.none)
+            {
+                // Translate the treasure prompt.
+                treasurePromptText.text = lm.GetLanguageText(TREASURE_PROMPT_TEXT_KEY);
+                treasureYesButtonText.text = lm.GetLanguageText("kwd_yes");
+                treasureNoButtonText.text = lm.GetLanguageText("kwd_no");
+            }
+            else // Mark text as not being loaded from file.
+            {
+                lm.MarkText(chargeButtonText);
+                lm.MarkText(runButtonText);
 
-            marker.MarkText(move0NameText);
-            marker.MarkText(move1NameText);
-            marker.MarkText(move2NameText);
-            marker.MarkText(move3NameText);
+                lm.MarkText(move0NameText);
+                lm.MarkText(move1NameText);
+                lm.MarkText(move2NameText);
+                lm.MarkText(move3NameText);
 
-            marker.MarkText(treasurePromptText);
-            marker.MarkText(treasureYesButtonText);
-            marker.MarkText(treasureNoButtonText);
+                lm.MarkText(treasurePromptText);
+                lm.MarkText(treasureYesButtonText);
+                lm.MarkText(treasureNoButtonText);
 
-            marker.MarkText(opponentNameText);
+                lm.MarkText(opponentNameText);
+            }
         }
 
         // This function is called when the object becomes enabled and active

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 
@@ -259,7 +260,8 @@ namespace BBTS
         public GameQuestion GetQuestion(int number)
         {
             // If the text should be translated.
-            bool translate = false;
+            LanguageManager lm = LanguageManager.Instance;
+            bool translate = LanguageManager.TRANSLATE_TEXT && lm.Language != language.none;
 
             // The queston to be returned.
             GameQuestion question = new GameQuestion();
@@ -307,15 +309,15 @@ namespace BBTS
                     question.correctAnswerResponse = "This is indeed a test.";
                     question.incorrectAnswerResponse = "This is very likely a test.";
 
-                    // // Translates the question.
-                    // if (translate)
-                    // {
-                    //     question.question = defs["que00"];
-                    //     question.Response1 = defs["que00_res00"];
-                    //     question.Response0 = defs["que00_res01"];
-                    //     question.Response2 = defs["que00_res02"];
-                    //     question.Response3 = defs["que00_res03"];
-                    // }
+                    // Translates the question.
+                    if (translate)
+                    {
+                        question.question = lm.GetLanguageText("que00");
+                        question.Response1 = lm.GetLanguageText("que00_res00");
+                        question.Response0 = lm.GetLanguageText("que00_res01");
+                        question.Response2 = lm.GetLanguageText("que00_res02");
+                        question.Response3 = lm.GetLanguageText("que00_res03");
+                    }
 
                     break;
 
@@ -335,16 +337,16 @@ namespace BBTS
                     question.correctAnswerResponse = "Since there are only 2 outcomes, each event has a 0.50 chance.";
                     question.incorrectAnswerResponse = "When something is perfectly random, all outcomes have an equal chance of occurring.";
 
-                    //// Translates the question.
-                    //if (translate)
-                    //{
-                    //    question.question = defs["que01"];
+                    // Translates the question.
+                    if (translate)
+                    {
+                        question.question = lm.GetLanguageText("que01");
 
-                    //    question.correctAnswerResponse = defs["que01_correct"];
-                    //    question.correctAnswerSpeakKey = "que01_correct";
-                    //    question.incorrectAnswerResponse = defs["que01_incorrect"];
-                    //    question.incorrectAnswerSpeakKey = "que01_incorrect";
-                    //}
+                        question.correctAnswerResponse = lm.GetLanguageText("que01_correct");
+                        question.correctAnswerSpeakKey = "que01_correct";
+                        question.incorrectAnswerResponse = lm.GetLanguageText("que01_incorrect");
+                        question.incorrectAnswerSpeakKey = "que01_incorrect";
+                    }
 
                     break;
                 case 2:
@@ -363,20 +365,20 @@ namespace BBTS
                     question.correctAnswerResponse = "The burn chance is 0.00, meaning the move cannot burn the target.";
                     question.incorrectAnswerResponse = "In a 0-1 scale, 0 means the event never happens, and 1 means the event always happens.";
 
-                    //// Translates the question.
-                    //if (translate)
-                    //{
-                    //    question.question = defs["que02"];
-                    //    question.Response0 = defs["que02_res00"];
-                    //    question.Response1 = defs["que02_res01"];
-                    //    question.Response2 = defs["que02_res02"];
-                    //    question.Response3 = defs["que02_res03"];
+                    // Translates the question.
+                    if (translate)
+                    {
+                        question.question = lm.GetLanguageText("que02");
+                        question.Response0 = lm.GetLanguageText("que02_res00");
+                        question.Response1 = lm.GetLanguageText("que02_res01");
+                        question.Response2 = lm.GetLanguageText("que02_res02");
+                        question.Response3 = lm.GetLanguageText("que02_res03");
 
-                    //    question.correctAnswerResponse = defs["que02_correct"];
-                    //    question.correctAnswerSpeakKey = "que02_correct";
-                    //    question.incorrectAnswerResponse = defs["que02_incorrect"];
-                    //    question.incorrectAnswerSpeakKey = "que02_incorrect";
-                    //}
+                        question.correctAnswerResponse = lm.GetLanguageText("que02_correct");
+                        question.correctAnswerSpeakKey = "que02_correct";
+                        question.incorrectAnswerResponse = lm.GetLanguageText("que02_incorrect");
+                        question.incorrectAnswerSpeakKey = "que02_incorrect";
+                    }
 
                     break;
                 case 3:
@@ -396,20 +398,20 @@ namespace BBTS
                     question.incorrectAnswerResponse = "In a 0-1 scale, 0 means the event never happens, and 1 means the event always happens.";
 
 
-                    //// Translates the question.
-                    //if (translate)
-                    //{
-                    //    question.question = defs["que03"];
-                    //    question.Response0 = defs["que03_res00"];
-                    //    question.Response1 = defs["que03_res01"];
-                    //    question.Response2 = defs["que03_res02"];
-                    //    question.Response3 = defs["que03_res03"];
+                    // Translates the question.
+                    if (translate)
+                    {
+                        question.question = lm.GetLanguageText("que03");
+                        question.Response0 = lm.GetLanguageText("que03_res00");
+                        question.Response1 = lm.GetLanguageText("que03_res01");
+                        question.Response2 = lm.GetLanguageText("que03_res02");
+                        question.Response3 = lm.GetLanguageText("que03_res03");
 
-                    //    question.correctAnswerResponse = defs["que03_correct"];
-                    //    question.correctAnswerSpeakKey = "que03_correct";
-                    //    question.incorrectAnswerResponse = defs["que03_incorrect"];
-                    //    question.incorrectAnswerSpeakKey = "que03_incorrect";
-                    //}
+                        question.correctAnswerResponse = lm.GetLanguageText("que03_correct");
+                        question.correctAnswerSpeakKey = "que03_correct";
+                        question.incorrectAnswerResponse = lm.GetLanguageText("que03_incorrect");
+                        question.incorrectAnswerSpeakKey = "que03_incorrect";
+                    }
                     break;
 
                 case 4:
@@ -429,19 +431,19 @@ namespace BBTS
                     question.incorrectAnswerResponse = "Strong moves usually have a trade off. In this case, power is traded for accuracy.";
 
                     //// Translates the question.
-                    //if (translate)
-                    //{
-                    //    question.question = defs["que04"];
-                    //    question.Response0 = defs["que04_res00"];
-                    //    question.Response1 = defs["que04_res01"];
-                    //    question.Response2 = defs["que04_res02"];
-                    //    question.Response3 = defs["que04_res03"];
+                    if (translate)
+                    {
+                        question.question = lm.GetLanguageText("que04");
+                        question.Response0 = lm.GetLanguageText("que04_res00");
+                        question.Response1 = lm.GetLanguageText("que04_res01");
+                        question.Response2 = lm.GetLanguageText("que04_res02");
+                        question.Response3 = lm.GetLanguageText("que04_res03");
 
-                    //    question.correctAnswerResponse = defs["que04_correct"];
-                    //    question.correctAnswerSpeakKey = "que04_correct";
-                    //    question.incorrectAnswerResponse = defs["que04_incorrect"];
-                    //    question.incorrectAnswerSpeakKey = "que04_incorrect";
-                    //}
+                        question.correctAnswerResponse = lm.GetLanguageText("que04_correct");
+                        question.correctAnswerSpeakKey = "que04_correct";
+                        question.incorrectAnswerResponse = lm.GetLanguageText("que04_incorrect");
+                        question.incorrectAnswerSpeakKey = "que04_incorrect";
+                    }
                     break;
                 
                 
@@ -462,16 +464,16 @@ namespace BBTS
                     question.correctAnswerResponse = "Since 3/4 moves can heal the user, your foe has a 75% chance of healing themselves.";
                     question.incorrectAnswerResponse = "Since your foe won't charge their energy, they only have 4 moves to choose from.";
 
-                    //// Translates the question.
-                    //if (translate)
-                    //{
-                    //    question.question = defs["que05"];
+                    // Translates the question.
+                    if (translate)
+                    {
+                        question.question = lm.GetLanguageText("que05");
 
-                    //    question.correctAnswerResponse = defs["que05_correct"];
-                    //    question.correctAnswerSpeakKey = "que05_correct";
-                    //    question.incorrectAnswerResponse = defs["que05_incorrect"];
-                    //    question.incorrectAnswerSpeakKey = "que05_incorrect";
-                    //}
+                        question.correctAnswerResponse = lm.GetLanguageText("que05_correct");
+                        question.correctAnswerSpeakKey = "que05_correct";
+                        question.incorrectAnswerResponse = lm.GetLanguageText("que05_incorrect");
+                        question.incorrectAnswerSpeakKey = "que05_incorrect";
+                    }
 
                     break;
 
@@ -491,20 +493,20 @@ namespace BBTS
                     question.correctAnswerResponse = "Since your accuracy has gone up, your moves are more likely to hit their target.";
                     question.incorrectAnswerResponse = "Accuracy determines how likely it is for a move to hit its target.";
 
-                    //// Translates the question.
-                    //if (translate)
-                    //{
-                    //    question.question = defs["que06"];
-                    //    question.Response0 = defs["que06_res00"];
-                    //    question.Response1 = defs["que06_res01"];
-                    //    question.Response2 = defs["que06_res02"];
-                    //    question.Response3 = defs["que06_res03"];
+                    // Translates the question.
+                    if (translate)
+                    {
+                        question.question = lm.GetLanguageText("que06");
+                        question.Response0 = lm.GetLanguageText("que06_res00");
+                        question.Response1 = lm.GetLanguageText("que06_res01");
+                        question.Response2 = lm.GetLanguageText("que06_res02");
+                        question.Response3 = lm.GetLanguageText("que06_res03");
 
-                    //    question.correctAnswerResponse = defs["que06_correct"];
-                    //    question.correctAnswerSpeakKey = "que06_correct";
-                    //    question.incorrectAnswerResponse = defs["que06_incorrect"];
-                    //    question.incorrectAnswerSpeakKey = "que06_incorrect";
-                    //}
+                        question.correctAnswerResponse = lm.GetLanguageText("que06_correct");
+                        question.correctAnswerSpeakKey = "que06_correct";
+                        question.incorrectAnswerResponse = lm.GetLanguageText("que06_incorrect");
+                        question.incorrectAnswerSpeakKey = "que06_incorrect";
+                    }
                     break;
 
                 case 7:
@@ -523,20 +525,20 @@ namespace BBTS
                     question.correctAnswerResponse = "Since your accuracy has gone down, your moves are more likely to miss.";
                     question.incorrectAnswerResponse = "Accuracy determines how likely it is for a move to hit its target.";
 
-                    //// Translates the question.
-                    //if (translate)
-                    //{
-                    //    question.question = defs["que07"];
-                    //    question.Response0 = defs["que07_res00"];
-                    //    question.Response1 = defs["que07_res01"];
-                    //    question.Response2 = defs["que07_res02"];
-                    //    question.Response3 = defs["que07_res03"];
+                    // Translates the question.
+                    if (translate)
+                    {
+                        question.question = lm.GetLanguageText("que07");
+                        question.Response0 = lm.GetLanguageText("que07_res00");
+                        question.Response1 = lm.GetLanguageText("que07_res01");
+                        question.Response2 = lm.GetLanguageText("que07_res02");
+                        question.Response3 = lm.GetLanguageText("que07_res03");
 
-                    //    question.correctAnswerResponse = defs["que07_correct"];
-                    //    question.correctAnswerSpeakKey = "que07_correct";
-                    //    question.incorrectAnswerResponse = defs["que07_incorrect"];
-                    //    question.incorrectAnswerSpeakKey = "que07_incorrect";
-                    //}
+                        question.correctAnswerResponse = lm.GetLanguageText("que07_correct");
+                        question.correctAnswerSpeakKey = "que07_correct";
+                        question.incorrectAnswerResponse = lm.GetLanguageText("que07_incorrect");
+                        question.incorrectAnswerSpeakKey = "que07_incorrect";
+                    }
                     break;
 
                 case 8:
@@ -555,16 +557,16 @@ namespace BBTS
                     question.correctAnswerResponse = "Since there are only 2 options, each event has a 0.50 chance of happening.";
                     question.incorrectAnswerResponse = "There are only 2 possible outcomes.";
 
-                    //// Translates the question.
-                    //if (translate)
-                    //{
-                    //    question.question = defs["que08"];
-                        
-                    //    question.correctAnswerResponse = defs["que08_correct"];
-                    //    question.correctAnswerSpeakKey = "que08_correct";
-                    //    question.incorrectAnswerResponse = defs["que08_incorrect"];
-                    //    question.incorrectAnswerSpeakKey = "que08_incorrect";
-                    //}
+                    // Translates the question.
+                    if (translate)
+                    {
+                        question.question = lm.GetLanguageText("que08");
+
+                        question.correctAnswerResponse = lm.GetLanguageText("que08_correct");
+                        question.correctAnswerSpeakKey = "que08_correct";
+                        question.incorrectAnswerResponse = lm.GetLanguageText("que08_incorrect");
+                        question.incorrectAnswerSpeakKey = "que08_incorrect";
+                    }
                     break;
                 
 
@@ -585,18 +587,18 @@ namespace BBTS
                     question.correctAnswerResponse = "Move B is stronger, but it's more likely to miss.";
                     question.incorrectAnswerResponse = "Accuracy works on a 0-1 scale, with 1.00 meaning a move will always hit.";
 
-                    //// Translates the question.
-                    //if (translate)
-                    //{
-                    //    question.question = defs["que09"];
-                    //    question.Response0 = defs["kwd_yes"];
-                    //    question.Response1 = defs["kwd_no"];
+                    // Translates the question.
+                    if (translate)
+                    {
+                        question.question = lm.GetLanguageText("que09");
+                        question.Response0 = lm.GetLanguageText("kwd_yes");
+                        question.Response1 = lm.GetLanguageText("kwd_no");
 
-                    //    question.correctAnswerResponse = defs["que09_correct"];
-                    //    question.correctAnswerSpeakKey = "que09_correct";
-                    //    question.incorrectAnswerResponse = defs["que09_incorrect"];
-                    //    question.incorrectAnswerSpeakKey = "que09_incorrect";
-                    //}
+                        question.correctAnswerResponse = lm.GetLanguageText("que09_correct");
+                        question.correctAnswerSpeakKey = "que09_correct";
+                        question.incorrectAnswerResponse = lm.GetLanguageText("que09_incorrect");
+                        question.incorrectAnswerSpeakKey = "que09_incorrect";
+                    }
                     break;
 
                 case 10:
@@ -615,18 +617,18 @@ namespace BBTS
                     question.correctAnswerResponse = "Move B is stronger, but Move A is more accurate.";
                     question.incorrectAnswerResponse = "Accuracy works on a 0-1 scale, with 0 meaning a move will never hit.";
 
-                    //// Translates the question.
-                    //if (translate)
-                    //{
-                    //    question.question = defs["que10"];
-                    //    question.Response0 = defs["que_res_moveA"];
-                    //    question.Response1 = defs["que_res_moveB"];
-                        
-                    //    question.correctAnswerResponse = defs["que10_correct"];
-                    //    question.correctAnswerSpeakKey = "que10_correct";
-                    //    question.incorrectAnswerResponse = defs["que10_incorrect"];
-                    //    question.incorrectAnswerSpeakKey = "que10_incorrect";
-                    //}
+                    // Translates the question.
+                    if (translate)
+                    {
+                        question.question = lm.GetLanguageText("que10");
+                        question.Response0 = lm.GetLanguageText("que_res_moveA");
+                        question.Response1 = lm.GetLanguageText("que_res_moveB");
+
+                        question.correctAnswerResponse = lm.GetLanguageText("que10_correct");
+                        question.correctAnswerSpeakKey = "que10_correct";
+                        question.incorrectAnswerResponse = lm.GetLanguageText("que10_incorrect");
+                        question.incorrectAnswerSpeakKey = "que10_incorrect";
+                    }
                     break;
 
                 case 11:
@@ -645,19 +647,19 @@ namespace BBTS
                     question.correctAnswerResponse = "Move C has a burn chance of 1.00, which means that it always burns the target.";
                     question.incorrectAnswerResponse = "An event that will always happen has a chance value of 1.00.";
 
-                    //// Translates the question.
-                    //if (translate)
-                    //{
-                    //    question.question = defs["que11"];
-                    //    question.Response0 = defs["que_res_moveA"];
-                    //    question.Response1 = defs["que_res_moveB"];
-                    //    question.Response2 = defs["que_res_moveC"];
+                    // Translates the question.
+                    if (translate)
+                    {
+                        question.question = lm.GetLanguageText("que11");
+                        question.Response0 = lm.GetLanguageText("que_res_moveA");
+                        question.Response1 = lm.GetLanguageText("que_res_moveB");
+                        question.Response2 = lm.GetLanguageText("que_res_moveC");
 
-                    //    question.correctAnswerResponse = defs["que11_correct"];
-                    //    question.correctAnswerSpeakKey = "que11_correct";
-                    //    question.incorrectAnswerResponse = defs["que11_incorrect"];
-                    //    question.incorrectAnswerSpeakKey = "que11_incorrect";
-                    //}
+                        question.correctAnswerResponse = lm.GetLanguageText("que11_correct");
+                        question.correctAnswerSpeakKey = "que11_correct";
+                        question.incorrectAnswerResponse = lm.GetLanguageText("que11_incorrect");
+                        question.incorrectAnswerSpeakKey = "que11_incorrect";
+                    }
                     break;
 
                 case 12:
@@ -676,19 +678,19 @@ namespace BBTS
                     question.correctAnswerResponse = "Since Move B has the lowest burn chance, it is the least likely to inflict burn status.";
                     question.incorrectAnswerResponse = "In a 0-1 scale, an event chance of 0.00 means said event will never happen.";
 
-                    //// Translates the question.
-                    //if (translate)
-                    //{
-                    //    question.question = defs["que12"];
-                    //    question.Response0 = defs["que_res_moveA"];
-                    //    question.Response1 = defs["que_res_moveB"];
-                    //    question.Response2 = defs["que_res_moveC"];
-                        
-                    //    question.correctAnswerResponse = defs["que12_correct"];
-                    //    question.correctAnswerSpeakKey = "que12_correct";
-                    //    question.incorrectAnswerResponse = defs["que12_incorrect"];
-                    //    question.incorrectAnswerSpeakKey = "que12_incorrect";
-                    //}
+                    // Translates the question.
+                    if (translate)
+                    {
+                        question.question = lm.GetLanguageText("que12");
+                        question.Response0 = lm.GetLanguageText("que_res_moveA");
+                        question.Response1 = lm.GetLanguageText("que_res_moveB");
+                        question.Response2 = lm.GetLanguageText("que_res_moveC");
+
+                        question.correctAnswerResponse = lm.GetLanguageText("que12_correct");
+                        question.correctAnswerSpeakKey = "que12_correct";
+                        question.incorrectAnswerResponse = lm.GetLanguageText("que12_incorrect");
+                        question.incorrectAnswerSpeakKey = "que12_incorrect";
+                    }
                     break;
 
 
@@ -709,19 +711,19 @@ namespace BBTS
                     question.correctAnswerResponse = "While Move B is the most accurate, it has the lowest paralysis chance of the 3.";
                     question.incorrectAnswerResponse = "Since paralysis is the focus, the accuracy of each move is not important.";
 
-                    //// Translates the question.
-                    //if (translate)
-                    //{
-                    //    question.question = defs["que13"];
-                    //    question.Response0 = defs["que_res_moveA"];
-                    //    question.Response1 = defs["que_res_moveB"];
-                    //    question.Response2 = defs["que_res_moveC"];
+                    // Translates the question.
+                    if (translate)
+                    {
+                        question.question = lm.GetLanguageText("que13");
+                        question.Response0 = lm.GetLanguageText("que_res_moveA");
+                        question.Response1 = lm.GetLanguageText("que_res_moveB");
+                        question.Response2 = lm.GetLanguageText("que_res_moveC");
 
-                    //    question.correctAnswerResponse = defs["que13_correct"];
-                    //    question.correctAnswerSpeakKey = "que13_correct";
-                    //    question.incorrectAnswerResponse = defs["que13_incorrect"];
-                    //    question.incorrectAnswerSpeakKey = "que13_incorrect";
-                    //}
+                        question.correctAnswerResponse = lm.GetLanguageText("que13_correct");
+                        question.correctAnswerSpeakKey = "que13_correct";
+                        question.incorrectAnswerResponse = lm.GetLanguageText("que13_incorrect");
+                        question.incorrectAnswerSpeakKey = "que13_incorrect";
+                    }
                     break;
 
                 case 14:
@@ -740,20 +742,20 @@ namespace BBTS
                     question.correctAnswerResponse = "Since your accuracy has been lowered, no move is guaranteed to hit its target.";
                     question.incorrectAnswerResponse = "In a 0-1 scale, the closer an event chance is to 0.00, the less likely said event is.";
 
-                    //// Translates the question.
-                    //if (translate)
-                    //{
-                    //    question.question = defs["que14"];
-                    //    question.Response0 = defs["que_res_moveA"];
-                    //    question.Response1 = defs["que_res_moveB"];
-                    //    question.Response2 = defs["que_res_moveC"];
-                    //    question.Response3 = defs["que14_res03"];
-                        
-                    //    question.correctAnswerResponse = defs["que14_correct"];
-                    //    question.correctAnswerSpeakKey = "que14_correct";
-                    //    question.incorrectAnswerResponse = defs["que14_incorrect"];
-                    //    question.incorrectAnswerSpeakKey = "que14_incorrect";
-                    //}
+                    // Translates the question.
+                    if (translate)
+                    {
+                        question.question = lm.GetLanguageText("que14");
+                        question.Response0 = lm.GetLanguageText("que_res_moveA");
+                        question.Response1 = lm.GetLanguageText("que_res_moveB");
+                        question.Response2 = lm.GetLanguageText("que_res_moveC");
+                        question.Response3 = lm.GetLanguageText("que14_res03");
+
+                        question.correctAnswerResponse = lm.GetLanguageText("que14_correct");
+                        question.correctAnswerSpeakKey = "que14_correct";
+                        question.incorrectAnswerResponse = lm.GetLanguageText("que14_incorrect");
+                        question.incorrectAnswerSpeakKey = "que14_incorrect";
+                    }
                     break;
 
                 case 15:
@@ -772,20 +774,20 @@ namespace BBTS
                     question.correctAnswerResponse = "Since your accuracy has increased, Move B now has a 1.00 chance of hitting its target.";
                     question.incorrectAnswerResponse = "In a 0-1 scale, the closer an event chance is to 1.00, the more likely said event is.";
 
-                    //// Translates the question.
-                    //if (translate)
-                    //{
-                    //    question.question = defs["que15"];
-                    //    question.Response0 = defs["que15_res00"];
-                    //    question.Response1 = defs["que15_res01"];
-                    //    question.Response2 = defs["que15_res02"];
-                    //    question.Response3 = defs["que15_res03"];
+                    // Translates the question.
+                    if (translate)
+                    {
+                        question.question = lm.GetLanguageText("que15");
+                        question.Response0 = lm.GetLanguageText("que15_res00");
+                        question.Response1 = lm.GetLanguageText("que15_res01");
+                        question.Response2 = lm.GetLanguageText("que15_res02");
+                        question.Response3 = lm.GetLanguageText("que15_res03");
 
-                    //    question.correctAnswerResponse = defs["que15_correct"];
-                    //    question.correctAnswerSpeakKey = "que15_correct";
-                    //    question.incorrectAnswerResponse = defs["que15_incorrect"];
-                    //    question.incorrectAnswerSpeakKey = "que15_incorrect";
-                    //}
+                        question.correctAnswerResponse = lm.GetLanguageText("que15_correct");
+                        question.correctAnswerSpeakKey = "que15_correct";
+                        question.incorrectAnswerResponse = lm.GetLanguageText("que15_incorrect");
+                        question.incorrectAnswerSpeakKey = "que15_incorrect";
+                    }
                     break;
 
                 case 16:
@@ -804,19 +806,19 @@ namespace BBTS
                     question.correctAnswerResponse = "Move C getting a critical damage bonus is the most likely event to happen.";
                     question.incorrectAnswerResponse = "The higher the chance value, the more likely the event is.";
 
-                    //// Translates the question.
-                    //if (translate)
-                    //{
-                    //    question.question = defs["que16"];
-                    //    question.Response0 = defs["que16_res00"];
-                    //    question.Response1 = defs["que16_res01"];
-                    //    question.Response2 = defs["que16_res02"];
+                    // Translates the question.
+                    if (translate)
+                    {
+                        question.question = lm.GetLanguageText("que16");
+                        question.Response0 = lm.GetLanguageText("que16_res00");
+                        question.Response1 = lm.GetLanguageText("que16_res01");
+                        question.Response2 = lm.GetLanguageText("que16_res02");
 
-                    //    question.correctAnswerResponse = defs["que16_correct"];
-                    //    question.correctAnswerSpeakKey = "que16_correct";
-                    //    question.incorrectAnswerResponse = defs["que16_incorrect"];
-                    //    question.incorrectAnswerSpeakKey = "que16_incorrect";
-                    //}
+                        question.correctAnswerResponse = lm.GetLanguageText("que16_correct");
+                        question.correctAnswerSpeakKey = "que16_correct";
+                        question.incorrectAnswerResponse = lm.GetLanguageText("que16_incorrect");
+                        question.incorrectAnswerSpeakKey = "que16_incorrect";
+                    }
                     break;
 
 
@@ -837,20 +839,20 @@ namespace BBTS
                     question.correctAnswerResponse = "Since Move A has the lowest accuracy, it is the riskiest move to use.";
                     question.incorrectAnswerResponse = "The lower the accuracy, the more likely the move is to miss.";
 
-                    //// Translates the question.
-                    //if (translate)
-                    //{
-                    //    question.question = defs["que17"];
-                    //    question.Response0 = defs["que_res_moveA"];
-                    //    question.Response1 = defs["que_res_moveB"];
-                    //    question.Response2 = defs["que_res_moveC"];
-                    //    question.Response3 = defs["que17_res03"];
+                    // Translates the question.
+                    if (translate)
+                    {
+                        question.question = lm.GetLanguageText("que17");
+                        question.Response0 = lm.GetLanguageText("que_res_moveA");
+                        question.Response1 = lm.GetLanguageText("que_res_moveB");
+                        question.Response2 = lm.GetLanguageText("que_res_moveC");
+                        question.Response3 = lm.GetLanguageText("que17_res03");
 
-                    //    question.correctAnswerResponse = defs["que17_correct"];
-                    //    question.correctAnswerSpeakKey = "que17_correct";
-                    //    question.incorrectAnswerResponse = defs["que17_incorrect"];
-                    //    question.incorrectAnswerSpeakKey = "que17_incorrect";
-                    //}
+                        question.correctAnswerResponse = lm.GetLanguageText("que17_correct");
+                        question.correctAnswerSpeakKey = "que17_correct";
+                        question.incorrectAnswerResponse = lm.GetLanguageText("que17_incorrect");
+                        question.incorrectAnswerSpeakKey = "que17_incorrect";
+                    }
                     break;
 
                 case 18:
@@ -869,18 +871,18 @@ namespace BBTS
                     question.correctAnswerResponse = "Move B is the least accurate, so it's the least likely to hit you.";
                     question.incorrectAnswerResponse = "The lower the accuracy, the less likely the move is to hit its target.";
 
-                    //// Translates the question.
-                    //if (translate)
-                    //{
-                    //    question.question = defs["que18"];
-                    //    question.Response0 = defs["que_res_moveA"];
-                    //    question.Response1 = defs["que_res_moveB"];
-                    //    question.Response2 = defs["que_res_moveC"];
-                    //    question.Response3 = defs["que_res_moveD"];
+                    // Translates the question.
+                    if (translate)
+                    {
+                        question.question = lm.GetLanguageText("que18");
+                        question.Response0 = lm.GetLanguageText("que_res_moveA");
+                        question.Response1 = lm.GetLanguageText("que_res_moveB");
+                        question.Response2 = lm.GetLanguageText("que_res_moveC");
+                        question.Response3 = lm.GetLanguageText("que_res_moveD");
 
-                    //    question.correctAnswerResponse = defs["que18_correct"];
-                    //    question.incorrectAnswerResponse = defs["que18_incorrect"];
-                    //}
+                        question.correctAnswerResponse = lm.GetLanguageText("que18_correct");
+                        question.incorrectAnswerResponse = lm.GetLanguageText("que18_incorrect");
+                    }
                     break;
 
                 case 19:
@@ -899,20 +901,20 @@ namespace BBTS
                     question.correctAnswerResponse = "Since your attack stat cannot go higher, Move A's event is irrelevant.";
                     question.incorrectAnswerResponse = "If an event would have no effect, then it can be ignored.";
 
-                    //// Translates the question.
-                    //if (translate)
-                    //{
-                    //    question.question = defs["que19"];
-                    //    question.Response0 = defs["que19_res00"];
-                    //    question.Response1 = defs["que19_res01"];
-                    //    question.Response2 = defs["que19_res02"];
-                    //    question.Response3 = defs["que19_res03"];
+                    // Translates the question.
+                    if (translate)
+                    {
+                        question.question = lm.GetLanguageText("que19");
+                        question.Response0 = lm.GetLanguageText("que19_res00");
+                        question.Response1 = lm.GetLanguageText("que19_res01");
+                        question.Response2 = lm.GetLanguageText("que19_res02");
+                        question.Response3 = lm.GetLanguageText("que19_res03");
 
-                    //    question.correctAnswerResponse = defs["que19_correct"];
-                    //    question.correctAnswerSpeakKey = "que19_correct";
-                    //    question.incorrectAnswerResponse = defs["que19_incorrect"];
-                    //    question.incorrectAnswerSpeakKey = "que19_incorrect";
-                    //}
+                        question.correctAnswerResponse = lm.GetLanguageText("que19_correct");
+                        question.correctAnswerSpeakKey = "que19_correct";
+                        question.incorrectAnswerResponse = lm.GetLanguageText("que19_incorrect");
+                        question.incorrectAnswerSpeakKey = "que19_incorrect";
+                    }
                     break;
 
                 case 20:
@@ -931,20 +933,20 @@ namespace BBTS
                     question.correctAnswerResponse = "Your defense is not maxed out, so Move B's event can still happen.";
                     question.incorrectAnswerResponse = "A stat that cannot go any lower can still be raised.";
 
-                    //// Translates the question.
-                    //if (translate)
-                    //{
-                    //    question.question = defs["que20"];
-                    //    question.Response0 = defs["que20_res00"];
-                    //    question.Response1 = defs["que20_res01"];
-                    //    question.Response2 = defs["que20_res02"];
-                    //    question.Response3 = defs["que20_res03"];
+                    // Translates the question.
+                    if (translate)
+                    {
+                        question.question = lm.GetLanguageText("que20");
+                        question.Response0 = lm.GetLanguageText("que20_res00");
+                        question.Response1 = lm.GetLanguageText("que20_res01");
+                        question.Response2 = lm.GetLanguageText("que20_res02");
+                        question.Response3 = lm.GetLanguageText("que20_res03");
 
-                    //    question.correctAnswerResponse = defs["que20_correct"];
-                    //    question.correctAnswerSpeakKey = "que20_correct";
-                    //    question.incorrectAnswerResponse = defs["que20_incorrect"];
-                    //    question.incorrectAnswerSpeakKey = "que20_incorrect";
-                    //}
+                        question.correctAnswerResponse = lm.GetLanguageText("que20_correct");
+                        question.correctAnswerSpeakKey = "que20_correct";
+                        question.incorrectAnswerResponse = lm.GetLanguageText("que20_incorrect");
+                        question.incorrectAnswerSpeakKey = "que20_incorrect";
+                    }
                     break;
 
 
@@ -965,16 +967,16 @@ namespace BBTS
                     question.correctAnswerResponse = "Since 2/10 doors are treasure doors, there's a 20% chance of you choosing one.";
                     question.incorrectAnswerResponse = "When the left value is equal to the right value, the chance value is 1.00 in decimal form.";
 
-                    //// Translates the question.
-                    //if (translate)
-                    //{
-                    //    question.question = defs["que21"];
+                    // Translates the question.
+                    if (translate)
+                    {
+                        question.question = lm.GetLanguageText("que21");
 
-                    //    question.correctAnswerResponse = defs["que21_correct"];
-                    //    question.correctAnswerSpeakKey = "que21_correct";
-                    //    question.incorrectAnswerResponse = defs["que21_incorrect"];
-                    //    question.incorrectAnswerSpeakKey = "que21_incorrect";
-                    //}
+                        question.correctAnswerResponse = lm.GetLanguageText("que21_correct");
+                        question.correctAnswerSpeakKey = "que21_correct";
+                        question.incorrectAnswerResponse = lm.GetLanguageText("que21_incorrect");
+                        question.incorrectAnswerSpeakKey = "que21_incorrect";
+                    }
                     break;
 
                 case 22:
@@ -993,16 +995,16 @@ namespace BBTS
                     question.correctAnswerResponse = "4/5 doors are not treasure doors, so a non-treasure door has an 80% chance of being chosen.";
                     question.incorrectAnswerResponse = "The larger the numerator (left value), the more likely the event is.";
 
-                    //// Translates the question.
-                    //if (translate)
-                    //{
-                    //    question.question = defs["que22"];
+                    // Translates the question.
+                    if (translate)
+                    {
+                        question.question = lm.GetLanguageText("que22");
 
-                    //    question.correctAnswerResponse = defs["que22_correct"];
-                    //    question.correctAnswerSpeakKey = "que22_correct";
-                    //    question.incorrectAnswerResponse = defs["que22_incorrect"];
-                    //    question.incorrectAnswerSpeakKey = "que22_incorrect";
-                    //}
+                        question.correctAnswerResponse = lm.GetLanguageText("que22_correct");
+                        question.correctAnswerSpeakKey = "que22_correct";
+                        question.incorrectAnswerResponse = lm.GetLanguageText("que22_incorrect");
+                        question.incorrectAnswerSpeakKey = "que22_incorrect";
+                    }
                     break;
 
                 case 23:
@@ -1021,20 +1023,20 @@ namespace BBTS
                     question.correctAnswerResponse = "Since Enemy C has the highest door count, you are most likely to encounter one of them next.";
                     question.incorrectAnswerResponse = "The lower the numerator (left value), the less likely the event is.";
 
-                    //// Translates the question.
-                    //if (translate)
-                    //{
-                    //    question.question = defs["que23"];
-                    //    question.Response0 = defs["que_res_enemyA"];
-                    //    question.Response1 = defs["que_res_enemyB"];
-                    //    question.Response2 = defs["que_res_enemyC"];
-                    //    question.Response3 = defs["que_res_enemyD"];
+                    // Translates the question.
+                    if (translate)
+                    {
+                        question.question = lm.GetLanguageText("que23");
+                        question.Response0 = lm.GetLanguageText("que_res_enemyA");
+                        question.Response1 = lm.GetLanguageText("que_res_enemyB");
+                        question.Response2 = lm.GetLanguageText("que_res_enemyC");
+                        question.Response3 = lm.GetLanguageText("que_res_enemyD");
 
-                    //    question.correctAnswerResponse = defs["que23_correct"];
-                    //    question.correctAnswerSpeakKey = "que23_correct";
-                    //    question.incorrectAnswerResponse = defs["que23_incorrect"];
-                    //    question.incorrectAnswerSpeakKey = "que23_incorrect";
-                    //}
+                        question.correctAnswerResponse = lm.GetLanguageText("que23_correct");
+                        question.correctAnswerSpeakKey = "que23_correct";
+                        question.incorrectAnswerResponse = lm.GetLanguageText("que23_incorrect");
+                        question.incorrectAnswerSpeakKey = "que23_incorrect";
+                    }
                     break;
 
                 case 24:
@@ -1053,20 +1055,20 @@ namespace BBTS
                     question.correctAnswerResponse = "Enemy D is behind 1/9 doors, so it is the least likely enemy to be encountered next.";
                     question.incorrectAnswerResponse = "The denominator (right value) is the total number of doors.";
 
-                    //// Translates the question.
-                    //if (translate)
-                    //{
-                    //    question.question = defs["que24"];
-                    //    question.Response0 = defs["que_res_enemyA"];
-                    //    question.Response1 = defs["que_res_enemyB"];
-                    //    question.Response2 = defs["que_res_enemyC"];
-                    //    question.Response3 = defs["que_res_enemyD"];
+                    // Translates the question.
+                    if (translate)
+                    {
+                        question.question = lm.GetLanguageText("que24");
+                        question.Response0 = lm.GetLanguageText("que_res_enemyA");
+                        question.Response1 = lm.GetLanguageText("que_res_enemyB");
+                        question.Response2 = lm.GetLanguageText("que_res_enemyC");
+                        question.Response3 = lm.GetLanguageText("que_res_enemyD");
 
-                    //    question.correctAnswerResponse = defs["que24_correct"];
-                    //    question.correctAnswerSpeakKey = "que24_correct";
-                    //    question.incorrectAnswerResponse = defs["que24_incorrect"];
-                    //    question.incorrectAnswerSpeakKey = "que24_incorrect";
-                    //}
+                        question.correctAnswerResponse = lm.GetLanguageText("que24_correct");
+                        question.correctAnswerSpeakKey = "que24_correct";
+                        question.incorrectAnswerResponse = lm.GetLanguageText("que24_incorrect");
+                        question.incorrectAnswerSpeakKey = "que24_incorrect";
+                    }
                     break;
 
                 case 25:
@@ -1085,15 +1087,15 @@ namespace BBTS
                     question.correctAnswerResponse = "The critical damage chance is also the chance of ending the battle in one turn.";
                     question.incorrectAnswerResponse = "The amount of turns needed to win the battle hinges on getting a critical damage bonus.";
 
-                    //// Translates the question.
-                    //if (translate)
-                    //{
-                    //    question.question = defs["que25"];
-                    //    question.correctAnswerResponse = defs["que25_correct"];
-                    //    question.correctAnswerSpeakKey = "que25_correct";
-                    //    question.incorrectAnswerResponse = defs["que25_incorrect"];
-                    //    question.incorrectAnswerSpeakKey = "que25_incorrect";
-                    //}
+                    // Translates the question.
+                    if (translate)
+                    {
+                        question.question = lm.GetLanguageText("que25");
+                        question.correctAnswerResponse = lm.GetLanguageText("que25_correct");
+                        question.correctAnswerSpeakKey = "que25_correct";
+                        question.incorrectAnswerResponse = lm.GetLanguageText("que25_incorrect");
+                        question.incorrectAnswerSpeakKey = "que25_incorrect";
+                    }
                     break;
 
             }

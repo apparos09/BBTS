@@ -114,7 +114,19 @@ namespace BBTS
         // Provided are the name key and the description key.
         public void LoadTranslation(string nameKey, string descKey)
         {
-            // NONE
+            LanguageManager lm = LanguageManager.Instance;
+
+            // If text should be translated and language is set.
+            if (LanguageManager.TRANSLATE_TEXT && lm.Language != language.none)
+            {
+                // Loads in the name and description.
+                name = lm.GetLanguageText(nameKey);
+                description = lm.GetLanguageText(descKey);
+
+                // Saves the name speak key and description speak key.
+                nameSpeakKey = nameKey;
+                descSpeakKey = descKey;
+            }
         }
 
         // Returns the ID of the move.
