@@ -27,7 +27,25 @@ namespace BBTS
         public string[] lines;
 
 
-        // sets the file.
+        // Returns the file with its path.
+        // If 'useBackSlash' is true, a backslash is put at the end of the file path if one does not exist.
+        // If 'useBackSlash' is false, a forward slash is added to the end of the file path if one does not exist.
+        public string GetFileWithPath(bool useBackSlash = true)
+        {
+            // The resulting filepath.
+            string result = "";
+
+            // Make sure they're set properly.
+            SetFile(file);
+            SetFilePath(filePath);
+
+            // Combines the two.
+            result = filePath + file;
+
+            return result;
+        }
+
+        // Sets the file.
         public void SetFile(string newFile)
         {
             file = newFile;
@@ -77,6 +95,28 @@ namespace BBTS
 
             // returns true if the file exists.
             bool result = File.Exists(filePath + file);
+
+            return result;
+        }
+
+        // Checks if the file is empty.
+        public bool IsFileEmpty()
+        {
+            // Checks if the file exists.
+            bool result = FileExists();
+
+            // File exists, so open it and see if it has data.
+            if (result)
+            {
+                // Opens a reading file stream.
+                FileStream fs = File.OpenRead(GetFileWithPath());
+                
+                // Checks if the file stream is set.
+                result = fs.Length == 0;
+
+                // Close the file stream.
+                fs.Close();
+            }
 
             return result;
         }

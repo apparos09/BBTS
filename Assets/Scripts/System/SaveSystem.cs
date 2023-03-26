@@ -1,7 +1,9 @@
 
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Playables;
@@ -89,8 +91,11 @@ namespace BBTS
         // The data that was loaded.
         public BBTS_GameData loadedData;
 
+        // The file reader.
+        public FileReader fileReader = null;
+
         // The manager for the game.
-        public GameplayManager gameManager;
+        public GameplayManager gameManager = null;
 
         // LOL - AutoSave //
         // Added from the ExampleCookingGame. Used for feedback from autosaves.
@@ -155,8 +160,16 @@ namespace BBTS
         // Set save and load operations.
         public void Initialize()
         {
+            // The result.
+            bool result;
 
-            // ...
+            // Creates the file reader with its file path and file.
+            fileReader = new FileReader();
+            fileReader.filePath = "Assets\\Resources\\Data\\";
+            fileReader.file = "save.dat";
+
+            // Checks if the file exists.
+            result = fileReader.FileExists();
         }
 
         // Checks if the game manager has been set.
@@ -204,12 +217,27 @@ namespace BBTS
             // Generates the save data.
             BBTS_GameData savedData = gameManager.GenerateSaveData();
 
+            // Save to a file.
+            SaveToFile(savedData);
+
             // Stores the most recent save.
             lastSave = savedData;
 
             // TODO: implement save state.
 
             return success;
+        }
+
+        // Save the information to a file.
+        private void SaveToFile(BBTS_GameData data)
+        {
+            // TODO: implement.
+        }
+
+        // Loads information from a file.
+        private void LoadFromFile()
+        {
+            // TODO: implement.
         }
 
         // Called for saving the result.
