@@ -2,9 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
 using TMPro;
-
 using UnityEngine.UI;
 
 namespace BBTS
@@ -1577,35 +1575,29 @@ namespace BBTS
         public bool SaveGame(bool continueGame)
         {
             // Saves the game.
-            bool success = SystemManager.Instance.saveSystem.SaveGame();
+            bool success = false;
+            
+            // If the game should allow saving.
+            if(SaveSystem.Instance.allowSaveLoad)
+                SystemManager.Instance.saveSystem.SaveGame();
 
             // NOTE: a message is printed to show that the save failed if the game hasn't been initialized.
             // As such, that message is not repeated.
 
-            // If the game should be continued, or should be quit.
-            if (continueGame)
-            {
-                // Turn off the save prompt object if it is visible.
-                if (savePrompt.gameObject.activeSelf)
-                    ToggleSavePrompt();
-            }
-            else
-            {
-                // Go to the title scene.
+            // Turn off the save prompt object if it is visible.
+            if (savePrompt.gameObject.activeSelf)
+                ToggleSavePrompt();
+
+            // If the game won't be continued, go to the title scene.
+            if(!continueGame)
                 ToTitleScene();
-            }
 
             return success;
-            
         }
 
         // Called when the game should be saved and continued.
         public void SaveAndContinueGame()
         {
-            // Hide the save prompt.
-            if (savePrompt.gameObject.activeSelf)
-                ToggleSavePrompt();
-
             // Save the game.
             SaveGame(true);
         }
@@ -1624,11 +1616,6 @@ namespace BBTS
         // Called when the game should be saved and quit.
         public void SaveAndQuitGame()
         {
-            // TODO: maybe post message instead of closing the window?
-            // Hide the save prompt.
-            if (savePrompt.gameObject.activeSelf)
-                ToggleSavePrompt();
-
             // Save the game.
             SaveGame(false);
         }

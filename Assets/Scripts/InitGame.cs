@@ -64,7 +64,7 @@ namespace BBTS
             // LOL Initialization
             // Create the WebGL (or mock) object
 #if UNITY_EDITOR
-            SystemManager.Instance.saveSystem.allowSaves = true;
+            SystemManager.Instance.saveSystem.allowSaveLoad = true;
 #elif UNITY_WEBGL
             SystemManager.Instance.saveSystem.allowSaves = false;
 #elif UNITY_IOS || UNITY_ANDROID
@@ -92,7 +92,7 @@ namespace BBTS
             }
 
             // Loads the current save.
-            if(SystemManager.Instance.saveSystem.allowSaves)
+            if(SystemManager.Instance.saveSystem.allowSaveLoad)
                 LoadCurrentSave();
 
             // Game has been initialized.

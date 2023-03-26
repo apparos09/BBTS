@@ -1,9 +1,8 @@
-
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Playables;
@@ -82,7 +81,7 @@ namespace BBTS
         private static SaveSystem instance;
 
         // If set to 'true', the game allows the player to save.
-        public bool allowSaves = false;
+        public bool allowSaveLoad = false;
 
         // The game data.
         // The last game save. This is only for testing purposes.
@@ -218,7 +217,7 @@ namespace BBTS
             BBTS_GameData savedData = gameManager.GenerateSaveData();
 
             // Save to a file.
-            SaveToFile(savedData);
+            bool result = SaveToFile(savedData);
 
             // Stores the most recent save.
             lastSave = savedData;
@@ -228,16 +227,77 @@ namespace BBTS
             return success;
         }
 
-        // Save the information to a file.
-        private void SaveToFile(BBTS_GameData data)
+        // Converts an object to bytes (requires seralizable object) and returns it.
+        static public byte[] SerializeObject(object data)
         {
-            // TODO: implement.
+            BinaryFormatter bf = new BinaryFormatter();
+            MemoryStream ms = new MemoryStream();
+
+            bf.Serialize(ms, data); // Serialize the data for them emory stream.
+            return ms.ToArray();
+        }
+
+        // Deserialize the provided object, converting it to an object and returning it.
+        static public object DeserializeObject(byte[] data)
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            MemoryStream ms = new MemoryStream();
+
+            ms.Write(data, 0, data.Length); // Write data.
+            ms.Seek(0, 0); // Return to start of data.
+
+            return bf.Deserialize(ms); // return content
+        }
+
+        // Save the information to a file.
+        private bool SaveToFile(BBTS_GameData data)
+        {
+            // Gets the file.
+            string file = fileReader.GetFileWithPath();
+
+            // Checks that the file exists.
+            if (!fileReader.FileExists())
+                return false;
+
+            // Seralize the data.
+            byte[] dataArr = SerializeObject(data);
+
+            // Data did not serialize properly.
+            if (dataArr.Length == 0)
+                return false;
+
+            // Write to the file.
+            File.WriteAllBytes(file, dataArr);
+
+            // Data written successfully.
+            return true;
         }
 
         // Loads information from a file.
-        private void LoadFromFile()
+        private BBTS_GameData LoadFromFile()
         {
-            // TODO: implement.
+            // Gets the file.
+            string file = fileReader.GetFileWithPath();
+
+            // Checks that the file exists.
+            if (!fileReader.FileExists())
+                return null;
+
+            // Read from the file.
+            byte[] dataArr = File.ReadAllBytes(file);
+
+            // Data did not serialize properly.
+            if (dataArr.Length == 0)
+                return null;
+
+            // Deseralize the data.
+            object data = DeserializeObject(dataArr);
+
+            // Convert to loaded data.
+            BBTS_GameData loadData = (BBTS_GameData)(data);
+
+            // Return loaded data.
+            return loadData;
         }
 
         // Called for saving the result.
