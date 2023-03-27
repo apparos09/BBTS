@@ -24,34 +24,6 @@ namespace BBTS
         // The text for the game initialization.
         public TMP_Text initText;
 
-        // LOL //
-        // Relative to Assets /StreamingAssets/
-        private const string languageJSONFilePath = "language.json";
-        private const string questionsJSONFilePath = "questions.json";
-        private const string startGameJSONFilePath = "startGame.json";
-
-        // Use to determine when all data is preset to load to next state.
-        // This will protect against async request race conditions in webgl.
-        LoLDataType _receivedData;
-
-        // This should represent the data you're expecting from the platform.
-        // Most games are expecting 2 types of data, Start and Language.
-        LoLDataType _expectedData = LoLDataType.START | LoLDataType.LANGUAGE;
-
-        // // LOL - AutoSave //
-        // // Added from the ExampleCookingGame. Used for feedback from autosaves.
-        // WaitForSeconds feedbackTimer = new WaitForSeconds(2);
-        // Coroutine feedbackMethod;
-        // public TMP_Text feedbackText;
-
-        [System.Flags]
-        enum LoLDataType
-        {
-            START = 0,
-            LANGUAGE = 1 << 0,
-            QUESTIONS = 1 << 1
-        }
-
         void Awake()
         {
             // Unity Initialization
@@ -102,6 +74,9 @@ namespace BBTS
             // Load the English translation.
             LanguageManager lm = LanguageManager.Instance;
 
+            // Gets the save system.
+            SaveSystem saveSys = SystemManager.Instance.saveSystem;
+
             // Sets text to be translated.
             lm.translateText = true;
 
@@ -109,10 +84,8 @@ namespace BBTS
             if (lm.translateText)
             {
                 lm.LoadEnglish();
+                saveSys.RefreshFeedbackString();
             }
-
-            // Gets the save system.
-            SaveSystem saveSys = SystemManager.Instance.saveSystem;
 
             // Don't save if running through a web player.
             saveSys.allowSaveLoad = !(Application.platform == RuntimePlatform.WebGLPlayer);

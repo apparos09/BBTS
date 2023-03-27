@@ -141,15 +141,18 @@ namespace BBTS
 
         // LOL - AutoSave //
         // Added from the ExampleCookingGame. Used for feedback from autosaves.
-        WaitForSeconds feedbackTimer = new WaitForSeconds(2);
+        WaitForSeconds feedbackTimer = new WaitForSeconds(2); // Orignally 2 seconds.
         Coroutine feedbackMethod;
         public TMP_Text feedbackText;
 
         // The string shown when having feedback.
-        private string feedbackString = "Saving Data";
+        private string feedbackString = "Saving game...";
 
         // The string key for the feedback.
         private const string FEEDBACK_STRING_KEY = "sve_msg_savingGame";
+
+        // Becomes 'true' when a save is in progress.
+        private bool saveInProgress = false;
 
         // Private constructor so that only one save system object exists.
         private SaveSystem()
@@ -178,15 +181,8 @@ namespace BBTS
         // Start is called before the first frame update
         void Start()
         {
-            // The language manager.
-            LanguageManager lm = LanguageManager.Instance;
-
-            // If the language should be translated.
-            if (lm.TranslateAndLanguageSet())
-            {
-                feedbackString = LanguageManager.Instance.GetLanguageText(FEEDBACK_STRING_KEY);
-            }
-
+            // Refreshes the feeback string.
+            RefreshFeedbackString();
         }
 
         // Returns the instance of the save system.
@@ -285,7 +281,7 @@ namespace BBTS
         }
 
         // Saves data.
-        public bool SaveGame()
+        public bool SaveGame(bool async)
         {
             // The game manager does not exist if false.
             if (!IsGameManagerSet())
@@ -306,20 +302,34 @@ namespace BBTS
                 }
             }
 
-            // Determines if saving wa a success.
+            // Determines if saving was a success.
             bool success = false;
 
             // Generates the save data.
             BBTS_GameData savedData = gameManager.GenerateSaveData();
 
-            // Save to a file.
-            bool result = SaveToFile(savedData);
-
             // Stores the most recent save.
             lastSave = savedData;
 
-            // TODO: implement save state.
-
+            // Checks if save/load should be allowed.
+            if(allowSaveLoad)
+            {
+                // Save to a file.
+                if (async) // Asynchronous save.
+                {
+                    success = SaveToFileAsync(savedData);
+                }
+                else // Synchronous save.
+                {
+                    success = SaveToFile(savedData);
+                }
+            }
+            else
+            {
+                success = false;
+            }
+            
+            // Return the result.
             return success;
         }
 
@@ -341,11 +351,136 @@ namespace BBTS
             if (dataArr.Length == 0)
                 return false;
 
+            // Save started.
+            saveInProgress = true;
+
             // Write to the file.
             File.WriteAllBytes(file, dataArr);
 
+            // Save finished.
+            saveInProgress = false;
+
             // Data written successfully.
             return true;
+        }
+
+        // Saves the game asynchronously.
+        public bool SaveToFileAsync(BBTS_GameData data)
+        {
+            // Checks if the feedback method exists.
+            if(feedbackMethod == null)
+            {
+                feedbackMethod = StartCoroutine(SaveToFileAsyncCourtine(data));
+                return true;
+            }
+            else
+            {
+                Debug.LogWarning("Save already in progress.");
+                return false;
+            }
+        }
+
+        // Refreshes the feedback string.
+        public void RefreshFeedbackString()
+        {
+            // The language manager.
+            LanguageManager lm = LanguageManager.Instance;
+
+            // If the language should be translated.
+            if (lm.TranslateAndLanguageSet())
+            {
+                feedbackString = LanguageManager.Instance.GetLanguageText(FEEDBACK_STRING_KEY);
+            }
+            else
+            {
+                feedbackString = "Saving game...";
+            }
+        }
+
+        // Refreshes the feedback text.
+        public void RefreshFeedbackText()
+        {
+            // If the text exists.
+            if(feedbackText != null)
+            {
+                // Checks if a save is in progress.
+                if (saveInProgress)
+                    feedbackText.text = feedbackString;
+                else
+                    feedbackText.text = string.Empty;
+            }
+        }
+
+        // Save the information to a file asynchronously (cannot return anything).
+        private IEnumerator SaveToFileAsyncCourtine(BBTS_GameData data)
+        {
+            // Save started.
+            saveInProgress = true;
+
+            // Show saving text.
+            RefreshFeedbackText();
+
+            // Gets the file.
+            string file = fileReader.GetFileWithPath();
+
+            // Seralize the data.
+            byte[] dataArr = SerializeObject(data);
+
+            // Yield return before file wrting begins.
+            yield return null;
+
+            // Show saving text in case scene has changed.
+            RefreshFeedbackText();
+
+            // Opens the file in the file stream.
+            FileStream fs = File.OpenWrite(file);
+
+            // NOTE: this is pretty scuffed, but because of the way it's set up I don't really have a better option.
+            // File.WriteAsync would probably be better.
+
+            // Ver. 1
+            // // The number of bytes to write, and the offset.
+            // int count = 32;
+            // int offset = 0;
+
+            // // While there's still bytes to write.
+            // while(offset < dataArr.Length)
+            // {
+            //     // If the count exceeds the amount of remaining bytes, adjust it.
+            //     if (offset + count > dataArr.Length)
+            //         count = dataArr.Length - offset;
+            // 
+            //     fs.Write(dataArr, offset, count);
+            // 
+            //     // Increase the offset.
+            //     offset += count;
+            // 
+            //     // Run other operations.
+            //     // yield return null;
+            // 
+            //     // Pause the courtine for 2 seconds.
+            //     yield return feedbackTimer;
+            // }
+
+            // Ver. 2 - write the data and suspend for the amount of time set to feedbackTimer.
+            fs.Write(dataArr, 0, dataArr.Length);
+            yield return feedbackTimer;
+
+            // Show saving text in case scene has changed.
+            RefreshFeedbackText();
+
+            // Close the file stream.
+            fs.Close();
+
+            // Save finished.
+            saveInProgress = false;
+
+            // Hide feedback text now that the save is done.
+            RefreshFeedbackText();
+
+            // Save is complete, so set the method to null.
+            if (feedbackMethod != null)
+                feedbackMethod = null;
         }
 
         // Loads a save.
@@ -397,40 +532,40 @@ namespace BBTS
             return loadData;
         }
 
-        // Called for saving the result.
-        private void OnSaveResult(bool success)
-        {
-            if (!success)
-            {
-                Debug.LogWarning("Saving not successful");
-                return;
-            }
+        //// Called for saving the result.
+        //private void OnSaveResult(bool success)
+        //{
+        //    if (!success)
+        //    {
+        //        Debug.LogWarning("Saving not successful");
+        //        return;
+        //    }
 
-            if (feedbackMethod != null)
-                StopCoroutine(feedbackMethod);
+        //    if (feedbackMethod != null)
+        //        StopCoroutine(feedbackMethod);
 
 
 
-            // ...Auto Saving Complete
-            feedbackMethod = StartCoroutine(Feedback(feedbackString));
-        }
+        //    // ...Auto Saving Complete
+        //    feedbackMethod = StartCoroutine(Feedback(feedbackString));
+        //}
 
-        // Feedback while result is saving.
-        IEnumerator Feedback(string text)
-        {
-            // Only updates the text that the feedback text was set.
-            if(feedbackText != null)
-                feedbackText.text = text;
+        //// Feedback while result is saving.
+        //IEnumerator Feedback(string text)
+        //{
+        //    // Only updates the text that the feedback text was set.
+        //    if(feedbackText != null)
+        //        feedbackText.text = text;
 
-            yield return feedbackTimer;
+        //    yield return feedbackTimer;
             
-            // Only updates the content if the feedback text has been set.
-            if(feedbackText != null)
-                feedbackText.text = string.Empty;
+        //    // Only updates the content if the feedback text has been set.
+        //    if(feedbackText != null)
+        //        feedbackText.text = string.Empty;
             
-            // nullifies the feedback method.
-            feedbackMethod = null;
-        }
+        //    // nullifies the feedback method.
+        //    feedbackMethod = null;
+        //}
 
         // Checks if the game has loaded data.
         public bool HasLoadedData()

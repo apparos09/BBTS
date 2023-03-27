@@ -146,6 +146,26 @@ namespace BBTS
                     langText.Add(str[0], str[1]);
                 else if (str.Length == 1)
                     langText.Add(str[0], string.Empty);
+
+
+                // NOTE: by default, this adds quotation marks on the end of the string.
+                // As such, the trims need to happen after taking the string out.
+                // Note that if you intended to have quotes around a message, that would need a workaround.
+
+                // Remove spaces and quotation marks on the end of the string.
+                string temp = langText[str[0]];
+
+                // Remove white spaces.
+                temp = temp.Trim();
+
+                // Remove quotation marks on the edges.
+                temp = temp.Trim('\"');
+
+                // Replace triple-elipses (…) with three periods (...). They can't be displayed for some reason.
+                temp = temp.Replace("\uFFFD", "...");
+
+                // Put temp back in lang text.
+                langText[str[0]] = temp;
             }
 
             // Data loaded successfully.
@@ -197,7 +217,7 @@ namespace BBTS
             if (langText.ContainsKey(key) && key != string.Empty)
             {
                 // Set the text.
-                text.text = langText[key];
+                text.text = GetLanguageText(key);
 
                 // Successful result.
                 result = true;
@@ -212,7 +232,6 @@ namespace BBTS
             }
 
             return result;
-
         }
     }
 }

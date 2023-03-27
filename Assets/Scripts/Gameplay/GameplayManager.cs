@@ -1593,7 +1593,11 @@ namespace BBTS
             
             // If the game should allow saving.
             if(SaveSystem.Instance.allowSaveLoad)
-                SystemManager.Instance.saveSystem.SaveGame();
+            {
+                // Saves the game asynchronously.
+                success = SystemManager.Instance.saveSystem.SaveGame(true);
+                // SystemManager.Instance.saveSystem.SaveToFileAsync();
+            }
 
             // NOTE: a message is printed to show that the save failed if the game hasn't been initialized.
             // As such, that message is not repeated.
