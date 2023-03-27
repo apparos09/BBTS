@@ -1431,6 +1431,9 @@ namespace BBTS
         // Goes to the results scene.
         public void ToResultsScene()
         {
+            // Return time to normal.
+            Time.timeScale = 1.0F;
+
             // Set up the results object. It will be kept when transitioning to the next scene.
             GameObject resultsObject = new GameObject();
             ResultsData results = resultsObject.AddComponent<ResultsData>();
@@ -1895,6 +1898,9 @@ namespace BBTS
         // Goes to the main menu.
         public void ToTitleScene()
         {
+            // Return time to normal.
+            Time.timeScale = 1.0F;
+
             // Sets the last save as the loaded data.
             SystemManager.Instance.saveSystem.SetLastSaveAsLoadedData();
 
