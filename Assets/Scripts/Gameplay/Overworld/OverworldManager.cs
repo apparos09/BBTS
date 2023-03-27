@@ -10,7 +10,6 @@ namespace BBTS
         // The instance of the Overworld Manager.
         private static OverworldManager instance;
 
-
         // Becomes 'true' when the overworld is initialized.
         private bool initialized = false;
 

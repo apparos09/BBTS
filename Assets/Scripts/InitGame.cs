@@ -56,11 +56,12 @@ namespace BBTS
         // Start is called just before any of the Update methods is called the first time.
         public void Start()
         {
-            // Creates instances.
+            // Creates instances of system, which has a LanguageManager and SaveSystem.
             SystemManager system = SystemManager.Instance;
-            LanguageManager lm = LanguageManager.Instance;
-            SaveSystem saveSys = SaveSystem.Instance;
-
+            
+            // LanguageManager lm = LanguageManager.Instance;
+            // SaveSystem saveSys = SaveSystem.Instance;
+            
             initGame = false;
         }
 
@@ -77,8 +78,28 @@ namespace BBTS
             // Gets the save system.
             SaveSystem saveSys = SystemManager.Instance.saveSystem;
 
-            // Sets text to be translated.
-            lm.translateText = true;
+            // NOTE: maybe comment this out if you don't want to use it.
+
+            // Checks if the application platform is WebGL or not.
+            if(Application.platform == RuntimePlatform.WebGLPlayer) // Is WebGL
+            {
+                // Don't allow saving, and don't translate text.
+                saveSys.allowSaveLoad = false;
+                lm.translateText = false;
+                lm.changeTextColor = false;
+            }
+            else // Not WebGL
+            {
+                // Allow data to be saved.
+                saveSys.allowSaveLoad = true;
+
+                // Sets text to be translated.
+                lm.translateText = false; // Set to 'true' if testing file reading.
+                lm.changeTextColor = false;
+            }
+
+            // Default - sets text to be translated.
+            // lm.translateText = true;
 
             // If text should be translated.
             if (lm.translateText)
@@ -87,8 +108,8 @@ namespace BBTS
                 saveSys.RefreshFeedbackString();
             }
 
-            // Don't save if running through a web player.
-            saveSys.allowSaveLoad = !(Application.platform == RuntimePlatform.WebGLPlayer);
+            // Default - don't save if running through a web player.
+            // saveSys.allowSaveLoad = !(Application.platform == RuntimePlatform.WebGLPlayer);
 
             // Loads the current save.
             if (saveSys.allowSaveLoad)

@@ -41,19 +41,14 @@ namespace BBTS
             // This object should not be destroyed.
             DontDestroyOnLoad(this);
 
-            // The LOLSDK version is the one you use.
-            // It is automatically being used already, but I wanted to make a note of this...
-            // Since you didn't realize you had to do it this way at the time.
-            // LOLSDK.DontDestroyOnLoad(this);
-
             // If the text-to-speech component is not set, try to get it.
             if (textToSpeech == null)
             {
                 // Tries to get the component.
                 if(!TryGetComponent<TextToSpeech>(out textToSpeech))
                 {
-                    // Adds the text-to-speech component.
-                    textToSpeech = gameObject.AddComponent<TextToSpeech>();
+                    // Creates an instance.
+                    textToSpeech = TextToSpeech.Instance;
                 }
             }
 
@@ -63,8 +58,8 @@ namespace BBTS
                 // Tries to get a component.
                 if (!TryGetComponent<SaveSystem>(out saveSystem))
                 {
-                    // Adds the component.
-                    saveSystem = gameObject.AddComponent<SaveSystem>();
+                    // Creates an instance.
+                    saveSystem = SaveSystem.Instance;
                 }
             }
         }

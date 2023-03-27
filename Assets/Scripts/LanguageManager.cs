@@ -33,7 +33,8 @@ namespace BBTS
         public Color noLoadColor = Color.red;
 
         // If the text colour should be changed.
-        public const bool CHANGE_TEXT_COLOR = true;
+        [HideInInspector]
+        public bool changeTextColor = true;
 
         // The constructor
         private LanguageManager()
@@ -184,7 +185,7 @@ namespace BBTS
         public void MarkText(TMP_Text text)
         {
             // If the text color should be changed.
-            if(CHANGE_TEXT_COLOR)
+            if(changeTextColor)
                 text.color = noLoadColor;
         }
 
