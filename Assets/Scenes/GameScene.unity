@@ -17439,8 +17439,8 @@ MonoBehaviour:
   opponentNameText: {fileID: 1204011799}
   opponentHealthBar: {fileID: 638855117}
   opponentHealthText: {fileID: 960459646}
-  battleBgm: {fileID: 8300000, guid: 305833c401aae2c45b1b431e8af9dfd9, type: 3}
-  bossBgm: {fileID: 8300000, guid: ca3dc6b8519cfac4fb668fea22b85529, type: 3}
+  battleBgm: {fileID: 8300000, guid: 6d9ea4a2c32bec44a8ebf6f78da78204, type: 3}
+  bossBgm: {fileID: 8300000, guid: ebed2dc5ce69f0045b44a9271339a927, type: 3}
   battleWonJng: {fileID: 8300000, guid: 21f83d9414e63aa46895ce0159a8b95e, type: 3}
   battleLostJng: {fileID: 8300000, guid: ecd88211fbd53084997d66b1f5644b97, type: 3}
   playerHurtSfx: {fileID: 8300000, guid: 6af039931413b72498d3d4f5cc75b72c, type: 3}
@@ -22799,8 +22799,8 @@ MonoBehaviour:
   askQuestionsFromRound: 2
   ui: {fileID: 1666888079}
   scoreText: {fileID: 1708766357}
-  overworldBgm: {fileID: 8300000, guid: 900e546873db56d4b808567384db31d1, type: 3}
-  questionBgm: {fileID: 8300000, guid: bdcd51667f8ac254fa3b59895293e9fd, type: 3}
+  overworldBgm: {fileID: 8300000, guid: 9063498ab877fe842b2789044a793b19, type: 3}
+  questionBgm: {fileID: 8300000, guid: e3747145ac66ed142ae8b8b9bc914b6a, type: 3}
   doorEnterSfx: {fileID: 8300000, guid: 7b21000d3b667864986a7148b0cf9be6, type: 3}
   doorLockedSfx: {fileID: 8300000, guid: 67dd6860510dc1147a1c0a0e00e9aaa3, type: 3}
   questionCorrectSfx: {fileID: 8300000, guid: bc4e420bd61924a42af022ce74353fcc, type: 3}
