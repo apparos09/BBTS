@@ -121,7 +121,7 @@ namespace BBTS
         private static SaveSystem instance;
 
         // If set to 'true', the game allows the player to save.
-        public bool allowSaveLoad = false;
+        public bool allowSaveLoad = false; // False by default.
 
         // Becomes 'true' when the save system is initialized.
         private bool initialized = false;

@@ -84,14 +84,29 @@ namespace BBTS
         // Start is called just before any of the Update methods is called the first time.
         public void Start()
         {
-            // Gets the language manager.
+            // Creates instances.
+            SystemManager system = SystemManager.Instance;
+            LanguageManager lm = LanguageManager.Instance;
+            SaveSystem saveSys = SaveSystem.Instance;
+
+            initGame = false;
+        }
+
+        // Initializes the game.
+        public void Initialize()
+        {
+            // Game has already been initialized, so don't do anything.
+            if (initGame)
+                return;
+
+            // Load the English translation.
             LanguageManager lm = LanguageManager.Instance;
 
             // Sets text to be translated.
             lm.translateText = true;
 
             // If text should be translated.
-            if(lm.translateText)
+            if (lm.translateText)
             {
                 lm.LoadEnglish();
             }
@@ -119,6 +134,9 @@ namespace BBTS
         // Update is called once per frame
         void Update()
         {
+            // Initialize the game on the first update frame.
+            Initialize();
+
             // Load the title scene on the first frame.
             SceneManager.LoadScene("TitleScene", LoadSceneMode.Single);
         }
