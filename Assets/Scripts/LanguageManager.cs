@@ -128,6 +128,8 @@ namespace BBTS
             // File doesn't exist, so file can't be loaded.
             if(!fileReader.FileExists())
             {
+                Debug.LogError("LANGUAGE FILE MISSING.");
+
                 setLanguage = language.none;
                 return false;
             }
