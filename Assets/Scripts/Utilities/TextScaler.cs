@@ -50,6 +50,12 @@ namespace BBTS
                 baseScale = text.transform.localScale;
         }
 
+        // Scales the text when the script is enabled.
+        private void OnEnable()
+        {
+            SetTextScale();
+        }
+
         // Sets the text scale.
         public void SetTextScale()
         {
