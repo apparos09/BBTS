@@ -41,6 +41,9 @@ namespace BBTS
         // Used to wait until a transition is done.
         private float waitTime = 0.0F;
 
+        // Extra wait time for the transition.
+        private const float EXTRA_WAIT_TIME = 0.5F;
+
         // The current clip being used.
         private AnimationClip currClip;
 
@@ -54,14 +57,6 @@ namespace BBTS
             sceneEnterObject.SetActive(false);
             sceneExitObject.SetActive(false);
 
-            // Original
-            // // Plays the entrance animation when entering the scene.
-            // if(useSceneEnterAnim)
-            // {
-            //     sceneEnterObject.SetActive(useSceneEnterAnim);
-            //     StartCoroutine(EndSceneEnterAnimation());
-            // }
-
             // New - plays the scene enter animation.
             if (useSceneEnterAnim)
             {
@@ -69,31 +64,6 @@ namespace BBTS
             }
 
         }
-
-        // Old
-        // // Ends the scene enter animation by turning off the object.
-        // private IEnumerator EndSceneEnterAnimation()
-        // {
-        //     // Turns on the object if the object is currently off.
-        //     if(!sceneEnterObject.activeSelf)
-        //         sceneExitObject.SetActive(true);
-        // 
-        //     // The wait time for the animation is equal to the length of the clip.
-        //     float waitTime = sceneEnterAnimClip.length;
-        // 
-        //     // While the operation is going.
-        //     while (waitTime > 0.0F)
-        //     {
-        //         // Reduce by delta time.
-        //         waitTime -= Time.deltaTime;
-        // 
-        //         // Tells the program to stall.
-        //         yield return null;
-        //     }
-        // 
-        //     // Turn off the object.
-        //     sceneEnterObject.SetActive(false);
-        // }
 
         // Plays teh scene enter animation.
         public void PlaySceneEnterAnimation()
@@ -105,21 +75,13 @@ namespace BBTS
             sceneEnterAnimator.Play("Fade from Black Animation");
 
             // The wait time for the animation is equal to the length of the clip.
-            waitTime = sceneEnterAnimClip.length;
+            waitTime = (sceneEnterAnimClip.length + EXTRA_WAIT_TIME) / sceneExitAnimator.speed;
             currClip = sceneEnterAnimClip;
         }
 
         // Loads a scene.
         public void LoadScene(string sceneName)
         {
-            // Old
-            // // Checks if the exit animation should be used.
-            // if (useSceneExitAnim)
-            //     StartCoroutine(LoadSceneWithAnimation(sceneName));
-            // else
-            //     SceneManager.LoadScene(sceneName);
-
-
             // New
             // Checks if the exit animation should be used.
             if (useSceneExitAnim)
@@ -176,7 +138,7 @@ namespace BBTS
             nextScene = sceneName;
 
             // The wait time for the animation is equal to the length of the clip.
-            waitTime = sceneExitAnimClip.length;
+            waitTime = (sceneExitAnimClip.length + EXTRA_WAIT_TIME) / sceneExitAnimator.speed;
             currClip = sceneExitAnimClip;
         }
 
