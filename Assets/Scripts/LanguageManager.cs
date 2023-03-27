@@ -52,6 +52,9 @@ namespace BBTS
                 // Creates a file reader.
                 if(fileReader == null)
                     fileReader = new FileReader();
+
+                // Don't destroy the language manager on load.
+                DontDestroyOnLoad(gameObject);
             }
             else
             {

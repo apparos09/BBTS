@@ -164,6 +164,9 @@ namespace BBTS
             if (instance == null)
             {
                 instance = this;
+
+                // Don't destroy the language manager on load.
+                DontDestroyOnLoad(gameObject);
             }
 
             // Initializes the save system.
