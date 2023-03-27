@@ -99,6 +99,34 @@ namespace BBTS
             return result;
         }
 
+        // Checks if a file path exists.
+        public bool FilePathExists()
+        {
+            bool result = Directory.Exists(filePath);
+
+            return result;
+        }
+
+        // Makes the file directory. Returns false if it fails, or if the directory already exists.
+        public bool MakeFileDirectory()
+        {
+            // Checks if the file path already exists.
+            if(FilePathExists())
+            {
+                Debug.LogWarning("File directory already exists.");
+                return false;
+            }
+            else
+            {
+                // Genrate the directory.
+                DirectoryInfo direcInfo = Directory.CreateDirectory(filePath);
+
+                // Checks if it was successful.
+                bool result = direcInfo.Exists;
+                return result;           
+            } 
+        }
+
         // Checks if the file is empty.
         public bool IsFileEmpty()
         {

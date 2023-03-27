@@ -119,7 +119,10 @@ namespace BBTS
                 lm.MarkText(controlsBackButtonText);
             }
 
-           
+
+            // The game has loaded data.
+            bool dataLoaded = SystemManager.Instance.saveSystem.HasLoadedData();
+
 
             // You can save and go back to the menu, so the continue button is usable under that circumstance.
             if (SystemManager.Instance.saveSystem.HasLoadedData()) // Game has loaded data.
@@ -149,8 +152,8 @@ namespace BBTS
             }
 
 
-            // Have the button be turned on no matter what for testing purposes.
-            continueButton.interactable = true;
+            // If no data is loaded, don't make the continue button interactable.
+            continueButton.interactable = dataLoaded;
 
             // Adjust the audio settings since the InitScene was not used.
             settings.AdjustAllAudioLevels();

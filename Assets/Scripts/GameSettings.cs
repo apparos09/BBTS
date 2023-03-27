@@ -15,7 +15,7 @@ namespace BBTS
         [Header("Settings")]
 
         // Use the text-to-speech options.
-        private bool useTTS = true;
+        private bool useTTS = false; // No TTS, so keep this as false.
 
         // Use the tutorial for the game.
         // This is only relevant when starting up the game scene.

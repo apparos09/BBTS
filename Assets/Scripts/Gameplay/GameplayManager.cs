@@ -127,8 +127,14 @@ namespace BBTS
         // The speak key for the save prompt.
         private const string SAVE_PROMPT_TEXT_KEY = "sve_msg_prompt";
 
+        // The save and continue button.
+        public Button saveAndContinueButton;
+
         // The save and continue text.
         public TMP_Text saveAndContinueText;
+
+        // The save and quit button.
+        public Button saveAndQuitButton;
 
         // The save and quit text.
         public TMP_Text saveAndQuitText;
@@ -373,6 +379,9 @@ namespace BBTS
                 // Just empty out the string.
                 saveFeedbackText.text = string.Empty;
             }
+
+            // Enables/disables save options if saving is not allowed.
+            RefreshSaveOptions();
 
             // Initialize
             Initialize();           
@@ -1115,7 +1124,6 @@ namespace BBTS
                 saveButton.interactable = false;
             }
 
-
             // The timer is paused when the tutorial text is displayed.
             if (pauseTimerWhenTutorial)
                 pausedTimer = false;
@@ -1603,6 +1611,17 @@ namespace BBTS
         {
             // Save the game.
             SaveGame(true);
+        }
+
+        // Called to disable the save button if saving is not allowed.
+        private void RefreshSaveOptions()
+        {
+            // Checks if saving is allowed.
+            bool allowed = SaveSystem.Instance.allowSaveLoad;
+
+            // Enable/disable buttons.
+            saveAndContinueButton.interactable = allowed;
+            saveAndQuitButton.interactable = allowed;  
         }
 
         // Called to save and continue the game using a button.
