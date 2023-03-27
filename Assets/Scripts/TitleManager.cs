@@ -200,28 +200,6 @@ namespace BBTS
         // Continues a saved game.
         public void ContinueGame()
         {
-            // // Original
-            // // Checks if there is loaded data.
-            // if (LOLManager.Instance.saveSystem.HasLoadedData()) // Game has loaded data, so start game.
-            // {
-            //     // If the user's tutorial settings should be overwritten, do so.
-            //     if (overrideTutorial)
-            //         GameSettings.Instance.UseTutorial = continueTutorial;
-            // 
-            //     StartGame();
-            //     
-            // }
-            // else // No data, so start new game.
-            // {
-            //     Debug.LogWarning("No save data found. New game to be loaded.");
-            //     StartNewGame();
-            // }
-
-            // New
-            // NOTE: a callback is setup onclick to load the save data.
-            // Since that might happen after this function is processed...
-            // It no longer checks for loaded data at this stage.
-
             // If the user's tutorial settings should be overwritten, do so.
             if (overrideTutorial)
                 GameSettings.Instance.UseTutorial = continueTutorial;
