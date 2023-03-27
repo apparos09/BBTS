@@ -65,10 +65,6 @@ namespace BBTS
         {
             get
             {
-                // Tries to find the language manager.
-                if(instance == null)
-                    instance = FindObjectOfType<LanguageManager>();
-
                 // Checks to see if the instance exists. If it doesn't, generate an object.
                 if (instance == null)
                 {

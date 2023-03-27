@@ -191,10 +191,6 @@ namespace BBTS
         {
             get
             {
-                // Tries to find the save system.
-                if (instance == null)
-                    instance = FindObjectOfType<SaveSystem>();
-
                 // Checks to see if the instance exists. If it doesn't, generate an object.
                 if (instance == null)
                 {
