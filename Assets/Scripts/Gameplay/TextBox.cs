@@ -111,7 +111,8 @@ namespace BBTS
 
             // The SDK is no longer available, so this isn't needed anymore.
             // Recolour the text to show that the text loaded is not coming from the language file.
-            LanguageManager.Instance.MarkText(boxText);
+            if (!LanguageManager.Instance.TranslateAndLanguageSet())
+                LanguageManager.Instance.MarkText(boxText);
         }
 
         // TODO: add touch and mouse for going onto the next page.

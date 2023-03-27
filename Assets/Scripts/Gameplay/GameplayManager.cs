@@ -382,8 +382,11 @@ namespace BBTS
         // This is needed so that everything is initialized properly.
         void PostStart()
         {
+            // Grabs the save system.
+            SaveSystem saveSys = SystemManager.Instance.saveSystem;
+
             // If there is save data, load the saved game.
-            if (SystemManager.Instance.saveSystem.HasLoadedData())
+            if (saveSys.HasLoadedData() && saveSys.allowSaveLoad)
             {
                 // Load the data.
                 // This function also updates the UI once the data is loaded.
