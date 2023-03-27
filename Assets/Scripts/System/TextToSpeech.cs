@@ -105,7 +105,7 @@ namespace BBTS
         // Reads the text based on the provided key.
         public void SpeakText(string key)
         {
-            // TTS is no longer available.
+            // TTS is no longer available, so nothing happens.
         }
 
         // Cancels the text that's being read by the text-to-speech.

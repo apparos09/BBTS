@@ -22,6 +22,8 @@ namespace BBTS
         {
             // The SDK for TTS has been removed, so the game no longer has any TTS functions.
             // ...
+            if (GameSettings.Instance.UseTextToSpeech && speakKey != string.Empty)
+                TextToSpeech.Instance.SpeakText(speakKey);
         }
 
         // This doesn't work if it's part of the UI. Use a button to call SpeakText() instead.
