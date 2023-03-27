@@ -215,7 +215,7 @@ namespace BBTS
             LanguageManager lm = LanguageManager.Instance;
 
             // If text should be translated, and the language is set.
-            if (LanguageManager.TRANSLATE_TEXT && lm.Language != language.none)
+            if (lm.TranslateAndLanguageSet())
             {
                 titleText.text = lm.GetLanguageText("kwd_questionTime");
                 correctString = lm.GetLanguageText(correctKey);

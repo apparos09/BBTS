@@ -84,10 +84,15 @@ namespace BBTS
         // Start is called just before any of the Update methods is called the first time.
         public void Start()
         {
+            // Gets the language manager.
+            LanguageManager lm = LanguageManager.Instance;
+
+            // Sets text to be translated.
+            lm.translateText = true;
+
             // If text should be translated.
-            if(LanguageManager.TRANSLATE_TEXT)
+            if(lm.translateText)
             {
-                LanguageManager lm = LanguageManager.Instance;
                 lm.LoadEnglish();
             }
 

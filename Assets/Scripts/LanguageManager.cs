@@ -26,7 +26,7 @@ namespace BBTS
         private language setLanguage = language.english;
 
         // If set to 'true', the text is translated.
-        public const bool TRANSLATE_TEXT = true;
+        public bool translateText = false;
 
         // The color used for marking text that wasn't repalced with language file content. 
         [HideInInspector]
@@ -95,7 +95,7 @@ namespace BBTS
         // Returns 'true' if text should be translated, and if the language is set.
         public bool TranslateAndLanguageSet()
         {
-            return TRANSLATE_TEXT && IsLanguageSet();
+            return translateText && IsLanguageSet();
         }
 
         // Loads the language.

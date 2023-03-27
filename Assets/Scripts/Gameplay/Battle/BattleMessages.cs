@@ -86,7 +86,7 @@ namespace BBTS
             msg = "{0} used {1}!";
 
             // Checks to translate the message.
-            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            if (lm.TranslateAndLanguageSet())
             {
                 // Grabs the translated message.
                 string newMsg = lm.GetLanguageText("btl_msg_mve_moveUsed");
@@ -127,7 +127,7 @@ namespace BBTS
             msg = "The move hit!";
 
             // Checks if translation exists.
-            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            if (lm.TranslateAndLanguageSet())
             {
                 // Grabs the translated message.
                 string newMsg = lm.GetLanguageText("btl_msg_mve_moveHit");
@@ -156,7 +156,7 @@ namespace BBTS
             msg = "The move was successful!";
 
             // Checks if translation exists.
-            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            if (lm.TranslateAndLanguageSet())
             {
                 // Grabs the translated message.
                 string newMsg = lm.GetLanguageText("btl_msg_mve_moveSuccess");
@@ -188,7 +188,7 @@ namespace BBTS
             msg = "The move hit, and it did critical damage!";
 
             // Checks if translation exists.
-            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            if (lm.TranslateAndLanguageSet())
             {
                 // Grabs the translated message.
                 string newMsg = lm.GetLanguageText("btl_msg_mve_moveCritical");
@@ -218,7 +218,7 @@ namespace BBTS
             msg = "{0} took recoil damage!";
 
             // Checks if translation exists.
-            if(LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            if(lm.TranslateAndLanguageSet())
             {
                 // Pull translated messages.
                 string newMsg = lm.GetLanguageText("btl_msg_mve_moveRecoil");
@@ -259,7 +259,7 @@ namespace BBTS
             msg = "{0} does not have enough energy to use their move!";
 
             // Checks if translation exists.
-            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            if (lm.TranslateAndLanguageSet())
             {
                 // Grabs the translated message.
                 string newMsg = lm.GetLanguageText("btl_msg_mve_moveNoEnergy");
@@ -301,7 +301,7 @@ namespace BBTS
             msg = "The move missed!";
 
             // Checks if translation exists.
-            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            if (lm.TranslateAndLanguageSet())
             {
                 // Grabs the translated message.
                 string newMsg = lm.GetLanguageText("btl_msg_mve_moveMissed");
@@ -333,7 +333,7 @@ namespace BBTS
             msg = "The move failed!";
 
             // Checks if translation exists.
-            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            if (lm.TranslateAndLanguageSet())
             {
                 // Grabs the translated message.
                 string newMsg = lm.GetLanguageText("btl_msg_mve_moveFailed");
@@ -367,7 +367,7 @@ namespace BBTS
                 msg = "The move increased {0}'s {1} by {2} stages!";
 
             // Checks if translation exists.
-            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            if (lm.TranslateAndLanguageSet())
             {
                 // Grabs the translated message.
                 string newMsg = "";
@@ -420,7 +420,7 @@ namespace BBTS
                 msg = "The move decreased {0}'s {1} by {2} stages!";
 
             // Checks if translation exists.
-            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            if (lm.TranslateAndLanguageSet())
             {
                 // Grabs the translated message.
                 string newMsg = "";
@@ -474,7 +474,7 @@ namespace BBTS
 
 
             // Checks if translation exists.
-            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            if (lm.TranslateAndLanguageSet())
             {
                 // Grabs the translated message.
                 string newMsg = "";
@@ -529,7 +529,7 @@ namespace BBTS
             msg = "{0} has been inflicted with burn status!";
 
             // Checks if translation exists.
-            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            if (lm.TranslateAndLanguageSet())
             {
                 // Grabs the translated message.
                 string newMsg = lm.GetLanguageText("btl_msg_mve_moveBurned");
@@ -570,7 +570,7 @@ namespace BBTS
             msg = "{0} has been inflicted with paralysis status!";
 
             // Checks if translation exists.
-            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            if (lm.TranslateAndLanguageSet())
             {
                 // Grabs the translated message.
                 string newMsg = lm.GetLanguageText("btl_msg_mve_moveParalyzed");
@@ -611,7 +611,7 @@ namespace BBTS
             msg = "{0} charged their energy!";
 
             // Checks if translation exists.
-            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            if (lm.TranslateAndLanguageSet())
             {
                 // Grabs the translated message.
                 string newMsg = lm.GetLanguageText("btl_msg_mve_chargeUsed");
@@ -652,7 +652,7 @@ namespace BBTS
             msg = "{0} failed to run away!";
 
             // Checks if translation exists.
-            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            if (lm.TranslateAndLanguageSet())
             {
                 // Grabs the translated message.
                 string newMsg = lm.GetLanguageText("btl_msg_mve_runFailed");
@@ -693,7 +693,7 @@ namespace BBTS
             msg = "Nothing happened.";
 
             // Checks if translation exists.
-            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            if (lm.TranslateAndLanguageSet())
             {
                 // Grabs the translated message.
                 string newMsg = lm.GetLanguageText("btl_msg_mve_nothing");
@@ -724,7 +724,7 @@ namespace BBTS
             msg = "{0} took burn damage!";
 
             // Checks if translation exists.
-            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            if (lm.TranslateAndLanguageSet())
             {
                 // Grabs the translated message.
                 string newMsg = lm.GetLanguageText("btl_msg_burned");
@@ -765,7 +765,7 @@ namespace BBTS
             msg = "{0} is immobilized, and can't move!";
 
             // Checks if translation exists.
-            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            if (lm.TranslateAndLanguageSet())
             {
                 // Grabs the translated message.
                 string newMsg = lm.GetLanguageText("btl_msg_paralyzed");
@@ -806,7 +806,7 @@ namespace BBTS
             msg = "The opponent ran away! Battle Bot has won the battle!";
 
             // Checks if translation exists.
-            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            if (lm.TranslateAndLanguageSet())
             {
                 // Grabs the translated message.
                 string newMsg = lm.GetLanguageText("btl_msg_battleWon");
@@ -837,7 +837,7 @@ namespace BBTS
             msg = "The boss ran away! Battle Bot has completed the simulation!";
 
             // Checks if translation exists.
-            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            if (lm.TranslateAndLanguageSet())
             {
                 // Grabs the translated message.
                 string newMsg = lm.GetLanguageText("btl_msg_battleWonBoss");
@@ -869,7 +869,7 @@ namespace BBTS
             msg = "Battle Bot lost the battle, and had to run away!";
 
             // Checks if translation exists.
-            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            if (lm.TranslateAndLanguageSet())
             {
                 // Grabs the translated message.
                 string newMsg = lm.GetLanguageText("btl_msg_battleLost");
@@ -901,7 +901,7 @@ namespace BBTS
             msg = "Battle Bot has taken the treasure!";
 
             // Checks if translation exists.
-            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            if (lm.TranslateAndLanguageSet())
             {
                 // Grabs the translated message.
                 string newMsg = lm.GetLanguageText("btl_msg_takeTreasure");
@@ -933,7 +933,7 @@ namespace BBTS
             msg = "Battle Bot got a level up!";
 
             // Checks if translation exists.
-            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            if (lm.TranslateAndLanguageSet())
             {
                 // Grabs the translated message.
                 string newMsg = lm.GetLanguageText("btl_msg_levelUp");
@@ -965,7 +965,7 @@ namespace BBTS
             msg = "Battle Bot is trying to learn a new move!";
 
             // Checks if translation exists.
-            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            if (lm.TranslateAndLanguageSet())
             {
                 // Grabs the translated message.
                 string newMsg = lm.GetLanguageText("btl_msg_learnMove");
@@ -995,7 +995,7 @@ namespace BBTS
             msg = "Battle Bot learned {0}!";
 
             // Checks if translation exists.
-            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            if (lm.TranslateAndLanguageSet())
             {
                 // Grabs the translated message.
                 string newMsg = lm.GetLanguageText("btl_msg_learnMoveYes");
@@ -1029,7 +1029,7 @@ namespace BBTS
 
 
             // Checks if translation exists.
-            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            if (lm.TranslateAndLanguageSet())
             {
                 // Grabs the translated message.
                 string newMsg = lm.GetLanguageText("btl_msg_learnMoveNo");
@@ -1064,7 +1064,7 @@ namespace BBTS
             msg = "The treasure had 3 moves inside! Choose one of the 3 moves to learn!";
 
             // Checks if translation exists.
-            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            if (lm.TranslateAndLanguageSet())
             {
                 // Grabs the translated message.
                 string newMsg = lm.GetLanguageText("btl_msg_multMoveOffer");
@@ -1094,7 +1094,7 @@ namespace BBTS
             msg = "Battle Bot did not learn any of the new moves!";
 
             // Checks if translation exists.
-            if (LanguageManager.TRANSLATE_TEXT && lm.IsLanguageSet())
+            if (lm.TranslateAndLanguageSet())
             {
                 // Grabs the translated message.
                 string newMsg = lm.GetLanguageText("btl_msg_multMoveOfferSkip");

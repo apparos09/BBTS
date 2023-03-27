@@ -261,7 +261,7 @@ namespace BBTS
         {
             // If the text should be translated.
             LanguageManager lm = LanguageManager.Instance;
-            bool translate = LanguageManager.TRANSLATE_TEXT && lm.Language != language.none;
+            bool translate = lm.TranslateAndLanguageSet();
 
             // The queston to be returned.
             GameQuestion question = new GameQuestion();

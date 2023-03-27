@@ -247,7 +247,7 @@ namespace BBTS
             Page hudPage;
 
             // Pages
-            if (LanguageManager.TRANSLATE_TEXT && lm.Language != language.none) // Translation
+            if (lm.TranslateAndLanguageSet()) // Translation
             {
                 pages.Add(new Page(lm.GetLanguageText("trl_intro_00"), "trl_intro_00"));
                 pages.Add(new Page(lm.GetLanguageText("trl_intro_01"), "trl_intro_01"));
@@ -334,7 +334,7 @@ namespace BBTS
             List<Page> pages = new List<Page>();
 
             // Pages
-            if(LanguageManager.TRANSLATE_TEXT && lm.Language != language.none) // Translation
+            if(lm.TranslateAndLanguageSet()) // Translation
             {
                 pages.Add(new Page(lm.GetLanguageText("trl_battle_00"), "trl_battle_00"));
                 pages.Add(new Page(lm.GetLanguageText("trl_battle_01"), "trl_battle_01"));
@@ -364,7 +364,7 @@ namespace BBTS
             List<Page> pages = new List<Page>();
 
             // Pages
-            if (LanguageManager.TRANSLATE_TEXT && lm.Language != language.none) // Translation
+            if (lm.TranslateAndLanguageSet()) // Translation
             {
                 pages.Add(new Page(lm.GetLanguageText("trl_firstMove_00"), "trl_firstMove_00"));
                 pages.Add(new Page(lm.GetLanguageText("trl_firstMove_01"), "trl_firstMove_01"));
@@ -392,7 +392,7 @@ namespace BBTS
             List<Page> pages = new List<Page>();
 
             // Pages
-            if(LanguageManager.TRANSLATE_TEXT && lm.Language != language.none) // Translation
+            if(lm.TranslateAndLanguageSet()) // Translation
             {
                 pages.Add(new Page(lm.GetLanguageText("trl_critical_00"), "trl_critical_00"));
             }
@@ -414,7 +414,7 @@ namespace BBTS
             List<Page> pages = new List<Page>();
 
             // Pages
-            if(LanguageManager.TRANSLATE_TEXT && lm.Language != language.none) // Translation
+            if(lm.TranslateAndLanguageSet()) // Translation
             {
                 pages.Add(new Page(lm.GetLanguageText("trl_recoil_00"), "trl_recoil_00"));
             }
@@ -436,7 +436,7 @@ namespace BBTS
             List<Page> pages = new List<Page>();
 
             // Pages
-            if(LanguageManager.TRANSLATE_TEXT && lm.Language != language.none) // Translation
+            if(lm.TranslateAndLanguageSet()) // Translation
             {
                 pages.Add(new Page(lm.GetLanguageText("trl_statChange_00"), "trl_statChange_00"));
             }
@@ -458,7 +458,7 @@ namespace BBTS
             List<Page> pages = new List<Page>();
 
             // Pages
-            if(LanguageManager.TRANSLATE_TEXT && lm.Language != language.none) // Translation
+            if(lm.TranslateAndLanguageSet()) // Translation
             {
                 pages.Add(new Page(lm.GetLanguageText("trl_burn_00"), "trl_burn_00"));
             }
@@ -480,7 +480,7 @@ namespace BBTS
             List<Page> pages = new List<Page>();
 
             // Pages
-            if(LanguageManager.TRANSLATE_TEXT && lm.Language != language.none) // Translation
+            if(lm.TranslateAndLanguageSet()) // Translation
             {
                 pages.Add(new Page(lm.GetLanguageText("trl_paralysis_00"), "trl_paralysis_00"));
             }
@@ -502,7 +502,7 @@ namespace BBTS
             List<Page> pages = new List<Page>();
 
             // Pages
-            if(LanguageManager.TRANSLATE_TEXT && lm.Language != language.none) // Translation
+            if(lm.TranslateAndLanguageSet()) // Translation
             {
                 pages.Add(new Page(lm.GetLanguageText("trl_firstBattleDeath_00"), "trl_firstBattleDeath_00"));
             }
@@ -524,7 +524,7 @@ namespace BBTS
             List<Page> pages = new List<Page>();
 
             // Pages
-            if(LanguageManager.TRANSLATE_TEXT && lm.Language != language.none) // Translation
+            if(lm.TranslateAndLanguageSet()) // Translation
             {
                 pages.Add(new Page(lm.GetLanguageText("trl_overworld_00"), "trl_overworld_00"));
             }
@@ -549,7 +549,7 @@ namespace BBTS
             List<Page> pages = new List<Page>();
 
             // Pages
-            if(LanguageManager.TRANSLATE_TEXT && lm.Language != language.none) // Translation
+            if(lm.TranslateAndLanguageSet()) // Translation
             {
                 pages.Add(new Page(lm.GetLanguageText("trl_treasure_00"), "trl_treasure_00"));
             }
@@ -571,7 +571,7 @@ namespace BBTS
             List<Page> pages = new List<Page>();
 
             // Pages
-            if(LanguageManager.TRANSLATE_TEXT && lm.Language != language.none) // Translation
+            if(lm.TranslateAndLanguageSet()) // Translation
             {
                 pages.Add(new Page(lm.GetLanguageText("trl_question_00"), "trl_question_00"));
                 pages.Add(new Page(lm.GetLanguageText("trl_question_01"), "trl_question_01"));
@@ -596,7 +596,7 @@ namespace BBTS
             List<Page> pages = new List<Page>();
 
             // Pages
-            if(LanguageManager.TRANSLATE_TEXT && lm.Language != language.none) // Translation
+            if(lm.TranslateAndLanguageSet()) // Translation
             {
                 pages.Add(new Page(lm.GetLanguageText("trl_phase_00"), "trl_phase_00"));
             }
@@ -619,7 +619,7 @@ namespace BBTS
             List<Page> pages = new List<Page>();
 
             // Pages
-            if(LanguageManager.TRANSLATE_TEXT && lm.Language != language.none) // Translation
+            if(lm.TranslateAndLanguageSet()) // Translation
             {
                 pages.Add(new Page(lm.GetLanguageText("trl_boss_00"), "trl_boss_00"));
             }
@@ -641,7 +641,7 @@ namespace BBTS
             List<Page> pages = new List<Page>();
 
             // Pages
-            if(LanguageManager.TRANSLATE_TEXT && lm.Language != language.none) // Translation
+            if(lm.TranslateAndLanguageSet()) // Translation
             {
                 pages.Add(new Page(lm.GetLanguageText("trl_gameOver_00"), "trl_gameOver_00"));
             }

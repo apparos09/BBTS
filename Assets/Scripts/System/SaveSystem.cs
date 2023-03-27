@@ -175,8 +175,11 @@ namespace BBTS
         // Start is called before the first frame update
         void Start()
         {
+            // The language manager.
+            LanguageManager lm = LanguageManager.Instance;
+
             // If the language should be translated.
-            if(LanguageManager.TRANSLATE_TEXT && LanguageManager.Instance.IsLanguageSet())
+            if (lm.TranslateAndLanguageSet())
             {
                 feedbackString = LanguageManager.Instance.GetLanguageText(FEEDBACK_STRING_KEY);
             }

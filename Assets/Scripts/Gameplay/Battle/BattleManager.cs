@@ -357,7 +357,7 @@ namespace BBTS
             LanguageManager lm = LanguageManager.Instance;
 
             // Language has been set.
-            if(LanguageManager.TRANSLATE_TEXT && lm.Language != language.none)
+            if(lm.TranslateAndLanguageSet())
             {
                 // Translate the treasure prompt.
                 treasurePromptText.text = lm.GetLanguageText(TREASURE_PROMPT_TEXT_KEY);

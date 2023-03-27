@@ -117,7 +117,7 @@ namespace BBTS
             LanguageManager lm = LanguageManager.Instance;
 
             // If text should be translated and language is set.
-            if (LanguageManager.TRANSLATE_TEXT && lm.Language != language.none)
+            if (lm.TranslateAndLanguageSet())
             {
                 // Loads in the name and description.
                 name = lm.GetLanguageText(nameKey);

@@ -211,7 +211,7 @@ namespace BBTS
             LanguageManager lm = LanguageManager.Instance;
 
             // Translate the name.
-            if(LanguageManager.TRANSLATE_TEXT && lm.Language != language.none)
+            if(lm.TranslateAndLanguageSet())
             {
                 displayName = lm.GetLanguageText(nameKey);
             }
@@ -226,7 +226,7 @@ namespace BBTS
             LanguageManager lm = LanguageManager.Instance;
 
             // Translate the name.
-            if (LanguageManager.TRANSLATE_TEXT && lm.Language != language.none)
+            if (lm.TranslateAndLanguageSet())
             {
                 data.displayName = lm.GetLanguageText(nameKey);
             }
