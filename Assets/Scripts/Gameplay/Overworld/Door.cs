@@ -26,7 +26,7 @@ namespace BBTS
 
         // Saves the position of the door.
         // This is needed in case the door position changes from a game over.
-        public Vector3 localPosition;
+        public BBTS_Vec3 localPosition;
         
     }
 
@@ -219,7 +219,7 @@ namespace BBTS
             saveData.doorType = doorType;
 
             // Save the door's position.
-            saveData.localPosition = transform.localPosition;
+            saveData.localPosition = BBTS_Vec3.Vector3ToVec3(transform.localPosition);
 
             // Returns the save data.
             return saveData;
@@ -242,7 +242,7 @@ namespace BBTS
             overworld.SetDoorSpritesByDoorType(this);
 
             // Sets the door's local position from the save data in case it got changed.
-            transform.localPosition = data.localPosition;
+            transform.localPosition = BBTS_Vec3.Vec3ToVector3(data.localPosition);
 
             UpdateSprite();
         }

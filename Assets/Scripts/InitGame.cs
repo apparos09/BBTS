@@ -91,8 +91,14 @@ namespace BBTS
                 lm.LoadEnglish();
             }
 
+            // Gets the save system.
+            SaveSystem saveSys = SystemManager.Instance.saveSystem;
+
+            // Don't save if running through a web player.
+            saveSys.allowSaveLoad = !(Application.platform == RuntimePlatform.WebGLPlayer);
+
             // Loads the current save.
-            if(SystemManager.Instance.saveSystem.allowSaveLoad)
+            if (saveSys.allowSaveLoad)
                 LoadCurrentSave();
 
             // Game has been initialized.
@@ -102,7 +108,7 @@ namespace BBTS
         // Load the current save.
         public void LoadCurrentSave()
         {
-            // TODO: load current save.
+            bool success = SaveSystem.Instance.LoadSave();
         }
 
         // Update is called once per frame

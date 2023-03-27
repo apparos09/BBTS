@@ -11,6 +11,46 @@ using UnityEngine.UI;
 
 namespace BBTS
 {
+    [System.Serializable]
+    public struct BBTS_Vec3
+    {
+        public float x;
+        public float y;
+        public float z;
+
+        // Set components to 0.
+        public void SetZero()
+        {
+            x = 0;
+            y = 0;
+            z = 0;
+        }
+
+        // Convert Vector3 to Vec3
+        public static BBTS_Vec3 Vector3ToVec3(Vector3 v)
+        {
+            BBTS_Vec3 v2;
+
+            v2.x = v.x;
+            v2.y = v.y;
+            v2.z = v.z;
+
+            return v2;
+        }
+
+        // Vec3 to Unity Vector3
+        public static Vector3 Vec3ToVector3(BBTS_Vec3 v)
+        {
+            Vector3 v2;
+
+            v2.x = v.x;
+            v2.y = v.y;
+            v2.z = v.z;
+
+            return v2;
+        }
+    }
+
     // The battle bot training sim data.
     [System.Serializable]
     public class BBTS_GameData
@@ -83,6 +123,9 @@ namespace BBTS
         // If set to 'true', the game allows the player to save.
         public bool allowSaveLoad = false;
 
+        // Becomes 'true' when the save system is initialized.
+        private bool initialized = false;
+
         // The game data.
         // The last game save. This is only for testing purposes.
         public BBTS_GameData lastSave;
@@ -122,6 +165,10 @@ namespace BBTS
             {
                 instance = this;
             }
+
+            // Initializes the save system.
+            if (!initialized)
+                Initialize();
         }
 
 
@@ -156,6 +203,12 @@ namespace BBTS
             }
         }
 
+        // Checks if the save system has been initialized.
+        public bool Initialized
+        {
+            get { return initialized; }
+        }
+
         // Set save and load operations.
         public void Initialize()
         {
@@ -169,6 +222,9 @@ namespace BBTS
 
             // Checks if the file exists.
             result = fileReader.FileExists();
+
+            // Save system has been initialized.
+            initialized = true;
         }
 
         // Checks if the game manager has been set.
@@ -200,33 +256,6 @@ namespace BBTS
             loadedData = null;
         }
 
-        // Saves data.
-        public bool SaveGame()
-        {
-            // The game manager does not exist if false.
-            if(!IsGameManagerSet())
-            {
-                Debug.LogWarning("The Game Manager couldn't be found.");
-                return false;
-            }
-
-            // Determines if saving wa a success.
-            bool success = false;
-
-            // Generates the save data.
-            BBTS_GameData savedData = gameManager.GenerateSaveData();
-
-            // Save to a file.
-            bool result = SaveToFile(savedData);
-
-            // Stores the most recent save.
-            lastSave = savedData;
-
-            // TODO: implement save state.
-
-            return success;
-        }
-
         // Converts an object to bytes (requires seralizable object) and returns it.
         static public byte[] SerializeObject(object data)
         {
@@ -249,15 +278,55 @@ namespace BBTS
             return bf.Deserialize(ms); // return content
         }
 
+        // Saves data.
+        public bool SaveGame()
+        {
+            // The game manager does not exist if false.
+            if (!IsGameManagerSet())
+            {
+                // Tries to find a gameplay manager.
+                GameplayManager temp = FindObjectOfType<GameplayManager>();
+
+                // Checks if a gameplay manager exists.
+                if (temp != null)
+                {
+                    // Set gameplay manager.
+                    gameManager = temp;
+                }
+                else
+                {
+                    Debug.LogWarning("The Game Manager couldn't be found.");
+                    return false;
+                }
+            }
+
+            // Determines if saving wa a success.
+            bool success = false;
+
+            // Generates the save data.
+            BBTS_GameData savedData = gameManager.GenerateSaveData();
+
+            // Save to a file.
+            bool result = SaveToFile(savedData);
+
+            // Stores the most recent save.
+            lastSave = savedData;
+
+            // TODO: implement save state.
+
+            return success;
+        }
+
         // Save the information to a file.
         private bool SaveToFile(BBTS_GameData data)
         {
             // Gets the file.
             string file = fileReader.GetFileWithPath();
 
-            // Checks that the file exists.
-            if (!fileReader.FileExists())
-                return false;
+            // Will generate the file if it doesn't exist.
+            // // Checks that the file exists.
+            // if (!fileReader.FileExists())
+            //     return false;
 
             // Seralize the data.
             byte[] dataArr = SerializeObject(data);
@@ -272,6 +341,28 @@ namespace BBTS
             // Data written successfully.
             return true;
         }
+
+        // Loads a save.
+        public bool LoadSave()
+        {
+            // The result of loading the save data.
+            bool success;
+
+            // The file doesn't exist.
+            if (!fileReader.FileExists())
+            {
+                return false;
+            }
+
+            // Loads the file.
+            loadedData = LoadFromFile();
+
+            // The data has been loaded successfully.
+            success = loadedData != null;
+
+            return success;
+        }
+
 
         // Loads information from a file.
         private BBTS_GameData LoadFromFile()
