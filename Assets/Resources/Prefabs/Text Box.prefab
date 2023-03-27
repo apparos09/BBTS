@@ -277,7 +277,7 @@ MonoBehaviour:
   enableAnimationSkip: 1
   enableAnimationBackSkip: 1
   DisableControlsIfAnimSkipDisabled: 1
-  charsPerLoad: 6
+  charsPerLoad: 4
   textSpeed: 0
 --- !u!1 &6215028496522477458
 GameObject:

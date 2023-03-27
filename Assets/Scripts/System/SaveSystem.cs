@@ -280,6 +280,12 @@ namespace BBTS
             return bf.Deserialize(ms); // return content
         }
 
+        // Checks if a save is in progress.
+        public bool IsSaveInProgress()
+        {
+            return saveInProgress;
+        }
+
         // Saves data.
         public bool SaveGame(bool async)
         {

@@ -29,33 +29,20 @@ namespace BBTS
             // Unity Initialization
             Application.targetFrameRate = 30; // 30 FPS
             Application.runInBackground = false; // Don't run in the background.
-
-            // Use the tutorial by default.
-            GameSettings.Instance.UseTutorial = true;
-
-            // LOL Initialization
-            // Create the WebGL (or mock) object
-#if UNITY_EDITOR
-            SystemManager.Instance.saveSystem.allowSaveLoad = true;
-#elif UNITY_WEBGL
-            SystemManager.Instance.saveSystem.allowSaves = false;
-#elif UNITY_IOS || UNITY_ANDROID
-            SystemManager.Instance.saveSystem.allowSaves = false;
-#endif
-
-
-            // Helper method to hide and show the state buttons as needed.
-            // Will call LoadState<T> for you.
-            // Helper.StateButtonInitialize<CookingData>(newGameButton, continueButton, OnLoad);
-
-            // TODO: take this out?
-            // Shows that the game has been initialized?
-            
         }
 
         // Start is called just before any of the Update methods is called the first time.
         public void Start()
         {
+            // Base settings (DONE IN INITIALIZE NOW)
+// #if UNITY_EDITOR
+//             SystemManager.Instance.saveSystem.allowSaveLoad = true;
+// #elif UNITY_WEBGL
+//             SystemManager.Instance.saveSystem.allowSaves = false;
+// #elif UNITY_IOS || UNITY_ANDROID
+//             SystemManager.Instance.saveSystem.allowSaves = false;
+// #endif
+
             // Creates instances of system, which has a LanguageManager and SaveSystem.
             SystemManager system = SystemManager.Instance;
             
@@ -71,6 +58,11 @@ namespace BBTS
             // Game has already been initialized, so don't do anything.
             if (initGame)
                 return;
+
+            // Use the tutorial by default (moved here so that the instance is set properly).
+            // GameSettings gets the base object deleted and replaced. I don't know why...
+            // But it doesn't seem to interfere with anything.
+            GameSettings.Instance.UseTutorial = true;
 
             // Load the English translation.
             LanguageManager lm = LanguageManager.Instance;
@@ -93,7 +85,7 @@ namespace BBTS
                 // Allow data to be saved.
                 saveSys.allowSaveLoad = true;
 
-                // Sets text to be translated.
+                // Sets text to be translated. You won't be using this, so this stays false.
                 lm.translateText = false; // Set to 'true' if testing file reading.
                 lm.changeTextColor = false;
             }

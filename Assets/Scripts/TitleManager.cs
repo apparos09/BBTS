@@ -49,6 +49,10 @@ namespace BBTS
         public GameObject creditsMenu;
         public TMP_Text creditsButtonText;
 
+        // Quit
+        public Button quitButton;
+        public TMP_Text quitButtonText;
+
         [Header("Controls Submenu")]
         // The controls title text.
         public TMP_Text controlsTitleText;
@@ -96,6 +100,9 @@ namespace BBTS
                 settingsButtonText.text = lm.GetLanguageText("kwd_settings");
                 creditsButtonText.text = lm.GetLanguageText("kwd_licenses");
 
+                // Main Menu - New - Quit
+                quitButtonText.text = lm.GetLanguageText("kwd_quit");
+
                 // Controls Menu
                 controlsTitleText.text = lm.GetLanguageText("kwd_controls");
                 controlsInstructText.text = lm.GetLanguageText("mnu_controls_instruct");
@@ -112,6 +119,9 @@ namespace BBTS
                 lm.MarkText(controlsButtonText);
                 lm.MarkText(settingsButtonText);
                 lm.MarkText(creditsButtonText);
+
+                // New - Quit
+                lm.MarkText(quitButtonText);
 
                 lm.MarkText(controlsTitleText);
                 lm.MarkText(controlsInstructText);
@@ -254,6 +264,30 @@ namespace BBTS
             continueButton.interactable = false;
         }
 
+        // Refreshes the quit button.
+        public void RefreshQuitButton()
+        {
+            // If running in WebGL, keep the button disabled.
+            if(Application.platform == RuntimePlatform.WebGLPlayer)
+            {
+                // If the button is enabled. 
+                if(quitButton.interactable)
+                    quitButton.interactable = false;
+            }
+            else
+            {
+                // If the game isn't saving, turn on the quit button.
+                quitButton.interactable = !SaveSystem.Instance.IsSaveInProgress();
+            }
+        }
+
+        // Quits the game.
+        public void QuitGame()
+        {
+            // TODO: make sure the game isn't saving before you quit.
+            Application.Quit();
+        }
+
         // Update is called once per frame
         void Update()
         {
@@ -265,6 +299,23 @@ namespace BBTS
             // Makes sure the continue button is kept on when the save system turns it off.
             if (!continueButton.gameObject.activeSelf)
                 continueButton.gameObject.SetActive(true);
+
+
+
+            // If not running in WebGL...
+            if(Application.platform != RuntimePlatform.WebGLPlayer)
+            {
+                // If a save is not in progress, and the quit button is enabled...
+                // Or if a save is in progress, and the quit button is disabled.
+                if ((SaveSystem.Instance.IsSaveInProgress() && quitButton.interactable) ||
+                    (!SaveSystem.Instance.IsSaveInProgress() && !quitButton.interactable))
+                {
+                    // Refreshes the quit button.
+                    RefreshQuitButton();
+                }
+            }
+
+            
         }
     }
 }
