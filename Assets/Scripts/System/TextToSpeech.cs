@@ -80,6 +80,10 @@ namespace BBTS
         {
             get
             {
+                // Tries to find the TTS.
+                if (instance == null)
+                    instance = FindObjectOfType<TextToSpeech>();
+
                 // Checks to see if the instance exists. If it doesn't, generate an object.
                 if (instance == null)
                 {
