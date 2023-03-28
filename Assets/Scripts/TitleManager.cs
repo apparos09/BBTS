@@ -137,8 +137,16 @@ namespace BBTS
                 dataLoaded = system.saveSystem.LoadSave();
 
 
+            // I think I'll take this out and leave the continue button as is.
+
+            // // If data is loaded, it checks to see if the game was completed.
+            // // If the game was completed, the player cannot go back into it.
+            // if (dataLoaded)
+            //     dataLoaded = !system.saveSystem.loadedData.complete;
+
             // You can save and go back to the menu, so the continue button is usable under that circumstance.
-            if (system.saveSystem.HasLoadedData()) // Game has loaded data.
+            // Game has loaded data, and the game was not completed.
+            if (dataLoaded)
             {
                 // Tutorial should be overwritten.
                 overrideTutorial = true;
@@ -158,7 +166,7 @@ namespace BBTS
                 // Activate continue button.
                 continueButton.interactable = true;
             }
-            else // No loaded data.
+            else // No loaded data, or the game was completed.
             {
                 // Disable continue button.
                 continueButton.interactable = false;
