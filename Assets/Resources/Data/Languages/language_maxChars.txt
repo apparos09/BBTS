@@ -6,6 +6,7 @@ kwd_continue	12
 kwd_controls	12
 kwd_settings	12
 kwd_licenses	12
+kwd_quit	12
 mnu_controls_instruct	42
 mnu_controls_desc	240
 kwd_volume	12
