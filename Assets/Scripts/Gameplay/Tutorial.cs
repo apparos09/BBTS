@@ -348,7 +348,7 @@ namespace BBTS
                 pages.Add(new Page("You can have up to 4 battle moves at a time, which together with the run and charge moves makes for a total of 6 battle options! To learn a new move, you must accept a move offer, which is given out every time you clear a room."));
                 pages.Add(new Page("The charge move is used to charge your energy, which is needed to perform your battle moves, while the run move has you attempt to flee from the battle."));
                 pages.Add(new Page("If you flee from battle, your health and energy levels stay the same. Your opponent keeps their health and energy levels as well, but they will get restored if you clear too many rooms without defeating them."));
-                pages.Add(new Page("With all that covered, time to try out one of your moves! If you want to know what a move does, click the stats button!"));
+                pages.Add(new Page("With all that covered, time to try out one of your moves! If you want to know what a move does, click the stats toggle!"));
             }
 
             // Loads the pages.

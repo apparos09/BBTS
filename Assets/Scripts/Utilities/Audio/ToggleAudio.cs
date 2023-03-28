@@ -5,20 +5,14 @@ using UnityEngine.UI;
 
 namespace BBTS
 {
-    // The audio for clicking a button.
-    public class ButtonAudio : MonoBehaviour
+    // Plays audio when clicking a toggle.
+    public class ToggleAudio : MonoBehaviour
     {
         // The button this script is for.
-        public Button button;
+        public Toggle toggle;
 
         // THe audio for the user inputs.
         public MenuAudio menuAudio;
-
-        // // The audio source for the button operations.
-        // public AudioSource audioSource;
-        // 
-        // // The clip for the button audio.
-        // public AudioClip clickClip;
 
         // Awake is called when the script instance is being loaded.
         private void Awake()
@@ -26,16 +20,16 @@ namespace BBTS
             // Moved here in case the button has not been set enabled before the game was closed.
 
             // Button not set.
-            if (button == null)
+            if (toggle == null)
             {
                 // Tries to grab the button from the parent object.
-                gameObject.TryGetComponent<Button>(out button);
+                gameObject.TryGetComponent<Toggle>(out toggle);
             }
 
             // Listener for the tutorial toggle.
-            button.onClick.AddListener(delegate
+            toggle.onValueChanged.AddListener(delegate
             {
-                OnClick();
+                OnValueChanged(toggle.isOn);
             });
         }
 
@@ -46,18 +40,17 @@ namespace BBTS
         }
 
 
-        // Called when the button is clicked.
-        private void OnClick()
+        // Called when the toggle is clicked.
+        private void OnValueChanged(bool isOn)
         {
-            // audioSource.PlayOneShot(clickClip);
             menuAudio.PlayButtonSoundEffect();
         }
 
         // Script is destroyed.
         private void OnDestroy()
         {
-            // Remove the listener for onClick.
-            button.onClick.RemoveListener(OnClick);
+            // Remove the listener for onValueChanged.
+            toggle.onValueChanged.RemoveListener(OnValueChanged);
         }
     }
 }

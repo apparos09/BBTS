@@ -68,7 +68,7 @@ namespace BBTS
         public bool enableAnimationBackSkip = true;
 
         // If set to 'true', the controls are hidden when the text is loading.
-        [Tooltip("If the controls shouldn't be enabled when the animation skip is disabled. The back button won't be disabled unless enableAnimationBackSkip is set to 'false'.")]
+        [Tooltip("If the controls shouldn't be enabled when the animation skip is disabled. The back toggle won't be disabled unless enableAnimationBackSkip is set to 'false'.")]
         public bool DisableControlsIfAnimSkipDisabled = true;
 
         // A queue of text for progressive character loading.

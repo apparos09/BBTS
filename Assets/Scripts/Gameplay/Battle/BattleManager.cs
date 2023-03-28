@@ -141,28 +141,28 @@ namespace BBTS
 
         // Move 0 (index 0) button.
         [Header("UI/Player/Move 0")]
-        [Tooltip("The button for using Player Move 0, which is at index [0].")]
+        [Tooltip("The toggle for using Player Move 0, which is at index [0].")]
         public Button move0Button;
         public TMP_Text move0NameText;
         public TMP_Text move0AccuracyText;
 
         // Move 1 (index 1) button.
         [Header("UI/Player/Move 1")]
-        [Tooltip("The button for using Player Move 1, which is at index [1].")]
+        [Tooltip("The toggle for using Player Move 1, which is at index [1].")]
         public Button move1Button;
         public TMP_Text move1NameText;
         public TMP_Text move1AccuracyText;
 
         // Move 2 (index 2) button.
         [Header("UI/Player/Move 2")]
-        [Tooltip("The button for using Player Move 2, which is at index [2].")]
+        [Tooltip("The toggle for using Player Move 2, which is at index [2].")]
         public Button move2Button;
         public TMP_Text move2NameText;
         public TMP_Text move2AccuracyText;
 
         // Move 3 (index 3) button.
         [Header("UI/Player/Move 3")]
-        [Tooltip("The button for using Player Move 3, which is at index [3].")]
+        [Tooltip("The toggle for using Player Move 3, which is at index [3].")]
         public Button move3Button;
         public TMP_Text move3NameText;
         public TMP_Text move3AccuracyText;
