@@ -200,7 +200,8 @@ namespace BBTS
                 LanguageManager.Instance.MarkText(saveFeedbackText);
             }
 
-
+            // Refreshes the quit button to see if it should be enabled.
+            RefreshQuitButton();
         }
 
         // Starts the game (general function for moving to the GameScene).
