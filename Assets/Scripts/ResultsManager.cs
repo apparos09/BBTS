@@ -2,10 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
-
 using TMPro;
-using System.Security.Cryptography;
 
 namespace BBTS
 {
@@ -202,28 +199,37 @@ namespace BBTS
                 Destroy(rd.gameObject);
             }
 
+            // The system manager.
+            SystemManager system = SystemManager.Instance;
+
             // Say the name of the title text.
-            if(GameSettings.Instance.UseTextToSpeech && titleSpeakKey != "")
+            if (GameSettings.Instance.UseTextToSpeech && titleSpeakKey != "")
             {
                 // Voice the title text.
-                SystemManager.Instance.textToSpeech.SpeakText(titleSpeakKey);
+                system.textToSpeech.SpeakText(titleSpeakKey);
             }
 
-            // Provides the save feedback text.
+            // Sets the save text.
             if (saveFeedbackText != null)
             {
                 saveFeedbackText.text = string.Empty;
-                SystemManager.Instance.saveSystem.feedbackText = saveFeedbackText;
+                system.saveSystem.feedbackText = saveFeedbackText;
             }
             else
             {
                 // Just empty out the string.
                 saveFeedbackText.text = string.Empty;
+
+                // Mark this as debug text.
+                LanguageManager.Instance.MarkText(saveFeedbackText);
             }
+
+            // Refreshes the feedback text.
+            system.saveSystem.RefreshFeedbackText();
         }
 
         // Goes to the main menu.
-        public void ToMainMenu()
+        public void ToTitleScene()
         {
             SceneManager.LoadScene("TitleScene");
         }
@@ -233,7 +239,7 @@ namespace BBTS
         {
             // Do not return to the main menu scene if running through the LOL platform.
             // This is because you can't have the game get repeated in the same session.
-            ToMainMenu();
+            ToTitleScene();
         }
     }
 }

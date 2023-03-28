@@ -1804,7 +1804,7 @@ namespace BBTS
             // Reuses the overworld BGM at plays it at a lower pitch.
             gameManager.audioManager.PlayBackgroundMusic(
                 gameManager.overworld.overworldBgm,
-                0.8F);
+                0.85F);
         }
 
         // SFX //

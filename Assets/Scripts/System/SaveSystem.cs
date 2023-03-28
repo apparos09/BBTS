@@ -141,7 +141,7 @@ namespace BBTS
 
         // LOL - AutoSave //
         // Added from the ExampleCookingGame. Used for feedback from autosaves.
-        WaitForSeconds feedbackTimer = new WaitForSeconds(2); // Orignally 2 seconds.
+        WaitForSeconds feedbackTimer = new WaitForSeconds(1); // Orignally 2 seconds.
         Coroutine feedbackMethod;
         public TMP_Text feedbackText;
 
