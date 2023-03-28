@@ -1482,7 +1482,7 @@ namespace BBTS
             
             // NOTE: this only happens once. If the player attempts to continue again once the game is over, a new game will start.
             // As such, I have decided to leave this in, even though it undoes SetLastSaveAsLoadedData.
-            SystemManager.Instance.saveSystem.ClearLoadedAndLastSaveData();
+            SystemManager.Instance.saveSystem.ClearLoadedAndLastSaveData(false);
 
             // Go to the results scene.
             if (useTransitions) // Transition

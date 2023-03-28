@@ -146,7 +146,7 @@ namespace BBTS
         public TMP_Text feedbackText;
 
         // The string shown when having feedback.
-        private string feedbackString = "Saving game...";
+        private string feedbackString = "Saving Game...";
 
         // The string key for the feedback.
         private const string FEEDBACK_STRING_KEY = "sve_msg_savingGame";
@@ -225,6 +225,18 @@ namespace BBTS
             // Checks if the file exists.
             result = fileReader.FileExists();
 
+            // If the file exists, the save system checks if it's empty.
+            if(result)
+            {
+                // If the file is empty, delete the file.
+                bool empty = fileReader.IsFileEmpty();
+
+                // If empty, delete the file.
+                if (empty)
+                    fileReader.DeleteFile();
+
+            }
+
             // Save system has been initialized.
             initialized = true;
         }
@@ -252,10 +264,29 @@ namespace BBTS
         }
 
         // Clears out the last save and the loaded data object.
-        public void ClearLoadedAndLastSaveData()
+        public void ClearLoadedAndLastSaveData(bool deleteFile)
         {
             lastSave = null;
             loadedData = null;
+
+
+            // If the file should be deleted.
+            if(deleteFile)
+            {
+                // If the file exists, delete it.
+                if (fileReader.FileExists())
+                {
+                    // Checks if a meta file exists so that that can be deleted too.
+                    string meta = fileReader.GetFileWithPath() + ".meta";
+
+                    // Delete the main file.
+                    fileReader.DeleteFile();
+
+                    // If the meta file exists, delete it.
+                    if (File.Exists(meta))
+                        File.Delete(meta);
+                }
+            }        
         }
 
         // Converts an object to bytes (requires seralizable object) and returns it.
@@ -399,7 +430,7 @@ namespace BBTS
             }
             else
             {
-                feedbackString = "Saving game...";
+                feedbackString = "Saving Game...";
             }
         }
 
@@ -492,6 +523,10 @@ namespace BBTS
         // Loads a save.
         public bool LoadSave()
         {
+            // Loading a save is not allowed.
+            if (!allowSaveLoad)
+                return false;
+
             // The result of loading the save data.
             bool success;
 

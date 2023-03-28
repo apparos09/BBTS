@@ -158,11 +158,11 @@ namespace BBTS
                 // Remove spaces and quotation marks on the end of the string.
                 string temp = langText[str[0]];
 
-                // Remove white spaces.
-                temp = temp.Trim();
-
                 // Remove quotation marks on the edges.
                 temp = temp.Trim('\"');
+
+                // Remove white spaces.
+                temp = temp.Trim();
 
                 // Replace triple-elipses (…) with three periods (...). They can't be displayed for some reason.
                 temp = temp.Replace("\uFFFD", "...");

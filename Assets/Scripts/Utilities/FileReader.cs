@@ -94,9 +94,25 @@ namespace BBTS
             SetFile(file, filePath);
 
             // returns true if the file exists.
-            bool result = File.Exists(filePath + file);
+            bool result = File.Exists(GetFileWithPath());
 
             return result;
+        }
+
+        // Deletes the file.
+        public bool DeleteFile()
+        {
+            // Checks if the file exists.
+            if(FileExists())
+            {
+                // Deletes the file.
+                File.Delete(GetFileWithPath());
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         // Checks if a file path exists.
@@ -127,6 +143,7 @@ namespace BBTS
             } 
         }
 
+
         // Checks if the file is empty.
         public bool IsFileEmpty()
         {
@@ -140,7 +157,8 @@ namespace BBTS
                 FileStream fs = File.OpenRead(GetFileWithPath());
                 
                 // Checks if the file stream is set.
-                result = fs.Length == 0;
+                result =  fs.Length == 0;
+
 
                 // Close the file stream.
                 fs.Close();

@@ -82,8 +82,8 @@ namespace BBTS
             // Checks if LOL SDK has been initialized.
             GameSettings settings = GameSettings.Instance;
 
-            // Gets an instance of the LOL manager.
-            SystemManager systemManager = SystemManager.Instance;
+            // Gets an instance of the system manager.
+            SystemManager system = SystemManager.Instance;
 
             // Language
             // Mark all of the text.
@@ -129,19 +129,22 @@ namespace BBTS
                 lm.MarkText(controlsBackButtonText);
             }
 
-
             // The game has loaded data.
-            bool dataLoaded = SystemManager.Instance.saveSystem.HasLoadedData();
+            bool dataLoaded = system.saveSystem.HasLoadedData();
+
+            // Tries to load the data if it hasn't been loaded yet.
+            if (!dataLoaded && system.saveSystem.allowSaveLoad)
+                dataLoaded = system.saveSystem.LoadSave();
 
 
             // You can save and go back to the menu, so the continue button is usable under that circumstance.
-            if (SystemManager.Instance.saveSystem.HasLoadedData()) // Game has loaded data.
+            if (system.saveSystem.HasLoadedData()) // Game has loaded data.
             {
                 // Tutorial should be overwritten.
                 overrideTutorial = true;
 
                 // Checks if the intro was cleared.
-                if (SystemManager.Instance.saveSystem.loadedData.clearedIntro)
+                if (system.saveSystem.loadedData.clearedIntro)
                 {
                     // If the intro was cleared, then that means the tutorial was on last time.
                     continueTutorial = true;
@@ -188,6 +191,8 @@ namespace BBTS
                 // Mark this as debug text.
                 LanguageManager.Instance.MarkText(saveFeedbackText);
             }
+
+
         }
 
         // Starts the game (general function for moving to the GameScene).
@@ -205,7 +210,7 @@ namespace BBTS
         public void StartNewGame()
         {
             // Clear out the loaded data and last save if the LOLSDK has been initialized.
-            SystemManager.Instance.saveSystem.ClearLoadedAndLastSaveData();
+            SystemManager.Instance.saveSystem.ClearLoadedAndLastSaveData(true);
 
             StartGame();
         }
