@@ -65,7 +65,7 @@ namespace BBTS
 
         }
 
-        // Plays teh scene enter animation.
+        // Plays the scene enter animation.
         public void PlaySceneEnterAnimation()
         {
             // Turn on the object.
