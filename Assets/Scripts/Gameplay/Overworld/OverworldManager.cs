@@ -851,19 +851,21 @@ namespace BBTS
                     // The phase is changing.
                     phaseChanged = true;
 
-                    // Goes through each door.
+                    // Goes through each door. 
                     foreach (Door door in doors)
                     {
-                        // Only evolve the entity if the door is unlocked.
-                        // It helps save on evolution time.
+                        // Only evolve the entity if the door is unlocked. 
+                        // It helps save on evolution time. 
                         if (!door.Locked)
                         {
-                            // Evolve the entity if it has an evolution.
-                            // If it can't evolve, raise it's level ith a basic level rate and no speciality. 
-                            
+                            // Evolve the entity if it has an evolution. 
+                            // If it can't evolve, raise it's level ith a basic level rate and no speciality.  
 
-                            // Checks if unevolved entities should receive a boost on a new phase or not.
-                            if(LEVEL_UP_FOR_PHASE_IF_UNEVOLVED) // All Entities Receive Boost
+                            // I just do this to remove a warning from using a const variable as a solo conditional. 
+                            bool levelUpUnevolved = LEVEL_UP_FOR_PHASE_IF_UNEVOLVED;
+
+                            // Checks if unevolved entities should receive a boost on a new phase or not. 
+                            if (levelUpUnevolved) // All Entities Receive Boost 
                             {
                                 // IF the entity can evolve, evolve it. If it can't evolve, just level it up.
                                 if (BattleEntity.CanEvolve(door.battleEntity))
