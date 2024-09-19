@@ -1115,12 +1115,16 @@ namespace BBTS
             // Checks each move.
             foreach(Move move in player.moves)
             {
-                // The player has an attacking move.
-                if(move.Power != 0)
+                // If the move is not equal to null, try to check the power.
+                if(move != null)
                 {
-                    playerHasAttack = true;
-                    break;
-                }
+                    // The player has an attacking move.
+                    if (move.Power != 0)
+                    {
+                        playerHasAttack = true;
+                        break;
+                    }
+                }                
             }
 
             // The player does not have an attacking move, so give them one.
