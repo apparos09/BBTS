@@ -9189,7 +9189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSource: {fileID: 591084194}
   maxVolume: 1
-  autoSetMaxVolume: 1
+  autoSetMaxVolume: 0
 --- !u!82 &591084194
 AudioSource:
   m_ObjectHideFlags: 0
@@ -28589,8 +28589,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 1845567639}
-  maxVolume: 0.75
-  autoSetMaxVolume: 1
+  maxVolume: 1
+  autoSetMaxVolume: 0
 --- !u!1001 &1849848834
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29580,7 +29580,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSource: {fileID: 1915852227}
   maxVolume: 1
-  autoSetMaxVolume: 1
+  autoSetMaxVolume: 0
 --- !u!114 &1918002631 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8247993992043946924, guid: 6ad1b64b977dbef43bce9bc5cdedbb44, type: 3}

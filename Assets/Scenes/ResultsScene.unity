@@ -2229,8 +2229,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 1485898495}
-  maxVolume: 0.75
-  autoSetMaxVolume: 1
+  maxVolume: 1
+  autoSetMaxVolume: 0
 --- !u!82 &1485898495
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3311,8 +3311,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 1911268885}
-  maxVolume: 0.75
-  autoSetMaxVolume: 1
+  maxVolume: 1
+  autoSetMaxVolume: 0
 --- !u!82 &1911268885
 AudioSource:
   m_ObjectHideFlags: 0
